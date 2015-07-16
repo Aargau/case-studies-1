@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "Writing Great Case Studies"
+date:   2015-07-11 23:34:28
+categories: CaseStudies GitHub process 
+---
+
+
+
 # Creating Great Case Studies, v2
 by Sara Spalding, Partner Catalyst Team
 
@@ -46,7 +55,7 @@ Write the content in MD, using your favorite MD editor.
 When you have finished a draft of your case study that you feel is ready for
 peer review, add it to the GitHub case study repo by doing <x>.  Each case study
 should have its own directory.  When you do the pull request to add your case study
-directory to the case study repo, be sure to @mention (at least) two reviewers: (1) a domain expert in the topic you cover, and (2) an engineer who is not 
+directory to the case study repo, be sure to @mention (at least) two reviewers: (1) a domain expert in the topic you cover, and (2) an engineer who is not
 familiar with the topic.
 
 After you have received and integrated their feedback, your pull request will be

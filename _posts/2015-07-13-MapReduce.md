@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "MapReduce Code Generation Using a DAG Model"
+date:   2015-07-13 23:34:28
+categories: MapReduce DAG Hadoop Spark
+---
+
+
 # MapReduce Code Generation Using a DAG Model
 
 Masayoshi Hagiwara, 28th May 2015
@@ -18,7 +26,7 @@ SQL on Hadoop or Hive does not help to solve this problem, because the SQL state
 
 Overview of the Solution
 
-To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the “enterprise level” quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
+To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the ï¿½enterprise levelï¿½ quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
 
 The DSL will compile business applications described at a business level of abstraction into a directed acyclic graph (DAG) as an intermediate language, then generates the MapReduce programs based on the resulting DAG. The DAG model is adopted because it defines the partial order of stages of MapReduce programs including concurrent processes. For the same reason, several open source projects such as Apache [_Spark_](http://spark.apache.org/), [_Storm_](http://storm.apache.org/) and [_Tez_](http://tez.apache.org/) have adopted the DAG model, originating with Dryad, from Microsoft Research, available here: [_http://research.microsoft.com/en-us/projects/Dryad_](http://research.microsoft.com/en-us/projects/Dryad).
 
@@ -27,7 +35,7 @@ Figure 1: a DAG model and its topological sort
 
 One of the characteristics of the DAG model is its topological sort. Figure 1 shows how topological sort works in a particular DAG model. In Figure 1, a circle means a process or a node, and an arrow means data flow from one process to another process. For example, process C has two incoming arrows. Process C can start only after data from both process A and process B are available. This means if process C receives data from process A only, process C has to wait for data from B. This shows an implicit synchronization at process C.
 
-Now let’s consider that one business application is formed by the processes from A to G as shown in Figure 1 and process G receives data from an external data source at the start.
+Now letï¿½s consider that one business application is formed by the processes from A to G as shown in Figure 1 and process G receives data from an external data source at the start.
 
 Process G sends data to process A, then process A sends data to both process B and process C. Process B can immediately start when it receives data from process A. But process C can start after Process B starts because it has to wait for data from process B. In the same way, process F starts after process C starts. Process E starts after process F. And process D starts after process E starts. The DAG model in Figure 1 shows this dependency of processes of an application through data flow. As the result, the data flow between processes of this business application decides the order of executing the processes. This order is topological sort of the DAG model. Topological sort in Figure 1 decides only one order. In general, there are several orders that topological sort decides because a DAG model defines partial order of processes (concurrent processes).
 
@@ -347,4 +355,3 @@ The Asakusa Framework was designed in collaboration with Nautilus. The code for 
 Opportunities for Reuse
 
 Since a DAG model supports a generalized form of concurrent applications based on data flow programming, insight drawn from this case study will give many opportunities for reuse. That is, with a layout analysis for a particular constrained programming model like MapReduce, the DAG model as an intermediate language will improve concurrency using the partial order of concurrent processes. Consequently, developers of the Asakusa Framework, Spark or Tez will automatically gain the advantage of the DAG model.
-
