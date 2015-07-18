@@ -72,256 +72,152 @@ The Asakusa Framework provides 3 types of DSLs: batch, flow and operator. These 
 
 * Batch DSL is the top level DSL and describes a batch job.
 
-`@Batch(name = "example.summarizeSales")`
-
-`public class SummarizeBatch extends BatchDescription {`
-
-`    @Override`
-
-`    protected void describe() {`
-
-`        run(CategorySummaryJob.class).soon();`
-
-`    }`
-
-`}`
+```
+@Batch(name = "example.summarizeSales")
+public class SummarizeBatch extends BatchDescription {
+    @Override
+    protected void describe() {
+        run(CategorySummaryJob.class).soon();
+    }
+}
+```
 
 To execute a batch job, we sometimes need to import data from sources or export to destinations other than HDFS; this data transfer should be part of the job. To do this, the Asakusa Framework provides a utility to manage batch jobs. It offers complementary assistance for other OSS tools such as Sqoop, Ozzie and Pig.
 
 * Flow DSL describes the business flow of a batch job. For instance, the job CategorySummaryJob.class in the batch DSL above is described below. A flow is defined by the sequence of built-in and/or user customized operators (operators.xxxx) that are also defined by the third operator DSL.
 
-`@Override`
-
-`    protected void describe() {`
-
-`        CoreOperatorFactory core = new CoreOperatorFactory();`
-
-`        CategorySummaryOperatorFactory operators = new CategorySummaryOperatorFactory();`
-
-`        // Check the store id of the storeInfo`
-
-`        CheckStore checkStore = operators.checkStore(storeInfo, salesDetail);`
-
-`        // Add the product info to the sales transaction`
-
-`        JoinItemInfo joinItemInfo = operators.joinItemInfo(itemInfo, checkStore.found);`
-
-`        // Summarize sales by category`
-
-`        SummarizeByCategory summarize = operators.summarizeByCategory(joinItemInfo.joined);`
-
-`        // Output the summary`
-
-`        categorySummary.add(summarize.out);`
-
-`        // Error if sales transaction with an unknown store id`
-
-`        SetErrorMessage unknownStore = operators.setErrorMessage(`
-
-`                core.restructure(checkStore.missed, ErrorRecord.class),`
-
-`                "Unknown store");`
-
-`        errorRecord.add(unknownStore.out);`
-
-`        // Error if the product info is not available`
-
-`        SetErrorMessage unknownItem = operators.setErrorMessage(`
-
-`                core.restructure(joinItemInfo.missed, ErrorRecord.class),`
-
-`                "Unknown product");`
-
-`        errorRecord.add(unknownItem.out);`
-
-`    }`
+```
+@Override
+    protected void describe() {
+        CoreOperatorFactory core = new CoreOperatorFactory();
+        CategorySummaryOperatorFactory operators = new CategorySummaryOperatorFactory();
+        // Check the store id of the storeInfo
+        CheckStore checkStore = operators.checkStore(storeInfo, salesDetail);
+        // Add the product info to the sales transaction
+        JoinItemInfo joinItemInfo = operators.joinItemInfo(itemInfo, checkStore.found);
+        // Summarize sales by category
+        SummarizeByCategory summarize = operators.summarizeByCategory(joinItemInfo.joined);
+        // Output the summary
+        categorySummary.add(summarize.out);
+        // Error if sales transaction with an unknown store id
+        SetErrorMessage unknownStore = operators.setErrorMessage(
+                core.restructure(checkStore.missed, ErrorRecord.class),
+                "Unknown store");
+        errorRecord.add(unknownStore.out);
+        // Error if the product info is not available
+        SetErrorMessage unknownItem = operators.setErrorMessage(
+                core.restructure(joinItemInfo.missed, ErrorRecord.class),
+                "Unknown product");
+        errorRecord.add(unknownItem.out);
+    }
+```
 
 * Operator DSL describes operators which are used in flow DSL.
 
-`public abstract class CategorySummaryOperator {`
-
-`    /**`
-
-* `      Check the store master database to find the store id of the sales transaction`
-* `      @param info store master database`
-* `      @param sales sales transaction`
-* `      @return if available {@code true}`
-* `     /`
-
-`    @MasterCheck`
-
-`    public abstract boolean checkStore(`
-
-`            @Key(group = "store_code") StoreInfo info,`
-
-`            @Key(group = "store_code") SalesDetail sales);`
-
-`    /**`
-
-* `      Join the product master with the sales transaction`
-* `      @param info product master database`
-* `      @param sales sales transaction`
-* `      @return joined result`
-* `      @see #selectAvailableItem(List, SalesDetail)`
-* `     /`
-
-`    @MasterJoin(selection = "selectAvailableItem")`
-
-`    public abstract JoinedSalesInfo joinItemInfo(ItemInfo info, SalesDetail sales);`
-
-`}`
+```
+public abstract class CategorySummaryOperator {
+    /**
+    * Check the store master database to find the store id of the sales transaction`
+    * @param info store master database`
+    * @param sales sales transaction`
+    * @return if available {@code true}`
+    * /
+    @MasterCheck
+    public abstract boolean checkStore(
+            @Key(group = "store_code") StoreInfo info,
+            @Key(group = "store_code") SalesDetail sales);
+    
+    /**
+    * Join the product master with the sales transaction`
+    * @param info product master database`
+    * @param sales sales transaction`
+    * @return joined result`
+    * @see #selectAvailableItem(List, SalesDetail)`
+    * /
+    @MasterJoin(selection = "selectAvailableItem")
+    public abstract JoinedSalesInfo joinItemInfo(ItemInfo info, SalesDetail sales);
+}
+```
 
 In addition, the Asakusa Framework provides dmdl DSL to define data. For instance,
 
-`"sales transaction"`
-
-`@directio.csv(`
-
-`    has_header = TRUE,`
-
-`    datetime = "yyyy-MM-dd HH:mm:ss"`
-
-`)`
-
-`sales_detail = {`
-
-`    "sales date"`
-
-`    @directio.csv.field(name = "date")`
-
-`    sales_date_time : DATETIME;`
-
-`    "store id"`
-
-`    @directio.csv.field(name = "store id")`
-
-`    store_code : TEXT;`
-
-`    "product code"`
-
-`    @directio.csv.field(name = "product code")`
-
-`    item_code : TEXT;`
-
-`    "quantity"`
-
-`    @directio.csv.field(name = "quantity")`
-
-`    amount : INT;`
-
-`    "sales price"`
-
-`    @directio.csv.field(name = "sales price")`
-
-`    unit_selling_price : INT;`
-
-`    "sales total"`
-
-`    @directio.csv.field(name = "sales total")`
-
-`    selling_price : INT;`
-
-`    "file name"`
-
-`    @directio.csv.file_name`
-
-`    file_name : TEXT;`
-
-`};`
-
-`"store master"`
-
-`@directio.csv(has_header = TRUE)`
-
-`store_info = {`
-
-`    "store id"`
-
-`    @directio.csv.field(name = "store id")`
-
-`    store_code : TEXT;`
-
-`    "store name "`
-
-`    @directio.csv.field(name = "name")`
-
-`    store_name : TEXT;`
-
-`};`
-
-`"product master"`
-
-`@directio.csv(`
-
-`    has_header = TRUE,`
-
-`    date = "yyyy-MM-dd"`
-
-`)`
-
-`item_info = {`
-
-`    "product code"`
-
-`    @directio.csv.field(name = "product code")`
-
-`    item_code : TEXT;`
-
-`    "product name"`
-
-`    @directio.csv.field(name = "product name")`
-
-`    item_name : TEXT;`
-
-`    "product department code"`
-
-`    @directio.csv.field(name = "department code")`
-
-`    department_code : TEXT;`
-
-`    "product department name"`
-
-`    @directio.csv.field(name = "department name")`
-
-`    department_name : TEXT;`
-
-`    "product category code"`
-
-`    @directio.csv.field(name = "category code")`
-
-`    category_code : TEXT;`
-
-`    "product category name"`
-
-`    @directio.csv.field(name = "category name")`
-
-`    category_name : TEXT;`
-
-`    "product unit price"`
-
-`    @directio.csv.field(name = "unit price")`
-
-`    unit_selling_price : INT;`
-
-`    "registered date"`
-
-`    @directio.csv.field(name = "registered date")`
-
-`    registered_date : DATE;`
-
-`    "applicable date"`
-
-`    @directio.csv.field(name = "applicable date")`
-
-`    begin_date : DATE;`
-
-`    "invalidated date"`
-
-`    @directio.csv.field(name = "invalidated date")`
-
-`    end_date : DATE;`
-
-`};`
+```
+"sales transaction"
+@directio.csv(
+    has_header = TRUE,
+    datetime = "yyyy-MM-dd HH:mm:ss"
+)
+sales_detail = {
+    "sales date"
+    @directio.csv.field(name = "date")
+    sales_date_time : DATETIME;
+    "store id"
+    @directio.csv.field(name = "store id")
+    store_code : TEXT;
+    "product code"
+    @directio.csv.field(name = "product code")
+    item_code : TEXT;
+    "quantity"
+    @directio.csv.field(name = "quantity")
+    amount : INT;
+    "sales price"
+    @directio.csv.field(name = "sales price")
+    unit_selling_price : INT;
+    "sales total"
+    @directio.csv.field(name = "sales total")
+    selling_price : INT;
+    "file name"
+    @directio.csv.file_name
+    file_name : TEXT;
+};
+"store master"
+@directio.csv(has_header = TRUE)
+store_info = {
+    "store id"
+    @directio.csv.field(name = "store id")
+    store_code : TEXT;
+    "store name "
+    @directio.csv.field(name = "name")
+    store_name : TEXT;
+};
+"product master"
+@directio.csv(
+    has_header = TRUE,
+    date = "yyyy-MM-dd"
+)
+item_info = {
+    "product code"
+    @directio.csv.field(name = "product code")
+    item_code : TEXT;
+    "product name"
+    @directio.csv.field(name = "product name")
+    item_name : TEXT;
+    "product department code"
+    @directio.csv.field(name = "department code")
+    department_code : TEXT;
+    "product department name"
+    @directio.csv.field(name = "department name")
+    department_name : TEXT;
+    "product category code"
+    @directio.csv.field(name = "category code")
+    category_code : TEXT;
+    "product category name"
+    @directio.csv.field(name = "category name")
+    category_name : TEXT;
+    "product unit price"
+    @directio.csv.field(name = "unit price")
+    unit_selling_price : INT;
+    "registered date"
+    @directio.csv.field(name = "registered date")
+    registered_date : DATE;
+    "applicable date"
+    @directio.csv.field(name = "applicable date")
+    begin_date : DATE;
+    "invalidated date"
+    @directio.csv.field(name = "invalidated date")
+    end_date : DATE;
+};
+```
 
 Built-in and customized operators executed at the processes of a DAG model put a constraint on generating MapReduce programs via this DAG model, because some operators can be executed in the map phase, but others cannot. For example, operators like CoGroup, Summarize, Fold, and GroupSort need to be executed in the reduce phase.
 
