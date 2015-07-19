@@ -5,25 +5,22 @@ date:   2015-07-13 23:34:28
 categories: Hadoop
 ---
 
-
-# MapReduce Code Generation Using a DAG Model
-
 by Masayoshi Hagiwara
 
 
-## The Problem
+### The Problem
 
 Business batch applications can make use of modern batch frameworks such as Hadoop and Spark to parallelize their jobs. However, the MapReduce programming model of Hadoop requires us to develop an application at such a low level that maintaining the resulting code can become very expensive. This is because there is a big gap in the level of abstraction between business process definitions and their implementation in programming models like MapReduce. A business process has a lot of exceptional procedures, error handling, etc. When we write MapReduce programs that handle these business exceptions, the programs soon become too complicated to manage. Typical business applications have hundreds or thousands of business exceptions, leading to hundreds or thousands of stages in the MapReduce programs that model them. In addition, since business requirements tend to change frequently, the code artifacts involved are required to change easily and inexpensively.
 
 SQL on Hadoop or Hive does not help to solve this problem, because the SQL statements describing a business application having a lot of exceptions become so complicated that they are just as hard to develop and maintain as custom MapReduce code.
 
-## Overview of the Solution
+### Overview of the Solution
 
-To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the �enterprise level� quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
+To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the enterprise level quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
 
 The DSL will compile business applications described at a business level of abstraction into a directed acyclic graph (DAG) as an intermediate language, then generates the MapReduce programs based on the resulting DAG. The DAG model is adopted because it defines the partial order of stages of MapReduce programs including concurrent processes. For the same reason, several open source projects such as Apache [_Spark_](http://spark.apache.org/), [_Storm_](http://storm.apache.org/) and [_Tez_](http://tez.apache.org/) have adopted the DAG model, originating with Dryad, from Microsoft Research, available here: [_http://research.microsoft.com/en-us/projects/Dryad_](http://research.microsoft.com/en-us/projects/Dryad).
 
-[Image: https://quip.com/-/blob/IHUAAAvgILg/KxK-Fb2lMsneHzkjZxmwfw]
+![Figure 1]( mapreduce_images/image001.jpg)
 Figure 1: a DAG model and its topological sort
 
 One of the characteristics of the DAG model is its topological sort. Figure 1 shows how topological sort works in a particular DAG model. In Figure 1, a circle means a process or a node, and an arrow means data flow from one process to another process. For example, process C has two incoming arrows. Process C can start only after data from both process A and process B are available. This means if process C receives data from process A only, process C has to wait for data from B. This shows an implicit synchronization at process C.
@@ -36,9 +33,12 @@ In this case study, we developed useful operators of data manipulation in the ar
 
 These built-in operators provided by our DSL were defined by practical usage in business application domains, and developers can customize their own operators for their purpose based on these built-in operators using a DSL. Built-in operators can cover many scenarios because they are very generic. If you need to define operators of a data flow application on top of Hadoop or Spark, the definition of these built-in operators can be used as a reference.
 
-Operator	Function	Layout constraint
-Branch	Choose one output target depending on the condition	Map
-confluent	Combine several inputs into one output	Map
+Operator|	Function	| Layout constraint
+---------------------------------------
+Branch	| Choose one output target depending on the condition	| Map
+
+confluent	| Combine several inputs into one output |	Map
+
 Update	Update the value of a record	Map
 Convert	Update the type of a record and create a new type	Map
 extend	Add a new property to the type and create a new type	Map
@@ -232,15 +232,17 @@ Then this procedure is transformed into stages which run Mapper(s) and/or Reduce
 
 Internally, flow DSL analyzes a flow definition to generate the FlowGraph (Figure 2 above). The Asakusa compiler (called [_Ashigel_](https://github.com/asakusafw/asakusafw/tree/master/dsl-project/ashigel-compiler/src/main/java/com/asakusafw/compiler)) then transforms this FlowGraph to the StageGraph (Figure 2 below) which consists of stages that include Mapper(s) and/or Reducer(s). Map and reduce classes are generated by the compiler, so application developers do not have to write map and reduce classes.
 
-[Image: https://quip.com/-/blob/IHUAAAvgILg/dCDcK7ZOOS2Q1DYR_WXSaw][Image: https://quip.com/-/blob/IHUAAAvgILg/Kd5uyjcixWXd8qTv7ppeJA]
+![Figure 2]( mapreduce_images/image002.png)
+![Figure 2 (below)]( mapreduce_images/image003.jpg)
+
 Figure 2: MapReduce code generation of a retail application - Data operations of the data flow (above) and the result of MapReduce layout analysis (below). Visualized by [_Graphviz_](http://graphviz.org/).
 
-Code Artifacts
+###Code Artifacts
 
 This case study is based on the development of the Asakusa Framework, batch processing runtime on top of Hadoop and its development environments which were developed by Nautilus Technologies, Inc. ([_http://www.nautilus-technologies.com/_](http://www.nautilus-technologies.com/)).
 
 The Asakusa Framework was designed in collaboration with Nautilus. The code for the Asakusa framework can be found on github: [_https://github.com/asakusafw/asakusafw_](https://github.com/asakusafw/asakusafw).
 
-Opportunities for Reuse
+###Opportunities for Reuse
 
 Since a DAG model supports a generalized form of concurrent applications based on data flow programming, insight drawn from this case study will give many opportunities for reuse. That is, with a layout analysis for a particular constrained programming model like MapReduce, the DAG model as an intermediate language will improve concurrency using the partial order of concurrent processes. Consequently, developers of the Asakusa Framework, Spark or Tez will automatically gain the advantage of the DAG model.
