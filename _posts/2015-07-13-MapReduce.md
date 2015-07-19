@@ -2,7 +2,7 @@
 layout: post
 title:  "MapReduce Code Generation Using a DAG Model"
 date:   2015-07-13 23:34:28
-categories: Hadoop, HDInsight, Big Data, Batch Processing, Directed Acyclic Graph, Domain Specific Language
+categories: Hadoop
 ---
 
 
