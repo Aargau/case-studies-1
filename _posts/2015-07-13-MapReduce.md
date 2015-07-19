@@ -34,27 +34,27 @@ In this case study, we developed useful operators of data manipulation in the ar
 
 These built-in operators provided by our DSL were defined by practical usage in business application domains, and developers can customize their own operators for their purpose based on these built-in operators using a DSL. Built-in operators can cover many scenarios because they are very generic. If you need to define operators of a data flow application on top of Hadoop or Spark, the definition of these built-in operators can be used as a reference.
 
-Operator | Function	| Layout constraints
---------|----------|------------
-Branch |Choose one output target depending on the condition | Map
-Confluent	|Combine several inputs into one output |	Map
-Update |Update the value of a record	|Map
-Convert	|Update the type of a record and create a new type	|Map
-Extend|Add a new property to the type and create a new type| Map
-project|	Remove the existing property from the type and create a new type	|Map
-restructure|	Move the values of common properties from one type to another type	|Map
-Extract|	Read the values of a record and put them into several records	|Map
-MasterCheck|	Look for the same key of a record and branch if found or not	|Reduce*
-MasterJoin|	Look for the same key of a record and join it with found records	|Reduce*
-MasterBranch|	Look for the same key of a record and branch depending on both the record and found records	|Reduce*
-MasterJoinUpdate|	Look for the same key of a record and update either record(s) depending on both the record and found records	|Reduce*
-CoGroup	|Group several input records with the same key	|Reduce
-Split	|Extract records from a combined record	|Map
-Summarize|	Group records with the same key and summarize each group	|Reduce
-Fold|	Group records with the same key and fold records in a group	|Reduce
-GroupSort|	Group records with the same key and sort records in a group	|Reduce
-checkpoint|	Set a retry point (not related with transaction processing)	|Map
-Logging|	Output a log at this point of a flow	|Map
+|Operator | Function	| Layout constraints|
+|--------|----------|------------|
+|Branch |Choose one output target depending on the condition | Map|
+|Confluent	|Combine several inputs into one output |	Map|
+|Update |Update the value of a record	|Map|
+|Convert	|Update the type of a record and create a new type	|Map|
+|Extend|Add a new property to the type and create a new type| Map|
+|Project|	Remove the existing property from the type and create a new type	|Map|
+|Restructure|	Move the values of common properties from one type to another type	|Map|
+|Extract|	Read the values of a record and put them into several records	|Map|
+|MasterCheck|	Look for the same key of a record and branch if found or not	|Reduce*|
+|MasterJoin|	Look for the same key of a record and join it with found records	|Reduce*|
+|MasterBranch|	Look for the same key of a record and branch depending on both the record and found records	|Reduce*|
+|MasterJoinUpdate|	Look for the same key of a record and update either record(s) depending on both the record and found records	|Reduce*|
+|CoGroup	|Group several input records with the same key	|Reduce|
+|Split	|Extract records from a combined record	|Map|
+|Summarize|	Group records with the same key and summarize each group	|Reduce|
+|Fold|	Group records with the same key and fold records in a group	|Reduce|
+|GroupSort|	Group records with the same key and sort records in a group	|Reduce|
+|checkpoint|	Set a retry point (not related with transaction processing)	|Map|
+|Logging|	Output a log at this point of a flow	|Map|
 
 Table 1:  Layout constraint on map/reduce side of operators
 
