@@ -34,6 +34,7 @@ In this case study, we developed useful operators of data manipulation in the ar
 
 These built-in operators provided by our DSL were defined by practical usage in business application domains, and developers can customize their own operators for their purpose based on these built-in operators using a DSL. Built-in operators can cover many scenarios because they are very generic. If you need to define operators of a data flow application on top of Hadoop or Spark, the definition of these built-in operators can be used as a reference.
 
+|-----
 |Operator | Function	| Layout constraints|
 |--------|----------|------------|
 |Branch |Choose one output target depending on the condition | Map|
