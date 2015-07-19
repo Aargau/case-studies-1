@@ -21,6 +21,7 @@ To overcome the problem, the Asakusa Framework was developed.  The Asakusa Frame
 The DSL will compile business applications described at a business level of abstraction into a directed acyclic graph (DAG) as an intermediate language, then generates the MapReduce programs based on the resulting DAG. The DAG model is adopted because it defines the partial order of stages of MapReduce programs including concurrent processes. For the same reason, several open source projects such as Apache [_Spark_](http://spark.apache.org/), [_Storm_](http://storm.apache.org/) and [_Tez_](http://tez.apache.org/) have adopted the DAG model, originating with Dryad, from Microsoft Research, available here: [_http://research.microsoft.com/en-us/projects/Dryad_](http://research.microsoft.com/en-us/projects/Dryad).
 
 ![Figure 1]( mapreduce_images/image001.jpg)
+
 Figure 1: a DAG model and its topological sort
 
 One of the characteristics of the DAG model is its topological sort. Figure 1 shows how topological sort works in a particular DAG model. In Figure 1, a circle means a process or a node, and an arrow means data flow from one process to another process. For example, process C has two incoming arrows. Process C can start only after data from both process A and process B are available. This means if process C receives data from process A only, process C has to wait for data from B. This shows an implicit synchronization at process C.
@@ -33,8 +34,8 @@ In this case study, we developed useful operators of data manipulation in the ar
 
 These built-in operators provided by our DSL were defined by practical usage in business application domains, and developers can customize their own operators for their purpose based on these built-in operators using a DSL. Built-in operators can cover many scenarios because they are very generic. If you need to define operators of a data flow application on top of Hadoop or Spark, the definition of these built-in operators can be used as a reference.
 
-Operator|	Function	| Layout constraint
----------------------------------------
+| Operator|	Function	| Layout constraints
+------------------------------
 Branch	| Choose one output target depending on the condition	| Map
 
 confluent	| Combine several inputs into one output |	Map
