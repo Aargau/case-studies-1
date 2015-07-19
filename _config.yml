@@ -9,6 +9,6 @@ twitter_username: saraspalding
 github_username:  sarasp
 
 # Build settings
-markdown: redcarpet
+# markdown: redcarpet
 # highlighter: pygments
 # extensions: [fenced_code_blocks]
