@@ -64,7 +64,7 @@ The Asakusa Framework provides 3 types of DSLs: batch, flow and operator. These 
 
 * Batch DSL is the top level DSL and describes a batch job.
 
-~~~java
+```java
 @Batch(name = "example.summarizeSales")
 public class SummarizeBatch extends BatchDescription {
     @Override
@@ -72,7 +72,7 @@ public class SummarizeBatch extends BatchDescription {
         run(CategorySummaryJob.class).soon();
     }
 }
-~~~
+```
 
 To execute a batch job, we sometimes need to import data from sources or export to destinations other than HDFS; this data transfer should be part of the job. To do this, the Asakusa Framework provides a utility to manage batch jobs. It offers complementary assistance for other OSS tools such as Sqoop, Ozzie and Pig.
 
@@ -236,12 +236,12 @@ Internally, flow DSL analyzes a flow definition to generate the FlowGraph (Figur
 
 Figure 2: MapReduce code generation of a retail application - Data operations of the data flow (above) and the result of MapReduce layout analysis (below). Visualized by [_Graphviz_](http://graphviz.org/).
 
-###Code Artifacts
+### Code Artifacts
 
 This case study is based on the development of the Asakusa Framework, batch processing runtime on top of Hadoop and its development environments which were developed by Nautilus Technologies, Inc. ([_http://www.nautilus-technologies.com/_](http://www.nautilus-technologies.com/)).
 
 The Asakusa Framework was designed in collaboration with Nautilus. The code for the Asakusa framework can be found on github: [_https://github.com/asakusafw/asakusafw_](https://github.com/asakusafw/asakusafw).
 
-###Opportunities for Reuse
+### Opportunities for Reuse
 
 Since a DAG model supports a generalized form of concurrent applications based on data flow programming, insight drawn from this case study will give many opportunities for reuse. That is, with a layout analysis for a particular constrained programming model like MapReduce, the DAG model as an intermediate language will improve concurrency using the partial order of concurrent processes. Consequently, developers of the Asakusa Framework, Spark or Tez will automatically gain the advantage of the DAG model.
