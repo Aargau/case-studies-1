@@ -11,3 +11,4 @@ github_username:  sarasp
 # Build settings
 markdown: kramdown
 # highlighter: pygments
+extensions: [fenced_code_blocks]
