@@ -65,7 +65,7 @@ The Asakusa Framework provides 3 types of DSLs: batch, flow and operator. These 
 
 * Batch DSL is the top level DSL and describes a batch job.
 
-```
+```java
 @Batch(name = "example.summarizeSales")
 public class SummarizeBatch extends BatchDescription {
     @Override
