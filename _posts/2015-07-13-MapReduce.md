@@ -2,29 +2,22 @@
 layout: post
 title:  "MapReduce Code Generation Using a DAG Model"
 date:   2015-07-13 23:34:28
-categories: MapReduce DAG Hadoop Spark
+categories: Hadoop, HDInsight, Big Data, Batch Processing, Directed Acyclic Graph, Domain Specific Language
 ---
 
 
 # MapReduce Code Generation Using a DAG Model
 
-Masayoshi Hagiwara, 28th May 2015
+by Masayoshi Hagiwara
 
-Audience:
 
-External
-
-Tags
-
-Hadoop, HDInsight, Big Data, Batch Processing, Directed Acyclic Graph, Domain Specific Language
-
-The Problem
+## The Problem
 
 Business batch applications can make use of modern batch frameworks such as Hadoop and Spark to parallelize their jobs. However, the MapReduce programming model of Hadoop requires us to develop an application at such a low level that maintaining the resulting code can become very expensive. This is because there is a big gap in the level of abstraction between business process definitions and their implementation in programming models like MapReduce. A business process has a lot of exceptional procedures, error handling, etc. When we write MapReduce programs that handle these business exceptions, the programs soon become too complicated to manage. Typical business applications have hundreds or thousands of business exceptions, leading to hundreds or thousands of stages in the MapReduce programs that model them. In addition, since business requirements tend to change frequently, the code artifacts involved are required to change easily and inexpensively.
 
 SQL on Hadoop or Hive does not help to solve this problem, because the SQL statements describing a business application having a lot of exceptions become so complicated that they are just as hard to develop and maintain as custom MapReduce code.
 
-Overview of the Solution
+## Overview of the Solution
 
 To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the �enterprise level� quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
 
@@ -35,7 +28,7 @@ Figure 1: a DAG model and its topological sort
 
 One of the characteristics of the DAG model is its topological sort. Figure 1 shows how topological sort works in a particular DAG model. In Figure 1, a circle means a process or a node, and an arrow means data flow from one process to another process. For example, process C has two incoming arrows. Process C can start only after data from both process A and process B are available. This means if process C receives data from process A only, process C has to wait for data from B. This shows an implicit synchronization at process C.
 
-Now let�s consider that one business application is formed by the processes from A to G as shown in Figure 1 and process G receives data from an external data source at the start.
+Now let's consider that one business application is formed by the processes from A to G as shown in Figure 1 and process G receives data from an external data source at the start.
 
 Process G sends data to process A, then process A sends data to both process B and process C. Process B can immediately start when it receives data from process A. But process C can start after Process B starts because it has to wait for data from process B. In the same way, process F starts after process C starts. Process E starts after process F. And process D starts after process E starts. The DAG model in Figure 1 shows this dependency of processes of an application through data flow. As the result, the data flow between processes of this business application decides the order of executing the processes. This order is topological sort of the DAG model. Topological sort in Figure 1 decides only one order. In general, there are several orders that topological sort decides because a DAG model defines partial order of processes (concurrent processes).
 
@@ -126,7 +119,7 @@ public abstract class CategorySummaryOperator {
     public abstract boolean checkStore(
             @Key(group = "store_code") StoreInfo info,
             @Key(group = "store_code") SalesDetail sales);
-    
+
     /**
     * Join the product master with the sales transaction`
     * @param info product master database`
