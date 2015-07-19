@@ -64,7 +64,7 @@ The Asakusa Framework provides 3 types of DSLs: batch, flow and operator. These 
 
 * Batch DSL is the top level DSL and describes a batch job.
 
-```java
+~~~java
 @Batch(name = "example.summarizeSales")
 public class SummarizeBatch extends BatchDescription {
     @Override
@@ -72,7 +72,7 @@ public class SummarizeBatch extends BatchDescription {
         run(CategorySummaryJob.class).soon();
     }
 }
-```
+~~~
 
 To execute a batch job, we sometimes need to import data from sources or export to destinations other than HDFS; this data transfer should be part of the job. To do this, the Asakusa Framework provides a utility to manage batch jobs. It offers complementary assistance for other OSS tools such as Sqoop, Ozzie and Pig.
 
