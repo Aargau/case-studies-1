@@ -13,5 +13,10 @@ github_username:  sarasp
 # highlighter: pygments
 # extensions: [fenced_code_blocks]
 
-kramdown:
-  input: GFM
+# Build settings
+markdown: redcarpet
+highlighter: pygments
+extensions: [fenced_code_blocks tables]
+
+# kramdown:
+#  input: GFM
