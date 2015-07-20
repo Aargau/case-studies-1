@@ -6,12 +6,12 @@
 
 
 // Our variables
-$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-family: "Open Sans", sans-serif;
 $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$spacing-unit:     30px;
+$spacing-unit:     16px;
 
 $text-color:       #111;
 $background-color: #fdfdfd;
@@ -22,10 +22,17 @@ $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+// Also serves as the "desktop" media query when needed
+$content-width:    100%;
 
+// These responsive points are based on legible columns 
+// combined with relative-pixel resolutions for common targets.
+// They are also max-widths.
 $on-palm:          600px;
-$on-laptop:        800px;
+// Tablet is really specifically for portrait tablet resolutions
+$on-tablet:        993px;
+$on-laptop:        1600px;
+$on-desktop:       10000px;
 
 
 
@@ -39,6 +46,19 @@ $on-laptop:        800px;
 @mixin media-query($device) {
     @media screen and (max-width: $device) {
         @content;
+    }
+}
+
+// Media query to account for retina image swaps
+@mixin retina {
+    @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (   min--moz-device-pixel-ratio: 2),
+        only screen and (     -o-min-device-pixel-ratio: 2/1),
+        only screen and (        min-device-pixel-ratio: 2),
+        only screen and (                min-resolution: 192dpi),
+        only screen and (                min-resolution: 2dppx) {
+            @content;
     }
 }
 

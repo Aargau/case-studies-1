@@ -1,12 +1,15 @@
 ---
 layout: post
 title:  "MapReduce Code Generation Using a DAG Model"
+author: "Masayoshi Hagiwara"
+#author-link: "http://#"
+#author-image: "/images/authors/photo.jpg" #should be square dimensions
 date:   2015-07-13 23:34:28
 categories: Hadoop
+color: "blue"
+#image: "/images/imagename.png" #should be ~350px tall
+excerpt: Business batch applications can make use of modern batch frameworks such as Hadoop and Spark to parallelize their jobs. However, the MapReduce programming model of Hadoop requires us to develop an application at such a low level that maintaining the resulting code can become very expensive.
 ---
-
-by Masayoshi Hagiwara
-
 
 ### The Problem
 

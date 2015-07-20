@@ -2,14 +2,56 @@
 layout: default
 ---
 <div class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
-  </header>
-
-  <article class="post-content">
-    {{ content }}
-  </article>
-
-</div>
+    <div class="row article-hero" style="{% if page.color %}background-color: {{ page.color }};{% endif %}{% if page.image %}background-image: url('{{ page.image}}');{% endif %}">
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <h4>{{ page.title }}</h4>
+            <div class="row">
+              <div class="col ss12  valign-wrapper">
+                {% if page.author %}
+                {% if page.author-image %}<img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
+                <span class="author-name">
+                  <a href="{{ page.author-link }}">{{ page.author }}</a>
+                </span>{% endif %}-
+                <span class="article-date">{{ page.date | date: "%b %-d, %Y" }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 article-content">
+          <article class="post-content">
+            {{ content }}
+          </article>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="row">
+        <div class="col s12">
+          <p>
+            {{ /*if there are tags/links to repos etc, or categories, they need to go here*/ }}
+          </p>
+          <p>
+            <a class="btn btn-social-icon btn-twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+                        <a class="btn btn-social-icon btn-facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+                        <a class="btn btn-social-icon btn-google">
+              <i class="fa fa-google"></i>
+            </a>
+                        <a class="btn btn-social-icon btn-reddit">
+              <i class="fa fa-reddit"></i>
+            </a>
+                        <a class="btn btn-social-icon btn-linkedin">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
