@@ -11,10 +11,9 @@
 }
 
 .site-title {
-    font-size: 26px;
-    line-height: 56px;
-    letter-spacing: -1px;
-    margin-bottom: 0;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0 0 0 16px;
     float: left;
 
     &,
@@ -23,13 +22,40 @@
     }
 }
 
+.site-title::before {
+	content: "";
+	background-image: url("/images/logo.png");
+	background-repeat: no-repeat;
+	height: 40px;
+	width: 202px;
+	display: inline-block;
+	margin: 8px 0 0 0;
+	vertical-align: sub;
+    @include retina {
+    	background-image: url("/images/logo_retina.png"); 
+    }
+}
+
 .site-nav {
     float: right;
     line-height: 56px;
+    box-shadow: none;
+    background-color: inherit;
+    width: inherit;
+    height: inherit;
+    margin-right: 16px;
+    overflow: inherit;
 
     .menu-icon {
         display: none;
     }
+    
+    .trigger {
+        display: inline-block;
+        vertical-align: bottom;
+        line-height: 40px;
+    }
+
 
     .page-link {
         color: $text-color;
@@ -44,11 +70,12 @@
     @include media-query($on-palm) {
         position: absolute;
         top: 9px;
-        right: 30px;
+        right: 0px;
+        min-height: 36px;
         background-color: $background-color;
         border: 1px solid $grey-color-light;
-        border-radius: 5px;
         text-align: right;
+        z-index: 1000;
 
         .menu-icon {
             display: block;
@@ -82,6 +109,7 @@
         .page-link {
             display: block;
             padding: 5px 10px;
+            line-height: 36px;
         }
     }
 }
@@ -99,6 +127,8 @@
 .footer-heading {
     font-size: 18px;
     margin-bottom: $spacing-unit / 2;
+    margin-left: $spacing-unit;
+    margin-right: $spacing-unit;
 }
 
 .contact-list,
@@ -110,7 +140,7 @@
 .footer-col-wrapper {
     font-size: 15px;
     color: $grey-color;
-    margin-left: -$spacing-unit / 2;
+    margin-left: $spacing-unit / 2;
     @extend %clearfix;
 }
 
@@ -162,7 +192,7 @@
  * Page content
  */
 .page-content {
-    padding: $spacing-unit 0;
+    padding: 0;
 }
 
 .page-heading {
@@ -193,14 +223,21 @@
 /**
  * Posts
  */
+ 
+.post {
+    margin: 0 $spacing-unit;      
+} 
+
 .post-header {
     margin-bottom: $spacing-unit;
+    margin-top: $spacing-unit * 2;
 }
 
 .post-title {
     font-size: 42px;
     letter-spacing: -1px;
     line-height: 1;
+    
 
     @include media-query($on-laptop) {
         font-size: 36px;
@@ -234,3 +271,158 @@
         }
     }
 }
+
+/**
+ * Home
+ */
+ 
+ #container {
+	margin:8px 0px 0px 16px;
+}
+
+.item {
+    float: left;
+    width: 100%;
+    @include media-query($on-desktop) { width: 20%; }
+    @include media-query($on-laptop)  { width: 33.333%; }
+    @include media-query($on-tablet)  { width: 50%;     }
+    @include media-query($on-palm)    { width: 100%;    }
+}
+
+.item.w2 {
+    float: left;
+    width: 100%;
+    @include media-query($on-desktop) { width: 40%; }
+    @include media-query($on-laptop) { width: 66.666%; }
+    @include media-query($on-tablet) { width: 100%;    }
+    @include media-query($on-palm)   { width: 100%;    }
+}
+
+.card,
+.card-image img,
+.card-content {
+	border-radius: 0 !important;
+}
+
+.card-image {   
+    a:hover{
+      text-decoration: none !important;
+    }
+    
+    img {
+	   max-height: 350px;
+    }
+}
+
+.card-title {
+    padding: 16px !important;
+}
+
+.card-title.inline {
+   display: block;
+   position: relative !important;
+}
+
+.card {
+	margin: 8px 16px 0 0 !important;
+    a {
+        text-transform: none;
+        margin: 0;
+        color: $brand-color;
+        text-decoration: none;
+        
+        &:visited {
+            color: darken($brand-color, 15%);
+        }
+    
+        &:hover {
+            color: $text-color;
+            text-decoration: underline;
+        }
+    }
+}
+
+.card-date {
+	font-size:12px;
+	display: block;
+}
+
+.author-image {
+	height: 32px;
+	width: 32px;
+    padding-right: 16px;
+}
+
+.author-name,
+.article-date {
+	padding-right: 8px;
+}
+
+.article-date {
+    padding-left: 8px;
+}
+
+.article-hero {
+	background-repeat: no-repeat;
+	background-size: auto;
+	color: #fff;
+	background-color: #000;
+    padding-top: 40px;
+    
+    a {
+        text-decoration: underline;
+        color: #fff;
+        
+        &:hover {
+            color: #fff;
+        }
+        
+        &:visited {
+            color: #fff;
+        }
+    }
+}
+
+.github-repo::before {
+	content:"";
+	width: 16px;
+	height: 16px;
+	background-image: url("../assets/images/GitHub-Mark-16px.png");
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 4px 5px 0;
+}
+
+.github-repo,
+.deis-pin {
+	border: 1px solid #ccc;
+	text-transform: none !important;
+	padding: 2px 4px;
+	color: #000 !important;
+	margin: 0 4px 0 0 !important;
+	white-space: nowrap;
+	line-height: 32px;
+}
+
+.deis-pin::before {
+	content:"";
+	width: 16px;
+	height: 16px;
+	background-image: url("../assets/images/deispin.png");
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 4px 5px 0;
+}
+
+.card-content a {
+	white-space: nowrap;
+}
+
+.card-action {
+	padding: 12px 20px 12px 20px !important;
+}
+
+
+

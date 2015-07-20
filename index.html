@@ -3,21 +3,33 @@ layout: default
 ---
 
 <div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    
+  <ul id="container" class="post-list js-packery"
+    data-packery-options='{ "itemSelector": ".item" }'>
     {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+      <li class="item{% if post.size > 1 %} {{ post.size }}{% endif %}">
+        <div class="card">
+          <div class="card-image {{ post.color }}">
+            <a href="{{ post.url | prepend: site.baseurl }}">
+                {% if post.image %}
+                <img class="card-back" src="{{ post.image | prepend: site.baseurl }}"/>    
+                <span class="card-title">
+                    <span class="card-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+                    {{ post.title }}
+                </span>
+                {% else %}
+                <span class="card-title inline">
+                    <span class="card-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+                    {{ post.title }}
+                </span>
+                {% endif %}
+            </a>
+          </div>
+          <div class="card-content">
+            {{ post.excerpt | strip_html }}<a href="{{ post.url | prepend: site.baseurl }}">Read the full article</a></p>
+          </div>
+        </div>
       </li>
     {% endfor %}
-
   </ul>
 
 <!--  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
