@@ -23,8 +23,8 @@ To overcome the problem, the Asakusa Framework was developed.  The Asakusa Frame
 
 The DSL will compile business applications described at a business level of abstraction into a directed acyclic graph (DAG) as an intermediate language, then generates the MapReduce programs based on the resulting DAG. The DAG model is adopted because it defines the partial order of stages of MapReduce programs including concurrent processes. For the same reason, several open source projects such as Apache [_Spark_](http://spark.apache.org/), [_Storm_](http://storm.apache.org/) and [_Tez_](http://tez.apache.org/) have adopted the DAG model, originating with Dryad, from Microsoft Research, available here: [_http://research.microsoft.com/en-us/projects/Dryad_](http://research.microsoft.com/en-us/projects/Dryad).
 
-![Figure 1]( images/mapreduce_images/image001.jpg)
-![Figure 1]( ./images/logo.png)
+![Figure 1]( /images/mapreduce_images/image001.jpg)
+![Figure 1]( /images/logo.png)
 
 
 Figure 1: a DAG model and its topological sort
