@@ -32,7 +32,9 @@
 	margin: 8px 0 0 0;
 	vertical-align: sub;
     @include retina {
-    	background-image: url("../images/logo_retina.png"); 
+    	background-image: url("../images/logo_retina.png");
+        height: 81px;
+        width: 410px;
     }
 }
 
