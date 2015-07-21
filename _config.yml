@@ -3,10 +3,10 @@ title: Partner Catalyst Team Case Studies
 email: sarasp@outlook.com
 description: > # this means to ignore newlines until "baseurl:"
   testbed for case study publication
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: http://sarasp.github.io" # the base hostname & protocol for your site
+baseurl: "/case-studies/" # the subpath of your site, e.g. /blog/
+url: http://catalystcode.github.io" # the base hostname & protocol for your site
 twitter_username: saraspalding
-github_username:  sarasp
+github_username:  catalystcode
 
 # Build settings
 # markdown: redcarpet
