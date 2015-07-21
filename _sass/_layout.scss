@@ -24,7 +24,7 @@
 
 .site-title::before {
 	content: "";
-	background-image: url("case-studies/images/logo.png");
+	background-image: url("../images/logo.png");
 	background-repeat: no-repeat;
 	height: 40px;
 	width: 202px;
@@ -32,7 +32,7 @@
 	margin: 8px 0 0 0;
 	vertical-align: sub;
     @include retina {
-    	background-image: url("case-studies/images/logo_retina.png"); 
+    	background-image: url("../images/logo_retina.png"); 
     }
 }
 
@@ -114,8 +114,6 @@
     }
 }
 
-
-
 /**
  * Site footer
  */
@@ -186,8 +184,6 @@
     }
 }
 
-
-
 /**
  * Page content
  */
@@ -217,7 +213,6 @@
     display: block;
     font-size: 24px;
 }
-
 
 
 /**
@@ -423,6 +418,3 @@
 .card-action {
 	padding: 12px 20px 12px 20px !important;
 }
-
-
-
