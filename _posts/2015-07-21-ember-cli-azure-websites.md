@@ -17,11 +17,7 @@ An important part of Ember is the powerful tool chain: A command line interface 
 
 This case study describes how to deploy Ember Cli apps automatically to Azure Web Apps – and how we built the small automation tool, [ember-cli-azure-deploy](https://github.com/felixrieseberg/ember-cli-azure-deploy). A smaller tutorial [was also made available on the Ember Cli homepage](http://www.ember-cli.com/user-guide/#azure).
 
-# Tags
-
-Ember, Ember Cli, JavaScript, Web Apps, Azure Websites, Azure Web Apps
-
-# Customer Problem: Don’t Commit your Compilation
+# Don’t Commit your Compilation
 
 It is a golden rule that one does not commit the compiled output of source code into a code repository. The rational is more than just code sanity – committing compiled output dramatically increases the size of a repository, makes the commit history confusing, and requires developer-driven compilation before every commit.
 
@@ -41,16 +37,16 @@ Let’s take a look at some code, starting with the customized deployment. The d
 
 **.deployment**
 
-``
+```
 [config]  
  command = bash deploy.sh
-``
+```
 
 The deployment bash script can be split up into four parts: First, we set up the environment – finding the right versions of Node.js and npm, making sure that Bower is installed, and ensuring that path variables are available.
 
 **deploy.sh**
 
-``
+```
 \# Setup  
  \# -----  
  echo Copy assets to $DEPLOYMENT_TEMP for build  
@@ -81,22 +77,22 @@ EMBER_PATH="$NODE_MODULES_DIR\\ember-cli\\bin\\ember"
 EMBER_CMD="\"$NODE_EXE\" \"$EMBER_PATH\""  
  BOWER_CMD="\"$NODE_EXE\" \"$BOWER_PATH\""  
  AZUREDEPLOY_CMD="\"$NODE_EXE\" \"$AZUREDEPLOY_PATH\""
-``
+```
 
 Once that is done, we can move on to install the requirements for Ember Cli. To avoid issues with outdated and native packages, we install certain Socket.io-related packages directly from GitHub, where various issues are already fixed (as opposed to npm, which only has older versions available). We also instruct npm to avoid bin links and optional dependencies: Instead of optimizing for fast build speeds and performance, we want to make the build and installation process as failsafe as possible.
 
-``
+```
 \# Installing dependencies to take load of ember-cli install 
 \# -----  
 
 eval $NPM_CMD install --no-optional --no-bin-links Automattic/engine.io-client  
  eval $NPM_CMD install --no-optional --no-bin-links socket.io  
  eval $NPM_CMD install --no-optional --no-bin-links testem
-``
+```
 
 We can then move on to actually install ember-cli itself, as well as bower and the compilation helper ember-cli-azure-deploy:
 
-``
+```
 echo Installing ember-cli  
  eval $NPM_CMD install --no-optional --no-bin-links ember-cli  
  exitWithMessageOnError "ember-cli failed"  
@@ -112,11 +108,11 @@ if [[ ! -e "$BOWER_PATH" ]]; then
  else  
    echo bower already installed, nothing to do  
  fi
-``
+```
 
 If that succeeds, we can move on to clean the package cache, install all the packages required by the web app, and kick off compilation:
 
-``
+```
 echo Cleaning Cache  
  eval $NPM_CMD cache clean  
  exitWithMessageOnError "npm cache cleaning failed"  
@@ -135,11 +131,11 @@ echo Build the dist folder
 
 echo Copy web.config to the dist folder  
  cp web.config dist\
- ``
+```
 
 You might notice that we don’t call ember-cli directly, but instead have ember-cli-azure-deploy handle the actual build process. Azure Web Apps does not provide stdin, which is not actually required for a successful ember-cli build, but nevertheless throws an error. To avoid this issue, we simply call ember-cli with stdin explicitly disabled, which Node.js allows us to do:
 
-``
+```
 cp = exec('node ' + execPath + '\\ember build -prod', {  
      cwd: currentFolder,  
      stdout: true,  
@@ -150,28 +146,28 @@ cp = exec('node ' + execPath + '\\ember build -prod', {
      }  
      console.log(stdout, stderr);  
  }.bind(this));
- ``
+```
 
 # Running the Code: Deploying an App to Azure Web Apps
 
 Start by ensuring that you have Node.js, npm, Bower, and ember-cli installed on your machine. If you’re only missing the node modules, you can simply install them with the following commands:
 
-``
+```
 npm install –g bower  
 npm install -g ember-cli
-``
+```
 
 Next, create a new application.
 
-``
+```
 ember new my-new-app
-``
+```
 
 Then, prepare your app for deployment to Azure by installing ember-cli-azure-deploy and letting it prepare your project:
 
-``
+```
 npm install --save-dev -g ember-cli-azure-deploy
 azure-deploy init
-``
+```
 
 Well done! Now, [simply deploy your project to Azure Web Apps – either using GitHub, VSO, Dropbox, or another method available](https://azure.microsoft.com/en-us/documentation/articles/web-sites-deploy/). Once the code is deployed, Azure Web Apps will automatically build and deploy your web app!
