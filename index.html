@@ -25,13 +25,10 @@ layout: default
             </a>
           </div>
           <div class="card-content">
-            {{ post.excerpt | strip_html }}<a href="{{ post.url | prepend: site.baseurl }}">Read the full article</a></p>
+            {{ post.excerpt | strip_html }}<p><a href="{{ post.url | prepend: site.baseurl }}">Read the full article</a></p>
           </div>
         </div>
       </li>
     {% endfor %}
   </ul>
-
-<!--  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
--->
 </div>
