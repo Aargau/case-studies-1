@@ -10,23 +10,6 @@ color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Background and floor removal from depth camera data.
 ---
-
-# Background and floor removal from depth camera data
-
-Petri Kainiemi, Ilkka Salento, Petro Soininen  
- May 2015  
- Version 1.0
-
-# Audience:
-
-Public, technical audience
-
-# Tags
-
-Kinect, depth camera, C++
-
-# Background
-
 Computer vision is used in various industries to process camera data as part of an analytics pipeline. Examples of usage of computer vision range from automated surveillance camera systems in public spaces to quality and stability monitoring of paper machines.
 
 This document introduces a reusable pattern and set of algorithms for extracting objects of interest from depth camera data.

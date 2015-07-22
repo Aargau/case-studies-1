@@ -11,10 +11,6 @@ color: "blue"
 excerpt: A framework to bootstrap enterprise single page applications with continuous Azure integration
 ---
 
-# A framework to bootstrap enterprise single page applications with continuous Azure integration
-
-## Customer Problem
-
 When developers embark on a new web application project, they often seek technical guidance for where to start, which  technologies to use, how to work through platform integration issues, etc. New technologies are emerging at a record pace, so developers spend a lot of time and energy deciding which frameworks are the most trusted and well-established in the web community. As an example, many startups favor open source solutions, and follow some form of agile SDLC methodology to stand up a full stack local web environment on-demand. Developers need an environment that provides the flexibility to easily swap frameworks while still allowing them to develop rapidly.
 
 Another problem developers often face is the lack or delay of a stable test environment after development is complete. This leaves the sustainability of an app at a vulnerable state; code often needs to be refactored to be testable in a production-ready environment.
@@ -53,11 +49,11 @@ SailsJS, Mocha, Node, NPM, ReactJS, Istanbul, Protractor, ESLint, Browserify, Ex
 
 # Overview of the solution
 
-Sails has a concept called generators that allow developers to extend and create a templated solution to fit their needs. This project’s custom generator uses ReactJS as the toolset to create front-end components, and plugged in other battle-tested open source products to cover testing, web asset management and continuous integration.
+Sails has a concept called generators that allow developers to extend and create a templated solution to fit their needs. This projectâ€™s custom generator uses ReactJS as the toolset to create front-end components, and plugged in other battle-tested open source products to cover testing, web asset management and continuous integration.
 
 This project solves the need for developers having a consistent working environment. The framework offers a powerful starting point, that is easily extensible and enables developers to reconfigure the project generator to plug in the tech stack they choose. This repo also comes packaged with Bootstrap 3 and LESS for CSS pre-processing, so you have the option available for a responsive and user-friendly front-end layout template to start with.  Some noteworthy Bootstrap 3 sites are showcased in the [Bootstrap Expo](http://expo.getbootstrap.com/).
 
-This repo supports test driven development practices, which encourages simple design and inspires confidence and reliability. The TDD cycle entails an iterative process of first writing unit tests that validate user features, then writing production code that’s continuously being validated (_against unit tests_) throughout development and providing real-time testing results. Test-driven development offers more than just simple validation, but can also drive the design of a service and/or program and makes refactoring a whole lot easier. By focusing on unit tests first, developers must think up front about how users will use their program. This also helps avoid conflicts where one developer’s local change(s) breaks another developer’s build. Mocha, Protractor, Istanbul and PhantomJS are bundled with this project as the test harness.  
+This repo supports test driven development practices, which encourages simple design and inspires confidence and reliability. The TDD cycle entails an iterative process of first writing unit tests that validate user features, then writing production code thatâ€™s continuously being validated (_against unit tests_) throughout development and providing real-time testing results. Test-driven development offers more than just simple validation, but can also drive the design of a service and/or program and makes refactoring a whole lot easier. By focusing on unit tests first, developers must think up front about how users will use their program. This also helps avoid conflicts where one developerâ€™s local change(s) breaks another developerâ€™s build. Mocha, Protractor, Istanbul and PhantomJS are bundled with this project as the test harness.  
 
 Because the framework uses Travis CI for build management, all unit tests are executed for each GIT commit and the team can be notified of any failed builds via Slack or email. We will also took a look at Deis as an exploration exercise to identify opportunities to take continuous integration one step further.
 
@@ -112,7 +108,7 @@ $ (Linux) sudo npm install
 
 ![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-Building-an-enterprise-web-app-with-continuous-azure-integration_images/image001.jpg)
 
-You should see this message coming back from Sails to confirm that you’re site is ready for use.
+You should see this message coming back from Sails to confirm that youâ€™re site is ready for use.
 
 You can access your new site by accessing the site at [http://localhost:1337](http://localhost:1337) 
 
@@ -122,7 +118,7 @@ Sails is delivered with a baseline site generator, and a standard set of GRUNT t
 
 Asset Packages
 
-Bower template file – **templates/bower.ejs**
+Bower template file â€“ **templates/bower.ejs**
 
 ``
 {
@@ -147,7 +143,7 @@ The default provided bower file includes dependencies for fontawesome and bootst
 
 Node Package Dependencies
 
-Node Package.json template – **templates/package.json**
+Node Package.json template â€“ **templates/package.json**
 
 ``
    "dependencies": {
@@ -217,11 +213,11 @@ matrix:
   fast_finish: true
 ``
 
-- To enable continuous integration with Travis, your app will need two things, one a .travis.yml file and enabling your account on the [Travis portal](https://travis-ci.org/) <span class="MsoHyperlink"></span> (_this part cannot be automated_).  You’ll find a .travis.yml file in your working directory that a developer controls. By default, Travis will invoke npm test (_listed above_) on every code commit, build your app on their VM, and a development team is notified of the results based. Travis also supports .NET builds as well.
+- To enable continuous integration with Travis, your app will need two things, one a .travis.yml file and enabling your account on the [Travis portal](https://travis-ci.org/) (_this part cannot be automated_).  Youâ€™ll find a .travis.yml file in your working directory that a developer controls. By default, Travis will invoke npm test (_listed above_) on every code commit, build your app on their VM, and a development team is notified of the results based. Travis also supports .NET builds as well.
 
 Front End Assets / Layout (_Bootstrap 3 + ReactJS Option is available_)
 
-The site will come bundled with a starter default [bootstrap template](http://getbootstrap.com/examples/cover/), which is fully customizable. The template location can be found within ‘working directory/views/homepage.ejs’. You’re free to use any other templating library like Semantic UI in place of bootstrap.
+The site will come bundled with a starter default [bootstrap template](http://getbootstrap.com/examples/cover/), which is fully customizable. The template location can be found within â€˜working directory/views/homepage.ejsâ€™. Youâ€™re free to use any other templating library like Semantic UI in place of bootstrap.
 
 **App.js** (_this is only an example to illustrate a sample react component_)
 
@@ -250,7 +246,7 @@ React.render(
 );
 ``
 
-If a developer chooses to use ReactJS as its component framework, Browserify is setup to pull in React components referenced at ‘working directory/assets/app/app.js’ . A sample app.js file with a component defined is shown above. The browserify location can be configured within ‘working directory/tasks/pipeline.js’
+If a developer chooses to use ReactJS as its component framework, Browserify is setup to pull in React components referenced at â€˜working directory/assets/app/app.jsâ€™ . A sample app.js file with a component defined is shown above. The browserify location can be configured within â€˜working directory/tasks/pipeline.jsâ€™
 
 Test Driven Development
 
@@ -288,7 +284,7 @@ describe('TestSet1', function(){
 
 # Challenges
 
-Sails is such a powerful framework that scaffolds a fully functional enterprise Node app that’s easily configurable. The main challenge I faced when working with Sails was the limited documentation. This forced me to crawl through the source code to answer questions and address issues I encountered. There were also only a couple examples where other engineers built custom Sails Generators. I tried to simplify some of the SailsJS issues that I ran into by abstraction and customizable hooks into Sails that can be leveraged in the sails-generate-reactjs project.
+Sails is such a powerful framework that scaffolds a fully functional enterprise Node app thatâ€™s easily configurable. The main challenge I faced when working with Sails was the limited documentation. This forced me to crawl through the source code to answer questions and address issues I encountered. There were also only a couple examples where other engineers built custom Sails Generators. I tried to simplify some of the SailsJS issues that I ran into by abstraction and customizable hooks into Sails that can be leveraged in the sails-generate-reactjs project.
 
 # Technologies used in this project
 
@@ -296,4 +292,4 @@ SailsJS, Socket.io, Express, Bower, NodeJS, NPM, Browserify, Handlerbars, ESLint
 
 # Opportunities for Reuse
 
-This project provides developers with a starting point to scaffold a Node JS Web application, and plugin additional packages and customize the base install so the development environment fit’s the needs of their project.
+This project provides developers with a starting point to scaffold a Node JS Web application, and plugin additional packages and customize the base install so the development environment fitâ€™s the needs of their project.

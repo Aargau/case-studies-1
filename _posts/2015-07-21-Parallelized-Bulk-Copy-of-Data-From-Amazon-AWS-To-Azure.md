@@ -11,25 +11,7 @@ color: "blue"
 excerpt: Parallelized Bulk Copy of Data from Amazon AWS to Microsoft Azure 
 ---
 
-# Parallelized Bulk Copy of Data from Amazon AWS to Microsoft Azure
-
-Barry Briggs
-
-May 13, 2015
-
-Version 0.1
-
-# Audience:
-
-External
-
-# Tags
-
-Azure, Amazon Web Services, AWS, S3, Azure Storage, Angular.js
-
-# Customer Problem
-
-For various reasons, many customers want the ability to easily and efficiently move data from Amazon Web Servicesí Simple Storage Service (S3) to Microsoft Azure storage. In this Case Study, youíll see how to take the simple notion of cloud file-copy and make it fast and efficient using parallel techniques.
+For various reasons, many customers want the ability to easily and efficiently move data from Amazon Web Services‚Äô Simple Storage Service (S3) to Microsoft Azure storage. In this Case Study, you‚Äôll see how to take the simple notion of cloud file-copy and make it fast and efficient using parallel techniques.
 
 There are several solutions available today for moving data from AWS to Azure.  These include any number of simple applications that copy data one file at a time, usually by moving the file to a client machine and then uploading it to Azure. Other solutions use Amazon Direct Connect and Azure Express Route to make the copy operations much faster as both provide direct data center-to-cloud connectivity bypassing the internet. Still others involve sending a physical drive to Amazon, copying data to it, and then after the drive is returned, sending to Microsoft and uploading the data to Azure.
 
@@ -37,10 +19,10 @@ Each of these solutions has value in certain circumstances.  However, in many ca
 
 # Overview of the Solution
 
-The solution, called ìawcopy,î consists of several components:
+The solution, called ‚Äúawcopy,‚Äù consists of several components:
 
 - A (scriptable) command line application which sends user credentials for both Amazon and Azure storage and  a set of commands to the Azure cloud service;
-- A command dispatcher in Azure which receives the commands and dispatches work items to ìagentsî;
+- A command dispatcher in Azure which receives the commands and dispatches work items to ‚Äúagents‚Äù;
 - Worker agents that are responsible for copying a (configurable) number of files (a command line setting);
 - A user interface that shows the progress of each copy job. Multiple copy jobs from multiple users may be running simultaneously. 
 
@@ -56,34 +38,34 @@ The number of agents is configurable on a per-job basis.
 
 The awcopy console application is invoked in the following manner:
 
-``
+```
 C:\awcopy>awcopy {aws-parameters} {azure-parameters} {options}
-``
+```
 
 The aws-parameters include:
 
-``
+```
 bucket:{aws-bucket-specification}
 path:{aws-object-path} (can be single file, *.*, or regular expression) 
 accesskey:{aws-S3-access-key}
 secret:{aws-S3-secret-key}
 region:{aws-region}
-``
+```
 
 Azure parameters include:
 
-``
+```
 container:{azure-container-specification}
 storageaccount:{azure-storage-account}
 storagekey:{azure-storage-key}
-``
+```
 
 Options (command-line switches) include:
 
-``
+```
 /H: list all commands and explanations
 /C: use cloud service to bulk copy files
-/U: local (workstation) copy ñ only useful for debugging/testing credentials
+/U: local (workstation) copy ‚Äì only useful for debugging/testing credentials
 /B: specify block size (default:4MB) format nnnnk or nnnnM
 /E: encrypt blobs in Azure
 /J: job name
@@ -92,8 +74,8 @@ Options (command-line switches) include:
 /P: prompt to overwrite existing Azure blobs
 /A: (maximum) number of agents in Azure to handle copy (default: 4)
 /L: list contents of AWS path and estimate egress charges
-/Z: log all activity to local journal file format: awcopyódata-time.log
-``
+/Z: log all activity to local journal file format: awcopy‚Äîdata-time.log
+```
 
 It is possible to bypass the cloud service to copy files locally (meaning, the files are copied from S3 to the user workstation and then up to Azure) using the /U switch. While inefficient, this is helpful to ensure that credentials are typed in correctly and for other debugging purposes.
 
@@ -111,14 +93,14 @@ Each such job is assigned a GUID. The username (`Environment.Username`) and an o
 
 Using the AWS .NET SDK and the Azure Storage SDK, files are copied in increments, as specified by the blocksize; by default, 4MB are copied at a time. There is no practical limitation on file size. The blocksize gets stuffed into the relevant AWS S3 structure as shown:
 
-``
+```
 Amazon.S3.Model.GetObjectRequest amzreq = new Amazon.S3.Model.GetObjectRequest
 {
      BucketName = s3data.Bucket,
      Key = s3data.Path,
      ByteRange = new Amazon.S3.Model.ByteRange(0, parms.BlockSize)
 };
-``
+```
 
 Because the files can be copied by many separate actors, and because actors can be transparently distributed across many cores and servers, a high degree of parallelism can be achieved. While this does not reduce the egress charges from Amazon, it can dramatically reduce overall elapsed time of a large copy operation. To the extent possible, all calls are asynchronous to improve CPU utilization.
 
@@ -144,4 +126,4 @@ The Orleans framework can be found here: [https://github.com/dotnet/orleans](htt
 
 # Notes
 
-ìAmazon Web Servicesî, ìAWSî, ìAmazon S3î, and ìAmazon Simple Storage Serviceî are registered trademarks of Amazon Web Services, an Amazon.com company.
+‚ÄúAmazon Web Services‚Äù, ‚ÄúAWS‚Äù, ‚ÄúAmazon S3‚Äù, and ‚ÄúAmazon Simple Storage Service‚Äù are registered trademarks of Amazon Web Services, an Amazon.com company.

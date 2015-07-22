@@ -11,20 +11,6 @@ color: "blue"
 excerpt: Microservice Orchestration with Fleet on Azure w/ Tok.tv and Docebo.com
 ---
 
-# Microservice Orchestration with Fleet on Azure w/ Tok.tv and Docebo.com
-
-Steven Edouard
-
-May 27, 2015
-
-# Audience:
-
-External
-
-# Tags
-
-Azure Virtual Machines, Linux, CoreOS, Docker, Fleet
-
 Micro-service architecture, the concept of providing a large scale service as a collection of small, highly available services is becoming increasingly popular in today's modern cloud service deployments. However, with the rise of Docker and other containerization and orchestration technologies, it can be difficult to get started.
 
 In this post, we'll explore how we collaborated with two Italian tech companies for a week to show how Fleet, a distributed init system and CoreOS, an operating system designed for clusters can be deployed on Microsoft Azure as a collection of high-availability 'Dockerized' microservices.
@@ -71,7 +57,7 @@ Fleet allows us to specifically define announcer or '[sidekick](https://coreos.c
 
 Here's what the App1 [service](file:///\\Users\steve\Documents\fleet-boostrapper\example-app\example-app@.service) [file](https://github.com/sedouard/fleet-bootstrapper/blob/master/example-app/example-app%40.service) looks like:
 
-``
+```
 # example-app@.service 
 # the '@' in the file name denotes that this unit file is a model Description=Example High-Availabilty Web App After=router.service  
 
@@ -84,16 +70,16 @@ ExecStopPost=/usr/bin/docker rm example
 
 [X-Fleet] 
 Conflicts=example-app@*.service
-``
+```
 
 This [Unit File](https://coreos.com/docs/launching-containers/launching/fleet-unit-files/) refers to the docker image example-app in our private azure docker registry. To start this unit we simply do:
 
-``
+```
 # upload the service model to fleet 
 fleetctl submit example-app@.service 
 # start an instance of the service 
 fleetctl start example-app@1.service
-``
+```
 
 The X-Fleet Conflicts tag in the unit file instructs fleet that we don't want more than one of this unit, an instance of the service, running on the same machine in order to have high availability.
 

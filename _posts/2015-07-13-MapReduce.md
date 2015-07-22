@@ -11,8 +11,6 @@ color: "blue"
 excerpt: Business batch applications can make use of modern batch frameworks such as Hadoop and Spark to parallelize their jobs. However, the MapReduce programming model of Hadoop requires us to develop an application at such a low level that maintaining the resulting code can become very expensive.
 ---
 
-### The Problem
-
 Business batch applications can make use of modern batch frameworks such as Hadoop and Spark to parallelize their jobs. However, the MapReduce programming model of Hadoop requires us to develop an application at such a low level that maintaining the resulting code can become very expensive. This is because there is a big gap in the level of abstraction between business process definitions and their implementation in programming models like MapReduce. A business process has a lot of exceptional procedures, error handling, etc. When we write MapReduce programs that handle these business exceptions, the programs soon become too complicated to manage. Typical business applications have hundreds or thousands of business exceptions, leading to hundreds or thousands of stages in the MapReduce programs that model them. In addition, since business requirements tend to change frequently, the code artifacts involved are required to change easily and inexpensively.
 
 SQL on Hadoop or Hive does not help to solve this problem, because the SQL statements describing a business application having a lot of exceptions become so complicated that they are just as hard to develop and maintain as custom MapReduce code.

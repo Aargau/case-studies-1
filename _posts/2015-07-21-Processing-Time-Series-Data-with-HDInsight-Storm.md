@@ -11,21 +11,6 @@ color: "blue"
 excerpt: Processing Time Series Data with HDInsight Storm
 ---
 
-# Processing Time Series Data with HDInsight Storm
-
-Tim Park
- May 15th, 2015
-
-# Audience:
-
-External
-
-# Tags
-
-Big Data, Hadoop, HDInsight Storm, Apache Storm, Event Hub
-
-# The Problem
-
 At Microsoft, we are working with a number of car manufacturers on processing telemetry streams.  One of the key business scenarios for the incoming real-time car telemetry is to offer real-time driver risk scoring for end user driving guidance applications, fleet administration, and usage-based insurance scenarios. This risk scoring is accomplished by combining telemetry data including speed, braking, and acceleration over a time window to produce an aggregate risk score for the driver.
 
 As we connect more devices to the internet, the amount of data and context we collect from these devices is increasing geometrically. The conventional solution to processing these large scale sets of information is to process it Map-Reduce style with systems like Apache Hadoop.  However, for some problems, the latency in using a batch system does not enable you to exploit this incoming data in a timely enough manner to be applicable to certain business use cases.

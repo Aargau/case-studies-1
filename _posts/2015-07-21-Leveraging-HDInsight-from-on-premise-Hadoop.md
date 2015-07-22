@@ -11,20 +11,6 @@ color: "blue"
 excerpt: Leveraging HDInsight from on-premises Hadoop
 ---
 
-# Leveraging HDInsight from on-premises Hadoop
-
-Beat Schwegler, Felix Rieseberg, Ivan Judson, 11 December 2014, V0.9
-
-# Audience:
-
-External
-
-# Tags
-
-Hadoop, HDInsight, Big Data, Hybrid Cloud, Apache Templeton
-
-# The Problem
-
 In big data solutions, compute is expected to takes place where the data resides, mainly due to the cost of moving very large scale data across clusters. However there exist scenarios where more compute capacity is needed than the on-premises cluster provides. To avoid moving large chunk of data around, the beneficial scenario consists of a comparable small dataset (in big data terms) that requires an indirect proportional amount of compute capacity. This is usually the case when building Monte Carlo models or calculating multiple models based on one dataset.
 
 In this case study you will learn how take advantage of [Microsoft Azure HDInsight](http://azure.microsoft.com/en-us/services/hdinsight/) to run a remote [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.2.1/index.html#MapReduce) job using [Apache Templeton](http://people.apache.org/~thejas/templeton_doc_latest/).
@@ -45,23 +31,23 @@ Figure 1: the data flow script runs on-premises and orchestrates all involved ta
 
 The bash script consists of a sequential flow of Azure CLI and Apache Templeton calls. While most of this is straight forward, starting and monitoring an HDInsight job from an on-premises Hadoop cluster required some trickery (the commands dealing with the HDInsight job are highlighted in bold):
 
-``
+```
 \# We copy the data and programs to blob store using the Azure CLI tools
 \# These blobs are mapped through the HDInsight cluster via wasb:// so they are available via 
 \# the local cluster file system. 
 azure storage blob upload anonymized default "/user/jaglion/input/"
 azure storage blob upload bin/jaglion.jar default "/user/jaglion/jaglion.jar"
 
-\# This part of the script is what launches and monitors the job through the ìTempletonî interface
+\# This part of the script is what launches and monitors the job through the ‚ÄúTempleton‚Äù interface
 \# HDInsight Endpoint for remote invocations
 \# API=https://jaglion.azurehdinsight.net/templeton/v1
 
 \# HDInsight credentials
-CRED=îuser.name=jaglion ñu jaglion:<password>î
+CRED=‚Äùuser.name=jaglion ‚Äìu jaglion:<password>‚Äù
 
 \# Run the job in HDInsight
 \#  This invocation sends a request to Hadoop via Templeton that requests the cluster to run
-\#  the Jaglion.Job class with the arguments defined with ëñd arg=í. 
+\#  the Jaglion.Job class with the arguments defined with ‚Äò‚Äìd arg=‚Äô. 
 \#  The other arguments, specifically (jar, callback, statusdir, hdInsightJobName) are information \#  for Hadoop to successfully run the job requested.
 \#
 JOBID=$(curl -d $CRED -d jar=$OUTPUTBASE/jaglion.jar -d hdInsightJobName=$BASEDIR \
@@ -80,7 +66,7 @@ done
 \# used to setup the job.
 mkdir -p $OUTPUTBASE/translated
 azure storage blob download default "$OUTPUTBASE/output" $OUTPUTBASE/output
-``
+```
 
 # Opportunities for Reuse
 
