@@ -1,4 +1,4 @@
-You've found the repository that houses the source of [Microsoft's Partner Catalyst's blog](http://catalystcode.github.io/case-studies). If you don't work for us, you might find the [actual website](http://catalystcode.github.io/case-studies) a lot more interesting than the source :sparkles:. If you're here to write some case studies, read on!
+<img src="https://travis-ci.org/CatalystCode/case-studies.svg" style="float: left" /> You've found the repository that houses the source of [Microsoft's Partner Catalyst's blog](http://catalystcode.github.io/case-studies). If you don't work for us, you might find the [actual website](http://catalystcode.github.io/case-studies) a lot more interesting than the source :sparkles:. If you're here to write some case studies, read on!
 
 ![](https://raw.githubusercontent.com/CatalystCode/case-studies/gh-pages/images/readme_banner.png)
 
