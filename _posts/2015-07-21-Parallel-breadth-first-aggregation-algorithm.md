@@ -11,20 +11,6 @@ color: "blue"
 excerpt: Parallel breadth-first aggregation algorithm
 ---
 
-# Parallel breadth-first aggregation algorithm
-
-Masayoshi Hagiwara, 5th March 2015, Draft
-
-# Audience:
-
-Internal
-
-# Tags
-
-Hadoop, HDInsight, Big Data, Batch Processing, Parallel Search Algorithm
-
-# The Problem
-
 Executing business applications using batch processing is still a very important solution in enterprise information systems whether we adopt the cloud computing or not. Traditionally, we execute batch processing in inventory management, consolidated accounting by RDB using SQL statements. However, this RDB solution has two major limitations: One is the limitation of throughput. The second is high maintenance cost due to the complex SQL statements (and the mainframe operations running the batch programs).
 
 In Japan, we have tried to alleviate these limitations to move from mainframes to “open” systems, but in vain. Main obstacle was less order of magnitude in parallelism in these open systems, as compared with the mainframes.
@@ -45,7 +31,7 @@ Depth-first search can be parallelized in fact. But breadth-first search is bett
 
 By using a queue Open, the BFS(Breadth-First-Search) pseudo code is:
 
-``
+```
 BFS() {
 	Closed = {};
 	Open = start_node;
@@ -59,7 +45,7 @@ BFS() {
 		}
 	}
 }
-``
+```
 
 However, this code is not scalable. Because Open (open list contains current front) and Closed (closed list contains visited nodes) become so enormous for large-scale applications that BFS cannot solve the problem due to the bottleneck of these variables. For example, the number of parts in an aircraft is at most 10<sup>6</sup>, and the number of order items at a large retail chain per quarter amounts to 10<sup>9</sup>.  Also, the traditional breadth-first search has drawbacks in terms of extra space required by the queue data structure. If a tree has multiple children and is a balanced tree, then the queue size would grow exponentially and could cause serious memory threats.
 
@@ -67,7 +53,7 @@ So we need to decompose data by partitioning the tree and to parallelize BFS wit
 
 The pseudo code of BFS with MapReduce is:
 
-``
+```
 void mapper(Position position, set usedMoves) {
 	foreach((successor, move) ∈ successors(position))
 		if(inverse(move) ∉ usedMoves)
@@ -87,7 +73,7 @@ main() {
 		intermediate = map(front, mapper());
 		front = reduce(intermediate, reducer()); }
 }
-``
+```
 
 # Code Artifacts
 
@@ -99,7 +85,7 @@ The example of aggregating the data items such as sales transaction is very easy
 
 Cost estimation of sales transactions: From the sales record, we can get a list of products per sales transaction. At the same time, from the date of sales transaction and inventory data, we can get cost about procurement of the products. Then we can aggregate the cost to estimate the cost of sales transactions. For instance, if exchange rate changes, we can estimate how it will change the cost and impact the earnings. In order to aggregate the cost,
 
-``
+```
 for each sales transaction
 	get the products (master selection)
 	get the sales date (master selection)
@@ -110,7 +96,7 @@ for each product
 	get the total cost
 	get the total sales price
 	get the total sales price - the total cost
-``
+```
 
 # Opportunities for Reuse
 

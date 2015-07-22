@@ -11,27 +11,13 @@ color: "blue"
 excerpt: Testing with web sites on Windows Phone.
 ---
 
-# Automated testing of Web sites on Windows Phone
-
-Ville Rantala, 05/31/15, version 1.4
-
-# Audience:
-
-Developers and testers who target Windows Phones with their Web sites.
-
-# Tags
-
-Windows Phone, WebDriver, Automated Testing, Web Sites, Internet Explorer
-
-# Summary
-
 This case study walks through how a developer can create an automated test suite to test Web sites on Windows Phone devices. Anyone who is building Web sites for Windows Phone can use this solution to automate their on-device testing.
 
 # Customer Problem
 
 Web sites need to work on various Web browsers including multiple versions of mobile browsers on many different mobile operating systems. Testing on each one manually is time consuming, error-prone, and expensive; creating an automated test suite is a preferable strategy.
 
-A commonly used approach is to build a test suite on top of frameworks and tooling that rely on the target browserís support for the [Selenium project](http://www.seleniumhq.org/)ís [WebDriver](http://www.w3.org/TR/webdriver/) API.
+A commonly used approach is to build a test suite on top of frameworks and tooling that rely on the target browser‚Äôs support for the [Selenium project](http://www.seleniumhq.org/)‚Äôs [WebDriver](http://www.w3.org/TR/webdriver/) API.
 
 There are many popular solutions to run WebDriver-based tests on Android and iOS based devices. Examples of such solutions are [Selendroid](http://selendroid.io/) for Android and [ios-driver](http://ios-driver.github.io/ios-driver/) for iOS. However, the options for Windows Phone devices aren't as widely available.
 
@@ -47,9 +33,9 @@ More information about the project can be found on its CodePlex [pages](http://w
 
 # Implementation
 
-The project uses ì[automation atoms](https://code.google.com/p/selenium/wiki/AutomationAtoms)î from the Selenium open source project, which enables developers to add new functionality without writing lots of code in the driver. Each ìatomî is a reusable building block written in JavaScript, and abstracts the browser-specific implementations of commonly-used functionality. For example, there is JavaScript atom to find elements in the DOM, so that the developer doesnít have to re-implement that functionality for every browser.
+The project uses ‚Äú[automation atoms](https://code.google.com/p/selenium/wiki/AutomationAtoms)‚Äù from the Selenium open source project, which enables developers to add new functionality without writing lots of code in the driver. Each ‚Äúatom‚Äù is a reusable building block written in JavaScript, and abstracts the browser-specific implementations of commonly-used functionality. For example, there is JavaScript atom to find elements in the DOM, so that the developer doesn‚Äôt have to re-implement that functionality for every browser.
 
-While the driver tests how Web sites behave in Internet Explorer on Windows Phone devices, the driver doesnít actually use the Internet Explorer app, but performs all testing inside an embedded Web browser control. This approach isnít 100% accurate in replicating the target context, but since the Web browser and browser control share the same rendering engine, enough similarities exists to make the test results meaningful in the development process.  A final verification should be done manually using Internet Explorer.
+While the driver tests how Web sites behave in Internet Explorer on Windows Phone devices, the driver doesn‚Äôt actually use the Internet Explorer app, but performs all testing inside an embedded Web browser control. This approach isn‚Äôt 100% accurate in replicating the target context, but since the Web browser and browser control share the same rendering engine, enough similarities exists to make the test results meaningful in the development process.  A final verification should be done manually using Internet Explorer.
 
 # Challenges
 
@@ -57,9 +43,9 @@ While the driver tests how Web sites behave in Internet Explorer on Windows Phon
 
 Providing a reliable end-to-end solution for running automated tests involves more than just supporting WebDriver on the target browser. Typically, the automated tests are run within a continuous integration (CI) system where the reliability of the entire system is a must.
 
-To do continuous integration, you must be able to reliably and continuously run a Windows Phone device that can be invoked by the CI system used. The testing software must not crash and in case of app (or device) crashes, there must be failover mechanisms in place that donít require manual intervention.
+To do continuous integration, you must be able to reliably and continuously run a Windows Phone device that can be invoked by the CI system used. The testing software must not crash and in case of app (or device) crashes, there must be failover mechanisms in place that don‚Äôt require manual intervention.
 
-While this driver is fairly easy to setup and can be used from any operating system, it doesnít contain components that handle the reliability aspects such as ensuring the driver app is always running and able to respond to test requests. Such functionality should be either built on top of the driver or it should be expected that sometimes manual intervention is necessary.
+While this driver is fairly easy to setup and can be used from any operating system, it doesn‚Äôt contain components that handle the reliability aspects such as ensuring the driver app is always running and able to respond to test requests. Such functionality should be either built on top of the driver or it should be expected that sometimes manual intervention is necessary.
 
 These limitations are specific to how this WebDriver solution is implemented. For example, [Selendroid](http://selendroid.io/) for Android and [ios-driver](http://ios-driver.github.io/ios-driver/) for iOS have a desktop server component that manages the lifecycle of the components running in the device. There is also [another WebDriver solution](https://github.com/forcedotcom/windowsphonedriver) for Windows Phones that has a desktop server, but that solution requires a Windows PC.
 
@@ -85,7 +71,7 @@ If requiring the Windows Phone SDK is a blocker, one solution is to publish the 
 
 A [blog post](http://blog.vjrantal.net/2015/02/05/angularjs-automated-testing-on-windows-phone/) contains more information about how to setup the driver and gives details on how to setup tests of an AngularJS-based app to be executed against the driver.
 
-The blog post also includes a [video](https://www.youtube.com/watch?v=juU2GHyCOJc) that shows Ionic frameworkís tests running on a physical device.
+The blog post also includes a [video](https://www.youtube.com/watch?v=juU2GHyCOJc) that shows Ionic framework‚Äôs tests running on a physical device.
 
 ## Example test
 
@@ -93,9 +79,9 @@ This example test uses the [selenium-webdriver](https://www.npmjs.com/package/se
 
 First, install the package with:
 
-```$ npm install selenium-webdriver  ```
-
-</div>
+```
+$ npm install selenium-webdriver
+```
 
 Then, add a file called _example.js_ with this content:
 
@@ -127,7 +113,9 @@ Then, add a file called _example.js_ with this content:
 
 After that, you should be able to run the test with:
 
-```$ node example.js```
+```
+$ node example.js
+```
 
 If the connection to the device works, the script should exit without any errors and the device should have a screen that shows something like this:
 

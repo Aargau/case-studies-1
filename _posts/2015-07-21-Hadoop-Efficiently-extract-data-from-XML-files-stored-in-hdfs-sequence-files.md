@@ -11,20 +11,6 @@ color: "blue"
 excerpt: Efficiently extracting XML data from HDFS sequence files
 ---
 
-# Efficiently extracting XML data from HDFS sequence files
-
-Beat Schwegler, 9 May 2015, V 0.1
-
-# Audience:
-
-External
-
-# Tags
-
-Hadoop, HDInsight, Big Data, IoT, XML
-
-# Customer Problem
-
 A partner we work with collects large quantities of diagnostic data from a wide range of devices. Periodically, each device transmits its state as an XML file. These XML files are archived on a Hadoop cluster as compressed sequence files. The goal of the project was to efficiently extract specific attributes and elements from the archive and use them for further processing, such as predictive analytics using Microsoft Azure Machine Learning. Less than 0.001% of the device data needs to be extracted from these models, making it impractical and inefficient to parse each document using XML DOM or SAX.
 
 In this paper, you will learn how to implement a MapReduce job to efficiently extract XML data from HDFS sequence files using a custom RecordReader.
@@ -47,13 +33,13 @@ The class `XmlExtractor` implements the extraction job (see Figure 1) and takes 
 
 ![]({{ site.url }}/case-studies/images/2015-07-21-Hadoop-Efficiently-extract-data-from-XML-files-stored-in-hdfs-sequence-files_images/image001.png)
 
-<a name="_Ref418957492">Figure</a> 1: Anatomy of an extraction job
+Figure 1: Anatomy of an extraction job
 
-The extraction job reads the sequence files using a custom `RecordReader` called `SeqXmlRecordReader`. It reads each xml file as a binary stream and scans it for the requested xml elements. Once a start tag is found, it scans for the corresponding end tag and provides the containing stream (including start and end tags) as the input to the Mapper. If we’re only interested in attributes, we omit the element content and add a matching closing tag without scanning for the corresponding tag in the stream. This reader emits values of type `XmlMapperValueWritable`, which contains the extracted xml stream, a list of XPath expression the Mapper has to run against that stream as well as information about the current stream position and the final output column number.
+The extraction job reads the sequence files using a custom `RecordReader` called `SeqXmlRecordReader`. It reads each xml file as a binary stream and scans it for the requested xml elements. Once a start tag is found, it scans for the corresponding end tag and provides the containing stream (including start and end tags) as the input to the Mapper. If weâ€™re only interested in attributes, we omit the element content and add a matching closing tag without scanning for the corresponding tag in the stream. This reader emits values of type `XmlMapperValueWritable`, which contains the extracted xml stream, a list of XPath expression the Mapper has to run against that stream as well as information about the current stream position and the final output column number.
 
 The Mapper loads the stream into a DOM and runs the configured XPath expressions against it. For each expression that returns nodes, we create the Mapper output key/value pairs (which are of type `XmlReducerKeyWritable` and `XmlReducerValueWritable` respectively):
 
-``
+```
 protected void map(Text key, XmlMapperValueWritable value, Mapper.Context context){
    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
    factory.setNamespaceAware(true);
@@ -85,7 +71,7 @@ protected void map(Text key, XmlMapperValueWritable value, Mapper.Context contex
       }
    }
 }
-``
+```
 
 The output key consists of the triple of _file guid_, the _sequence number_ and the _column order_. The output value contains the result of the XPath query and the corresponding column order.
 
@@ -97,7 +83,7 @@ Shuffling takes place between the Mapper output and the Reducer input:
 
 Using the above grouping and sorting, the Reducer can simply iterate across all values and build the output row. This works because all values with the same key are extracted from the same file and sorted in their sequence and their column order:
 
-``
+```
 public void reduce(XmlReducerKeyWritable key, 
                    Iterable<XmlReducerValueWritable> values, 
                    Context context){
@@ -124,18 +110,18 @@ public void reduce(XmlReducerKeyWritable key,
       context.write(null ,new Text (sb.toString()));
    }
 }
-``
+```
 
 ## Definition of the extraction configuration file
 
 The extraction configuration file configures the scanner, provides the XPath expression and defines the position of the output columns. Below an example configuration which extracts all XML nodes named header:
 
-``
+```
   <property>
     <name>headerNode</name>
     <value>header;false;true; ;0#//header/onwerId/text();1#//header/specNr/text</value>
   </property> 
-``
+```
 
 The complete description of the configuration format can be found [here](https://github.com/cloudbeatsch/HadoopXmlExtractor/blob/master/README.md), together with two [example configurations](https://github.com/cloudbeatsch/HadoopXmlExtractor/tree/master/testdata).
 
@@ -147,4 +133,4 @@ To ensure configuration simplicity, the current version loads each extracted byt
 
 # Opportunities for Reuse
 
-This XML extraction can be used for any project that requires efficient data extraction from XML files stored in HDFS –without the need for loading the complete files into a DOM. For performance reasons, the current version works with XML files that are compressed as Hadoop sequence files. The `SeqXmlRecordReader` requires a unique key for each contained file. (`CreateSequenceFile` is a sample application in the repo that creates a sequence from files contained in folder). It is also be possible to change `SeqXmlRecordReader` to work with non-compressed XML files.
+This XML extraction can be used for any project that requires efficient data extraction from XML files stored in HDFS â€“without the need for loading the complete files into a DOM. For performance reasons, the current version works with XML files that are compressed as Hadoop sequence files. The `SeqXmlRecordReader` requires a unique key for each contained file. (`CreateSequenceFile` is a sample application in the repo that creates a sequence from files contained in folder). It is also be possible to change `SeqXmlRecordReader` to work with non-compressed XML files.

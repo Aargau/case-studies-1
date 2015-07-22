@@ -11,60 +11,44 @@ color: "blue"
 excerpt: Massively Scalable Graph-Based Computing in Azure 
 ---
 
-# Massively Scalable Graph-Based Computing in Azure
+Many customers are looking for ways to exploit the massive computing capability afforded by Microsoft Azure. On the one hand, enterprises are gathering, in real time, enormous amounts of data, gigabytes or even terabytes per day. On the other hand, they see the almost unlimited capacity in the cloud: but how best to take advantage of it to extract insights from all this data? This Case Study describes a computing pattern called ‚Äúactor model‚Äù with one sample implementation that has been adapted for use by customers.
 
-Barry Briggs   
-May 15, 2015  
- **Third Draft**
-
-# Audience:
-
-External[1](#_ftn1)
-
-# Tags
-
-Azure, Orleans, Actor Model, HPC, Excel, spreadsheets
-
-# The Problem
-
-Many customers are looking for ways to exploit the massive computing capability afforded by Microsoft Azure. On the one hand, enterprises are gathering, in real time, enormous amounts of data, gigabytes or even terabytes per day. On the other hand, they see the almost unlimited capacity in the cloud: but how best to take advantage of it to extract insights from all this data? This Case Study describes a computing pattern called ìactor modelî with one sample implementation that has been adapted for use by customers.
-
-The sample application (more accurately, a _service)_ is a massively scalable parallelized, graph-based compute engine. Astute readers will recognize that graph-based processing is at the heart of one of the most compelling and popular computing paradigms of all time, the electronic spreadsheet. If such graphs could be placed in the cloud, could be spread out over dozens or hundreds of processors, then real-time computation (in this case using the worldís most common scripting language, Excel formulas) could be exponentially expanded.[2](#_ftn2)
+The sample application (more accurately, a _service)_ is a massively scalable parallelized, graph-based compute engine. Astute readers will recognize that graph-based processing is at the heart of one of the most compelling and popular computing paradigms of all time, the electronic spreadsheet. If such graphs could be placed in the cloud, could be spread out over dozens or hundreds of processors, then real-time computation (in this case using the world‚Äôs most common scripting language, Excel formulas) could be exponentially expanded.[2](#_ftn2)
 
 # Overview of the Solution
 
-This project has an unlikely underpinning: video games. The ìOrleansî project at Microsoft was created to support multi-player gaming. Each user in multi-player mode communicates with a small body of code in Microsoft Azure which tracks that userís relevant state ñ is s/he online, where in the game is s/he, and so on. Each such object communicates with other such objects representing other users in the particular game instance.
+This project has an unlikely underpinning: video games. The ‚ÄúOrleans‚Äù project at Microsoft was created to support multi-player gaming. Each user in multi-player mode communicates with a small body of code in Microsoft Azure which tracks that user‚Äôs relevant state ‚Äì is s/he online, where in the game is s/he, and so on. Each such object communicates with other such objects representing other users in the particular game instance.
 
 In Azure, Orleans runs as worker role instances. An Orleans application can transparently span multiple servers, where the runtime framework abstracts away from the developer much of the complexity of game and other sorts of Azure programming.
 
-Orleans is an example of what has been called ìactor modelî programming. Actors are "the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received.[3](#_ftn3) As implemented by Orleans, actors are simple, single-threaded .NET objects, usually fairly small, using asynchronous calling methods, and not blocking under any circumstances. Unlike other concurrency models, actors depend on a ìshared-nothingî model; while actor instances may (and do) communicate with each other, they do not depend on shared resources and therefore do not implement locks (a message-passing pattern).[4](#_ftn4)
+Orleans is an example of what has been called ‚Äúactor model‚Äù programming. Actors are "the universal primitives of concurrent computation: in response to a message that it receives, an actor can make local decisions, create more actors, send more messages, and determine how to respond to the next message received.[3](#_ftn3) As implemented by Orleans, actors are simple, single-threaded .NET objects, usually fairly small, using asynchronous calling methods, and not blocking under any circumstances. Unlike other concurrency models, actors depend on a ‚Äúshared-nothing‚Äù model; while actor instances may (and do) communicate with each other, they do not depend on shared resources and therefore do not implement locks (a message-passing pattern).[4](#_ftn4)
 
-In many circumstances, the Orleans actor model can simplify the complexity of distributed computing. For example, a call from one actor to another ñ no matter what server the destination may be running on ñ is as simple as an asynchronous method call:
+In many circumstances, the Orleans actor model can simplify the complexity of distributed computing. For example, a call from one actor to another ‚Äì no matter what server the destination may be running on ‚Äì is as simple as an asynchronous method call:
 
-``
+```
 await result=anotherActor.getSomethingAsync();
-``
+```
 
 This simplicity enables us to recreate the notion of a spreadsheet graph in a very straightforward way, with each cell represented as an instance of an actor.
 
-The CloudSheet project used actor-model programming to implement ìcellsî in a cloud-based spreadsheet-like engine. We say ìspreadsheet-likeî because in CloudSheet the user interface is completely decoupled from the calculation engine, as shown below:
+The CloudSheet project used actor-model programming to implement ‚Äúcells‚Äù in a cloud-based spreadsheet-like engine. We say ‚Äúspreadsheet-like‚Äù because in CloudSheet the user interface is completely decoupled from the calculation engine, as shown below:
 
 ![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image001.png)
 
 Figure 1. CloudSheet Architecture
 
-The boxes labeled ìcellî represent instances of the cell actor class, the core of CloudSheet. Each cell contains both code and data; the code includes a full recursive descent parser for Excel-like formulas,[5](#_ftn5) and a recalculation component, also recursive. The cellís data comprises, among other things, the input provided by a user interface or another cell, lists of dependencies (i.e., other cells), current value, and so on.
+The boxes labeled ‚Äúcell‚Äù represent instances of the cell actor class, the core of CloudSheet. Each cell contains both code and data; the code includes a full recursive descent parser for Excel-like formulas,[5](#_ftn5) and a recalculation component, also recursive. The cell‚Äôs data comprises, among other things, the input provided by a user interface or another cell, lists of dependencies (i.e., other cells), current value, and so on.
 
-When a new cell is created, say, when a user requests a cell via a UI, the Orleans runtime instantiates this new instance. Where the cell resides physically ñ that is, on which server or VM ñ is completely opaque to the application.
+When a new cell is created, say, when a user requests a cell via a UI, the Orleans runtime instantiates this new instance. Where the cell resides physically ‚Äì that is, on which server or VM ‚Äì is completely opaque to the application.
 
 Here is how a cell is instantiated:
 
-``
-           ICell thecell = CellFactory.GetGrain((long)cellasnumber);
-           ValType v = await thecell.CellGrainCreateNewCellV(text, addr);
-``
+```
+ICell thecell = CellFactory.GetGrain((long)cellasnumber);
+ValType v = await thecell.CellGrainCreateNewCellV(text, addr);
+```
 
-The `GetGrain()` call creates a local reference to the soon-to-be-instantiated cell. `GetGrain()` can take a long, a string, or a GUID as its parameter; here we have converted the cell address into a long. The second call, which actually instantiates the cell in the cloud, passes the text to placed and evaluated in the cell (a number, text or formula) and the cellís address as a structure. (A `Valtype` is a structure holding the cellís input, formula, type, and other data useful in for a user interface.)
+The `GetGrain()` call creates a local reference to the soon-to-be-instantiated cell. `GetGrain()` can take a long, a string, or a GUID as its parameter; here we have converted the cell address into a long. The second call, which actually instantiates the cell in the cloud, passes the text to placed and evaluated in the cell (a number, text or formula) and the cell‚Äôs address as a structure. (A `Valtype` is a structure holding the cell‚Äôs input, formula, type, and other data useful in for a user interface.)
 
 _User Interface_
 
@@ -72,7 +56,7 @@ Of course, the most obvious UI for such a calculation engine is that of a spread
 
 ![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image002.jpg)
 
-Figure 2\. CloudSheet UI Sample
+Figure 2. CloudSheet UI Sample
 
 To be clear, this web-based UI does very little: it merely accepts input in the input box and places results in the appropriate grid locations. Since cells can change asynchronously, either in response to a recalculation of a predecessor cell or as the result of an external event, the UI polls the cloud-based engine for updates every 500ms, which, empirically, seems fast enough. The UI can issue other primitive commands, such as loading a file or clearing the entire sheet, which are passed on through the Web API to the engine.
 
@@ -84,23 +68,23 @@ Here is a trivial little XAML/C# application to prove the point:
 
 Figure 3. Another UI
 
-When the user clicks ìSubmitî, in this case indicating that a new sale has occurred (and new data has been created), the three data items in the edit boxes are sent as new cells to CloudSheet. In this case these cells form a new row and the spreadsheet-like UI can be used to visualize all the purchases.
+When the user clicks ‚ÄúSubmit‚Äù, in this case indicating that a new sale has occurred (and new data has been created), the three data items in the edit boxes are sent as new cells to CloudSheet. In this case these cells form a new row and the spreadsheet-like UI can be used to visualize all the purchases.
 
 Of course, CloudSheet also supports import/export from Excel itself (through an Excel addin).
 
 _Predecessors and Successors_
 
-Each cell maintains a list of cells that it depends on, and cells that depend on it; these are called predecessors and successors, respectively (in other words, a directed acyclic graph). When a cellís value is updated (which _follows_ its recalculation), it calls the method:
+Each cell maintains a list of cells that it depends on, and cells that depend on it; these are called predecessors and successors, respectively (in other words, a directed acyclic graph). When a cell‚Äôs value is updated (which _follows_ its recalculation), it calls the method:
 
-``
+```
 UpdateSuccessors();
-``
+```
 
 which iterates through the list of successor cells and invokes their recalculation method:
 
-``
+```
 await thecell.Recalc(_thechain);
-``
+```
 
 When a given cell is recalculated, in turn, it iterates through the list of predecessors, if any, to retrieve their values, and so on.
 
@@ -118,97 +102,97 @@ One approach is to enhance the entire semantic of a cell. The new formula type _
 
 Figure 4. GSOD for Greenland, 1986
 
-Here, courtesy of the National Oceanic and Atmospheric Administration (NOAA), we see the Global Summary of the Day: the weather, in other words, for one year for one reporting station ñ here, in Greenland. High and low temperatures, dew point, wind speeds, and so on, are fairly self-explanatory.
+Here, courtesy of the National Oceanic and Atmospheric Administration (NOAA), we see the Global Summary of the Day: the weather, in other words, for one year for one reporting station ‚Äì here, in Greenland. High and low temperatures, dew point, wind speeds, and so on, are fairly self-explanatory.
 
-We can load this entire file in a cell (say, A1) by using _=DATA(sheetcsvs\sample.op)_ where _sheetcsvs_ is the Azure container. Once loaded, we can query it with _=SELECT(A1, 2, 19860301, 3)_ which says ìfor the file in A1, find the key 1986030 in column 2, and return the value in column 3.î [6](#_ftn6)
+We can load this entire file in a cell (say, A1) by using _=DATA(sheetcsvs\sample.op)_ where _sheetcsvs_ is the Azure container. Once loaded, we can query it with _=SELECT(A1, 2, 19860301, 3)_ which says ‚Äúfor the file in A1, find the key 1986030 in column 2, and return the value in column 3.‚Äù [6](#_ftn6)
 
 We can also use _=DATAAVG()_ to find the average value of a column; for example, the average temperature for Greenland in 1986 would be found by _=DATAAVG(A1, 3). =DATAMIN()_ and _=DATAMAX()_ find minimum and maximum values, respectively.
 
-_=DATA_ cells evolve the notion of a spreadsheet to that of what was once called a ìspreadbaseî. =_DATA_ and related cells enable real-time, interactive analysis of very large bodies of data using the most common scripting language in use today, Excel formulas.
+_=DATA_ cells evolve the notion of a spreadsheet to that of what was once called a ‚Äúspreadbase‚Äù. =_DATA_ and related cells enable real-time, interactive analysis of very large bodies of data using the most common scripting language in use today, Excel formulas.
 
-Given that CloudSheet lives in the cloud, and thus, on the web, other things are easy to implement. CloudSheet is Web-native. For example, an _=STOCK(symbol)_ retrieves real-time values of a particular equity. _=LOCATION(cell1, cell2)_ uses the values of two cells as latitude and longitude and, using Bing Maps APIís, returns the city and state/country in text.
+Given that CloudSheet lives in the cloud, and thus, on the web, other things are easy to implement. CloudSheet is Web-native. For example, an _=STOCK(symbol)_ retrieves real-time values of a particular equity. _=LOCATION(cell1, cell2)_ uses the values of two cells as latitude and longitude and, using Bing Maps API‚Äôs, returns the city and state/country in text.
 
 _Events_
 
 It is trivially easy to enable cells to accept events from other sources (say, IoT devices or a streaming stock feed, for an active trader trade station analytical tool):
 
-``
+```
 public async Task<bool> UpdateValue(int val)
 {
     _value = val;
     await _celldir.CellChange(_celladdr);
     return true; 
 }
-``
+```
 
- Since cells are .NET objects, incidentally, it is also quite easy to create a new cell type (say, a ìsensorî cell to receive events).
+ Since cells are .NET objects, incidentally, it is also quite easy to create a new cell type (say, a ‚Äúsensor‚Äù cell to receive events).
 
 _Why This Matters_
 
-Unlike traditional big data solutions, CloudSheet implements a live, in-memory calculation engine in which new data or formulas can be added at any time, or interactively, in a manner that is very approachable by ordinary mortals. Thus, when a massive amount of data is loaded, users can easily manipulate directly ñ as they do today with Excel ñ but potentially using the scale of the cloud.
+Unlike traditional big data solutions, CloudSheet implements a live, in-memory calculation engine in which new data or formulas can be added at any time, or interactively, in a manner that is very approachable by ordinary mortals. Thus, when a massive amount of data is loaded, users can easily manipulate directly ‚Äì as they do today with Excel ‚Äì but potentially using the scale of the cloud.
 
 How big can a spreadsheet be?
 
-CloudSheet currently holds the record (as far as we know) for the largest spreadsheet in history, with 470,000 cells holding (using _=DATA_) just less than 2.3 billion data items (all the worldís weather data for just under a century; over 13,000 reporting stations).  This spreadsheet ñ all of it in memory ñ utilized 146 processors on 18 servers in Azure. CloudSheet will _always_ hold this record; all that is needed is more data and more processors.
+CloudSheet currently holds the record (as far as we know) for the largest spreadsheet in history, with 470,000 cells holding (using _=DATA_) just less than 2.3 billion data items (all the world‚Äôs weather data for just under a century; over 13,000 reporting stations).  This spreadsheet ‚Äì all of it in memory ‚Äì utilized 146 processors on 18 servers in Azure. CloudSheet will _always_ hold this record; all that is needed is more data and more processors.
 
-Here is a screenshot of the ìrecord.î Each cell holds the number of data items in the file loaded by the cell; for example, in cell cc6 the file in that cell has 8052 data points. (Note not every station reports every year, for various reasons ñ wars, closings, etc.; hence the blank cells.) The red circle holds a simple _=sum()_ formula (typed in manually, after the data was loaded) to add the total number of data items.
+Here is a screenshot of the ‚Äúrecord.‚Äù Each cell holds the number of data items in the file loaded by the cell; for example, in cell cc6 the file in that cell has 8052 data points. (Note not every station reports every year, for various reasons ‚Äì wars, closings, etc.; hence the blank cells.) The red circle holds a simple _=sum()_ formula (typed in manually, after the data was loaded) to add the total number of data items.
 
 ![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image005.png)
 
 Figure 5\. CloudSheet Holding All the World's Weather
 
-Second, as mentioned in passing earlier, CloudSheet is _not_ an application. It is a _service_ in the cloud. As such it is intrinsically multi-user. Moreover any application can use its REST APIís to send and receive data ñ regardless of user interface modality.
+Second, as mentioned in passing earlier, CloudSheet is _not_ an application. It is a _service_ in the cloud. As such it is intrinsically multi-user. Moreover any application can use its REST API‚Äôs to send and receive data ‚Äì regardless of user interface modality.
 
 # Challenges
 
-There are a number of challenges and potential ìgotchaísî in a massively distributed system such as Orleans/Cloudsheet.
+There are a number of challenges and potential ‚Äúgotcha‚Äôs‚Äù in a massively distributed system such as Orleans/Cloudsheet.
 
 _Directory_
 
-Orleans does not, out of the box, provide a ìdirectoryî function, that is, a way to find out if a given object already exists or not. This is important because any reference to a nonexistent actor will instantiate it, causing needless overhead.[7](#_ftn7)
+Orleans does not, out of the box, provide a ‚Äúdirectory‚Äù function, that is, a way to find out if a given object already exists or not. This is important because any reference to a nonexistent actor will instantiate it, causing needless overhead.[7](#_ftn7)
 
 In CloudSheet, therefore, there is a CellDirectory actor which holds a list of every cell that has been instantiated in the sheet. Any range operation, then, will iterate over the range in a two-step process, first ascertaining if the cell actually exists:
 
-``
-¨bool bExists=await _cellDirectory.CellExists(long celladdress); 
-``
+```
+¬¨bool bExists=await _cellDirectory.CellExists(long celladdress); 
+```
 
 And then if so, retrieving the value.
 
 _To Parallelize or Not?_
 
-It is tempting with a massively distributed system to make extensive use of the Task Parallel Library (TPL)[8](#_ftn8) and in particular use scatter/gather approaches in certain cases. For example, when refreshing the screen, one can conceive of a number of parallel ìgetî operations (to retrieve the values from cell instances), concluding with a `.WhenAll` when all the values are in; something conceptually like this:
+It is tempting with a massively distributed system to make extensive use of the Task Parallel Library (TPL)[8](#_ftn8) and in particular use scatter/gather approaches in certain cases. For example, when refreshing the screen, one can conceive of a number of parallel ‚Äúget‚Äù operations (to retrieve the values from cell instances), concluding with a `.WhenAll` when all the values are in; something conceptually like this:
 
-``
+```
 ICell cella=GetCellInterface(a1);
 ICell cellb=GetCellInterface(b1);
 Task<double> a= cella.GetCellValue();
 Task<double> b= cellb.GetCellValue();
 Task tall=Task.WhenAll(a,b);
 await tall; 
-``
+```
 
-It turns out that on each server actors run as DLLs in a single-threaded address space and so the degree of parallelism isnít as significant as might appear. When retrieving a lot of data (hundreds of cell values for example) this approach is surprisingly slow ñ and is far better implemented as a cache.
+It turns out that on each server actors run as DLLs in a single-threaded address space and so the degree of parallelism isn‚Äôt as significant as might appear. When retrieving a lot of data (hundreds of cell values for example) this approach is surprisingly slow ‚Äì and is far better implemented as a cache.
 
 _Reentrancy_
 
-For speed, it is possible to make actors ìreentrantî by adding the [Reentrant] directive. For example, here is the class declaration for the cell actor:
+For speed, it is possible to make actors ‚Äúreentrant‚Äù by adding the [Reentrant] directive. For example, here is the class declaration for the cell actor:
 
-``
+```
 [Reentrant]  
-     public class Cell: Orleans.Grain<ICellState>, ICell  
-     {
-``
+public class Cell: Orleans.Grain<ICellState>, ICell  
+{
+```
 
 Reentrant here means that multiple threads may be executing _different_ methods in the class _simultaneously._ This can cause problems if the programmer is not careful. For example, we may have a method that adds data to a `List<>:`
 
-``
-       public Task<int> AddCellToDirectory(CellAddress cell)
-       {
-           _mdcells.Add(cell);
-           return Task.FromResult(_mdcells.Count);
-       }
-``
+```
+public Task<int> AddCellToDirectory(CellAddress cell)
+{
+   _mdcells.Add(cell);
+   return Task.FromResult(_mdcells.Count);
+}
+```
 
 However, we may also have another method which is iterating over the list, in this case `_mdcells`. This will cause an unexpected error as the List size will change during the iteration, causing an exception.
 
@@ -220,9 +204,9 @@ The Orleans framework can be viewed and downloaded from [http://www.github.com/d
 
 # Opportunities for Reuse
 
-The architectural pattern in CloudSheet ñ a directory, a large number of same-type actors, one or more caches of various types ñ is one that has potential for considerable reuse. In fact, one large financial services customer has already adapted some of CloudSheetís architectural patterns for an application which is going into production imminently (2QCY15).
+The architectural pattern in CloudSheet ‚Äì a directory, a large number of same-type actors, one or more caches of various types ‚Äì is one that has potential for considerable reuse. In fact, one large financial services customer has already adapted some of CloudSheet‚Äôs architectural patterns for an application which is going into production imminently (2QCY15).
 
-Actors are an efficient, easy way to develop scalable applications in which there are many, many objects that are relatively autonomous but require computation. For example, in the Internet of Things, actors can represent ìthingsî that require some level of cloud control; and the actor instances themselves can also have logic to log activity, provide information to reporting and machine learning components, and so on. Similarly, in financial applications, CloudSheet can enable users to see, manipulate and analyze vast quantities of historical and real-time data.
+Actors are an efficient, easy way to develop scalable applications in which there are many, many objects that are relatively autonomous but require computation. For example, in the Internet of Things, actors can represent ‚Äúthings‚Äù that require some level of cloud control; and the actor instances themselves can also have logic to log activity, provide information to reporting and machine learning components, and so on. Similarly, in financial applications, CloudSheet can enable users to see, manipulate and analyze vast quantities of historical and real-time data.
 
 Ultimately, services like CloudSheet and frameworks such as the actor model provide examples of how cloud computing can remove nearly all resource limitations from applications.
 
@@ -274,5 +258,3 @@ Ultimately, services like CloudSheet and frameworks such as the actor model prov
 <div id="ftn8">
 
 [8](#_ftnref8) [https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx](https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx)
-
-</div>

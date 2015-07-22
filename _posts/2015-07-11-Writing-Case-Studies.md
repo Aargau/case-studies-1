@@ -11,11 +11,6 @@ color: "red"
 excerpt: This document provides an overview of the case study process and provides details about writing, reviewing, and publlishing case studies.  Any TED engineer who wants to write or review case studies will want to read this document to get started.
 ---
 
-
-
-# Creating Great Case Studies, v2
-
-
 This document provides an overview of the case study process and provides details
 about writing, reviewing, and publlishing case studies.  Any TED engineer who
 wants to write or review case studies will want to read this document to get

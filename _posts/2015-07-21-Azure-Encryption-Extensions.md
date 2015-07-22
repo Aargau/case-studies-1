@@ -11,13 +11,9 @@ color: "blue"
 excerpt: Storing Data Securely in Azure Blob Storage with Azure Encryption Extensions.
 ---
 
-# Storing Data Securely in Azure Blob Storage with Azure Encryption Extensions
-
-## The Problem
-
 When building applications which require data encrypted at rest and on-the-wire there may be significant complexity added to the software development process.  Organizations building these types of applications must not only invest in the additional resources to write the code, but they must also ensure the implementation is actually secure.
 
-In this document you will learn how you can leverage the [Azure Encryption Extensions library](https://github.com/stefangordon/azure-encryption-extensions) to easily encrypt data you store in Azure Blob Storage using Microsoftís proven [Cryptographic Service Providers](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380245%28v=vs.85%29.aspx).  This solution also allows you to upgrade existing Azure Blob Storage code with minimal changes.
+In this document you will learn how you can leverage the [Azure Encryption Extensions library](https://github.com/stefangordon/azure-encryption-extensions) to easily encrypt data you store in Azure Blob Storage using Microsoft‚Äôs proven [Cryptographic Service Providers](https://msdn.microsoft.com/en-us/library/windows/desktop/aa380245%28v=vs.85%29.aspx).  This solution also allows you to upgrade existing Azure Blob Storage code with minimal changes.
 
 ## The Solution
 
@@ -65,7 +61,7 @@ blob.UploadFromFileEncrypted(provider, path, FileMode.Open);
 blob.DownloadToFileEncrypted(provider, destinationPath, FileMode.Create);
 ```
 
-Note that the Upload and Download methods have signatures which are very similar to those from the underlying Azure Storage SDK.  Simply append the word ìEncryptedî to the end of the methods to leverage the encrypted version and include one additional parameter to reference the encryption provider.  Defaults for all optional parameters will match the original methods.
+Note that the Upload and Download methods have signatures which are very similar to those from the underlying Azure Storage SDK.  Simply append the word ‚ÄúEncrypted‚Äù to the end of the methods to leverage the encrypted version and include one additional parameter to reference the encryption provider.  Defaults for all optional parameters will match the original methods.
 
 # Code Artifacts
 
@@ -77,7 +73,7 @@ You can install the library via [NuGet](https://www.nuget.org/packages/AzureEncr
 
 Or get the latest version by syncing the repository directly:
 
-# [https://github.com/stefangordon/azure-encryption-extensions</span>](https://github.com/stefangordon/azure-encryption-extensions)
+# [https://github.com/stefangordon/azure-encryption-extensions](https://github.com/stefangordon/azure-encryption-extensions)
 
 Extension documentation on the encryption implementation and library usage is available in the [readme](https://github.com/stefangordon/azure-encryption-extensions).
 
