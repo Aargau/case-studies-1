@@ -7,7 +7,7 @@ author-link: "http://blogs.msdn.com/b/scicoria/"
 date:   2015-07-21 23:34:28
 categories: Azure Office365 Mail
 color: "blue"
-image: "{{ site.baseurl }}/images/logo.png" #should be ~350px tall
+image: "{{ site.baseurl }}/images/blacktocat.png" #should be ~350px tall
 excerpt: Office Mail App for Rallyteam
 ---
 
