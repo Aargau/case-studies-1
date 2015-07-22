@@ -7,7 +7,7 @@ author-link: "http://blogs.msdn.com/b/scicoria/"
 date:   2015-07-21 23:34:28
 categories: Azure Office365 Mail
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+image: "{{ site.baseurl }}/images/logo.png" #should be ~350px tall
 excerpt: Office Mail App for Rallyteam
 ---
 
@@ -15,7 +15,7 @@ The Microsoft Office Platform is focused on enhancing the collaboration experien
 
 Working with Rallyteam, a [MS Ventures](https://www.microsoftventures.com/) Accelerator participant, we created a simple but effective mail app to demonstrate an action-oriented add-in activated within the context of a mail item.
 
-# Background
+## Background
 
 Rallyteam ([http://Rallyteam.com](http://Rallyteam.com)) provides a tool that facilitates project awareness and resource assignment within an organization. The platform is a matching service for projects and people for assignments that wouldn’t normally be visible within an organization. It attempts to achieve optimization of project assignments based upon numerous factors such as interests, kudos (which Rallyteam calls “props” for proper recognition), experience, and ratings of each person that participates. The goal is to facilitate self-forming teams and optimize resource assignment through matching of individuals.  Exposing this information also aids in identification of skill gaps and underutilized resources.
 
@@ -31,7 +31,7 @@ Generally, uses can:
 4.	Recognition provides peers with the ability to reward contributions to the community by earning points, props, and badges over time.
 
 
-# Opportunity
+## Opportunity
 
 Many organization are email-centric. Many users spend considerable time within an email client – either a desktop application like Outlook, a browser-based application (like Outlook Mail App – OWA), and/or their mobile devices.
 
@@ -39,7 +39,7 @@ During any email interaction there are triggers that require a user to switch co
 
 Mail apps for Outlook have the ability to activate an actionable link, then provide a User Interface (UI) that allows the user to interact with an application while never leaving the Outlook interface – reducing steps, decreasing context switching, and making things happen in a friction free manner.
 
-# High Level Flow
+## High Level Flow
 
 The following illustrates the high level flow from email creation (outside of Rallyteam and Mail apps for Outlook) to the point where the Rallyteam Action is triggered by the recognition of the key words in any email, then to the creation of a Rallyteam opportunity.
 
@@ -51,7 +51,7 @@ Figure 1 - High level flow
 
 Here are some screenshots illustrating the user experience when the system recognizes project opportunities. In the first case, you see an email with no such opportunities, but a series of Outlook Mail applications installed (the yellow bar, called the “action bar”):
 
-## Example of an email – NOT about a project or Opportunity
+### Example of an email – NOT about a project or Opportunity
 
 For a high level overview of the flow, see the diagram Figure 8 - High level deployment.
 
@@ -63,7 +63,7 @@ In the email above (here we're using the Outlook desktop client) the normal acti
 
 In the following example, the system has recognized an opportunity and a new application, “Project Unite” appears in the action bar. In this case the email was “triggered”:
 
-## Example of an Email – triggered
+### Example of an Email – triggered
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image003.jpg)
 
@@ -71,7 +71,7 @@ Figure 3 -Mail app about a project
 
 When the users open the email, they are presented with an opportunity to participate in a project, as shown below:
 
-## Mail App – Opened
+### Mail App – Opened
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image004.jpg)
 
@@ -79,21 +79,21 @@ Figure 4 - Mail App opened and ready for action
 
 Of course, this also works in the browser-based version (Outlook Web Access, or OWA), as shown below:
 
-## Also Working in Browser – Office Web App (OWA)
+### Also Working in Browser – Office Web App (OWA)
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image005.jpg)
 
 Figure 5 - App activated in Browser OWA
 
-## Running this in your Tenant
+### Running this in your Tenant
 
 You can add this yourself to your own Outlook client by adding the app. The following steps will show you how:
 
-### 1. Navigate to [https://rtmailapp.azurewebsites.net/](https://rtmailapp.azurewebsites.net/)
+1. Navigate to [https://rtmailapp.azurewebsites.net/](https://rtmailapp.azurewebsites.net/)
 
 This is a demo site that provides the backing HTML based application utilized by the Office App. For the purposes of this demo the application does very little and simply shows the Outlook integration. No updates are performed; it only recognizes the words “project | opportunity” within the email item Subject or Body.
 
-### 2. Copy the Link to Manifest
+2. Copy the Link to Manifest
 
 Once on that page, copy the shortcut shown on the page; it should be
 
@@ -101,19 +101,19 @@ Once on that page, copy the shortcut shown on the page; it should be
 
 If you deploy to your own Azure Web Site a different host name will be used. Note that this MUST be HTTPS. Using Azure Web Apps ensures that HTTPS is supported using the wildcard certificate “*.azurewebsites.net”.
 
-### 3. Open “Manage Apps” from OWA
+3. Open “Manage Apps” from OWA
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image006.jpg)
 
 Figure 6 - Mange Apps in OWA
 
-### 4. Click on the ‘+’
+4. Click on the ‘+’
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image007.jpg)
 
 Figure 7 - Adding an App with a URL
 
-### 5. Choose ‘Add from URL’
+5. Choose ‘Add from URL’
 
 When Presented with the Entry form, paste in the URL from above; if using the sample here:
 
@@ -121,7 +121,7 @@ When Presented with the Entry form, paste in the URL from above; if using the sa
 
 Then click "Next", then accept the “warning” regarding the app NOT being verified and NOT from the Office Store by clicking “Install”.  When it’s done, click OK.
 
-### List of Mail Apps
+List of Mail Apps
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image008.jpg)
 
@@ -129,15 +129,15 @@ Figure 8 - App shown in the Manage App list
 
 Once you’re done adding the mail application, it shows in the list "Manage Apps" as above. Note the information on the right side regarding what is read from the XML manifest provided before.
 
-# Overview of the Solution
+## Overview of the Solution
 
-## High Level Deployment
+### High Level Deployment
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image009.jpg)
 
 Figure 9 - High level deployment
 
-## Application Components
+### Application Components
 
 ### Client
 
@@ -177,11 +177,11 @@ There are three ways to deploy; the first two below bypass the Office Store – 
 
 Figure 11 - Warning when using non-Office Store App
 
-# Code Artifacts
+## Code Artifacts
 
 The code is published here: [https://github.com/cicorias/ProjectUnite](https://github.com/cicorias/ProjectUnite)
 
-## Required Tooling
+### Required Tooling
 
 The tools required to run the sample are:
 
@@ -197,15 +197,15 @@ The following shows installation of the tools using Web Platform Installer which
 
 Figure 12 - Web Platform Installer
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 There has been significant interest from various customers related to collaboration tools and applications that surround the Office 365 ecosystem. The example presented here can be used to bootstrap an effort and initiate conversations around what is possible to facilitate collaboration experiences and productivity enhancements
 
-# Follow up
+## Follow up
 
 Rallyteam is continuing to evaluate Office Mail Apps and looking at additionally providing contextual recognition beyond the simple regular expressions that are provided in this sample. For example, by increasing the permission levels of the application, it is possible to inspect a mail item deeper and use custom backend services, provided by the application and not Office 365, to enrich the experience. This capability requires greater trust level and permissions, but is possible through use of the Office 365 services that allow interaction within a user’s email item, their mailbox, or other O365 Services.
 
-# Links and References
+## Links and References
 
 Rallyteam: [http://www.rallyteam.com](http://www.rallyteam.com)
 
