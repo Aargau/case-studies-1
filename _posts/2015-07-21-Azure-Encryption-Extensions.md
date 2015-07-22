@@ -19,7 +19,7 @@ In this document you will learn how you can leverage the [Azure Encryption Exten
 
 Azure Encryption Extensions is a simple library designed to streamline the work required to encrypt data stored in Azure Blob Storage. Data is encrypted on-the-fly as it is uploaded to Azure, and decrypted as it is downloaded. Unencrypted data **never leaves your machine** and you can **manage your keys however you'd like.**
 
-![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
+![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
  The library provides a set of wrappers over the public Azure Storage SDK which closely mirror the existing storage methods.  This allows developers to access blob storage in a standard way, and reference existing documentation, while still achieving industry-standard security.
 
 ## Choosing the Encryption Method

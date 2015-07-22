@@ -19,7 +19,7 @@ Recently, distributed systems and cloud computing services like Hadoop, Spark ch
 
 That said, if we use Hadoop or its cloud service like HDInsight to execute business applications, we will face the following typical problem, for example, in calculating net price of each product assembling the parts.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Parallel-breadth-first-aggregation-algorithm_images/image001.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Parallel-breadth-first-aggregation-algorithm_images/image001.jpg)
 
 In this figure, Assembly X-2 is built by Part G, Part H and Part I, and Part G is built by Part B, Part H is built by Part B and Part C, and Part I is built by Part D and Part E. In the same way, we can build the tree structure describing the dependency relationships of assemblies, intermediate parts, and final unit parts. By this tree structure, we can calculate how much each assembly costs, by traversing which part(s) build this assembly from the root to the leaves. This traversal is called depth-first traversal/search. But as depth-first search is known to be an inherently sequential algorithm, it does not fit closely with parallel processing on top of Hadoop.
 

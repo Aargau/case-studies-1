@@ -106,7 +106,7 @@ $ (Linux) sudo npm install
 
 ``$ sails lift``
 
-![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-Building-an-enterprise-web-app-with-continuous-azure-integration_images/image001.jpg)
+![Figure 1]({{site.baseurl}}/images/2015-07-21-Building-an-enterprise-web-app-with-continuous-azure-integration_images/image001.jpg)
 
 You should see this message coming back from Sails to confirm that you’re site is ready for use.
 

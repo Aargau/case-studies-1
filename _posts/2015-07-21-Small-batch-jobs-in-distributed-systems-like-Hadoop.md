@@ -38,7 +38,7 @@ Initialization cost is the primary cause of inefficiency in executing small jobs
 
 In Figure 1, you can see that there are many communication procedures between the cluster components. After the cluster components are initialized, we can deploy our application programs to worker processes. If this initialization cost is worth paying, the distributed systems will be efficient for your solution. That is, there is the tradeoff between the performance gain such as high throughput or low latency, and the overhead involved with the distributed systems. In some scenarios, you can execute your application more efficiently on local multi-core system than in a distributed system.
 
-![http://jp.hortonworks.com/wp-content/uploads/2014/04/YARN_distributed_arch.png]({{ site.url }}/case-studies/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
+![http://jp.hortonworks.com/wp-content/uploads/2014/04/YARN_distributed_arch.png]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
 
 Figure 1: [YARN](http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) architecture
 

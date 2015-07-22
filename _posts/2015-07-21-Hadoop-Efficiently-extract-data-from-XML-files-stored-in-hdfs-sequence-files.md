@@ -31,7 +31,7 @@ The class `XmlExtractor` implements the extraction job (see Figure 1) and takes 
 - The path where the extracted elements are stored
 - The path to the extraction configuration file
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Hadoop-Efficiently-extract-data-from-XML-files-stored-in-hdfs-sequence-files_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Hadoop-Efficiently-extract-data-from-XML-files-stored-in-hdfs-sequence-files_images/image001.png)
 
 Figure 1: Anatomy of an extraction job
 
@@ -53,19 +53,19 @@ protected void map(Text key, XmlMapperValueWritable value, Mapper.Context contex
    XPath xpath = xpathfactory.newXPath();
 
    // now we iterate across all the XPath expressions for this xmlStream
-   // and run them against the DOM			
+   // and run them against the DOM
    for (XPathInfoWritable info : value.getXPathExpressions()){
       XPathExpression expr = xpath.compile(info.getExpression());
       Object result = expr.evaluate(doc, XPathConstants.NODESET);
       NodeList nodes = (NodeList) result;
-      
-      // in the case we got matching nodes, we create the reducer input   
+
+      // in the case we got matching nodes, we create the reducer input
       if (nodes.getLength() > 0) {
          StringBuilder sb = new StringBuilder();
          for (int i = 0; i < nodes.getLength(); i++) {
             sb.append(nodes.item(i).getNodeValue());
          }
-         XmlReducerKeyWritable xmlKey = 
+         XmlReducerKeyWritable xmlKey =
             new XmlReducerKeyWritable(key.toString(), value.getSequence(), info.getPos());
          context.write(xmlKey, new XmlReducerValueWritable(sb.toString(), info.getPos()));
       }
@@ -84,15 +84,15 @@ Shuffling takes place between the Mapper output and the Reducer input:
 Using the above grouping and sorting, the Reducer can simply iterate across all values and build the output row. This works because all values with the same key are extracted from the same file and sorted in their sequence and their column order:
 
 ```
-public void reduce(XmlReducerKeyWritable key, 
-                   Iterable<XmlReducerValueWritable> values, 
+public void reduce(XmlReducerKeyWritable key,
+                   Iterable<XmlReducerValueWritable> values,
                    Context context){
    String[] theColumns = new String[nrOfColumns];
-			
+
    for (XmlReducerValueWritable value : values) {
       theColumns[value.getOrder()] = value.getValue();
 
-      // once we got all columns, we write them - this works because 
+      // once we got all columns, we write them - this works because
       // values are sorted by sequence and then columns
       if (value.getOrder() == (nrOfColumns - 1)) {
          StringBuilder sb = new StringBuilder();
@@ -120,7 +120,7 @@ The extraction configuration file configures the scanner, provides the XPath exp
   <property>
     <name>headerNode</name>
     <value>header;false;true; ;0#//header/onwerId/text();1#//header/specNr/text</value>
-  </property> 
+  </property>
 ```
 
 The complete description of the configuration format can be found [here](https://github.com/cloudbeatsch/HadoopXmlExtractor/blob/master/README.md), together with two [example configurations](https://github.com/cloudbeatsch/HadoopXmlExtractor/tree/master/testdata).

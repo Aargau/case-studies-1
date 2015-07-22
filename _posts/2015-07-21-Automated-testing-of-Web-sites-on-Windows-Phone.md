@@ -27,7 +27,7 @@ One solution for running tests on Windows Phones devices is the open source [Win
 
 An overview of the solution architecture is illustrated below.
 
-![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image001.png)
+![Figure 1]({{site.baseurl}}/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image001.png)
 
 More information about the project can be found on its CodePlex [pages](http://winphonewebdriver.codeplex.com/).
 
@@ -119,6 +119,6 @@ $ node example.js
 
 If the connection to the device works, the script should exit without any errors and the device should have a screen that shows something like this:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image002.png)
+![]({{site.baseurl}}/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image002.png)
 
 In above screen, we can see that the right page was loaded, the text was inputted to the right input field and results were received to the search made.

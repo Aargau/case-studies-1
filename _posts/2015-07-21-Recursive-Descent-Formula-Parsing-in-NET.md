@@ -135,13 +135,13 @@ A corresponding `pop()` function also exists.
 
 At the end of parsing, a set of data structures holding the tokens and their relationships to one another exists and is presented to the evaluator. Here is an example of the result of a simple parsing session:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
 
 Each box indicates a formentry. The STARTPARSE and ENDPARSE formentry’s are convenience structures which optimize the evaluation process. In this case there is obviously no recursion.[3](#_ftn3)
 
 A more complex example is depicted below:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image002.png)
+![]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image002.png)
 
 Here, multiple levels of recursion are shown. Each instance of a PRECEDENCE formentry indicates a subexpression. At evaluation time, a depth-first traversal of the tree occurs such that as evaluation progresses, the deepest subexpression is evaluated (here: A1/12), then the next-deepest, and so on. The parser supports an arbitrary level of depth and complexity.
 

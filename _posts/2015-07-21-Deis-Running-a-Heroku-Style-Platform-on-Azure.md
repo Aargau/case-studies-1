@@ -16,7 +16,7 @@ Prior to the coding engagement, installing the Deis platform on Azure was both c
 
 Required were four things: 1) We needed to agree on a recommended path for installation; 2) Fix remaining issues in CoreOS and Deis; 3) Automate the provisioning and installation process; 4) Document the solution.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/image001.png)
 
 # Overview of the Solution
 

@@ -18,7 +18,7 @@ This case study describes the approach we took to create a Microsoft Azure Machi
 
 Figure 1 shows an overview of our approach:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image001.png) 
+![]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image001.png) 
 
 Figure 1: overview of the approach
 
@@ -86,7 +86,7 @@ Figure 2 visualizes the core concepts of the script: The trigger window, last da
 
 - **slots** defines the number of slots we aggregate and add to the output dataset. The length of a slot is defined by the **slot_size** in seconds.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image002.png)
+![]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image002.png)
 
 Figure 2: the concepts of trigger window, last data points and slots
 
@@ -108,7 +108,7 @@ python CreateTimeSeriesData.py
 
 We uploaded the created dataset to MAML and created the experiment which is shown in Figure 3\.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image003.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image003.jpg)
 
 Figure 3: Experiment predicting hypo using MAML
 
@@ -116,7 +116,7 @@ The actual experiment contains two models, one for diabetes type 1 and one for d
 
 We’re basically able to correctly predict ~35% of all hypos with only ~3% of our hypo predictions being a “false alarm” (see Figure 4). This makes it a useful tool to help the patients avoiding more than 1/3 of hypos.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image004.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image004.jpg)
 
 Figure 4: Model evaluation using MAML
 

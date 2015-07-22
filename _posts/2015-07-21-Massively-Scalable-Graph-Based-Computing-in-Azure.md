@@ -33,7 +33,7 @@ This simplicity enables us to recreate the notion of a spreadsheet graph in a ve
 
 The CloudSheet project used actor-model programming to implement “cells” in a cloud-based spreadsheet-like engine. We say “spreadsheet-like” because in CloudSheet the user interface is completely decoupled from the calculation engine, as shown below:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image001.png)
 
 Figure 1. CloudSheet Architecture
 
@@ -54,7 +54,7 @@ _User Interface_
 
 Of course, the most obvious UI for such a calculation engine is that of a spreadsheet:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image002.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image002.jpg)
 
 Figure 2. CloudSheet UI Sample
 
@@ -64,7 +64,7 @@ The application data format of the messages is very simple: it is Excel. Any app
 
 Here is a trivial little XAML/C# application to prove the point:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png) 
+![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png) 
 
 Figure 3. Another UI
 
@@ -98,7 +98,7 @@ Since in the cloud we now have memory and compute resources limited only by the 
 
 One approach is to enhance the entire semantic of a cell. The new formula type _=DATA(file)_ permits users to load a tabular file into a single cell. Here is an example of such a file (an excerpt):
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image004.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image004.jpg)
 
 Figure 4. GSOD for Greenland, 1986
 
@@ -137,7 +137,7 @@ CloudSheet currently holds the record (as far as we know) for the largest spread
 
 Here is a screenshot of the “record.” Each cell holds the number of data items in the file loaded by the cell; for example, in cell cc6 the file in that cell has 8052 data points. (Note not every station reports every year, for various reasons – wars, closings, etc.; hence the blank cells.) The red circle holds a simple _=sum()_ formula (typed in manually, after the data was loaded) to add the total number of data items.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image005.png)
+![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image005.png)
 
 Figure 5\. CloudSheet Holding All the World's Weather
 

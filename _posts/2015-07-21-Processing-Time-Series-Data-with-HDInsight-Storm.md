@@ -21,13 +21,13 @@ The real time, and incremental, nature of the problem means that we couldn't use
 
 In our solution, we are using Nitrogen ([http://nitrogen.io/](http://nitrogen.io/) ), a set of open source components that connect devices to Azure, as a frontend message gateway for data collection and to provide identity and authorization services for the cars.  These messages are fed into both Table Storage (for long term storage and querying) and Event Hub in Azure, which acts as a buffer that continuously pushes messages into the Storm topology that transforms it into the form that is needed for our Azure ML classifier.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image001.png)
 
 Figure 1: End to End Components of the Data Pipeline
 
 Apache Storm works on data using a stream model. In Storm's parlance, Spouts emit tuples of data that Bolts then process and optionally emit transformed tuples of data to other downstream Bolts.  Figure 1 shows an example topology.  Spouts can be consumed by multiple Bolts and Bolts can consume multiple tuple streams.
 
-![Inserting Picture]({{ site.url }}/case-studies/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image002.png)
+![Inserting Picture]({{site.baseurl}}/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image002.png)
 
 Figure 2: Apache Storm Topology
 
@@ -41,7 +41,7 @@ One of the other benefits of using a stream-based approach is that it is increme
 
 Spouts and Bolts can be written in a combination of C# and Java. The Event Hub spout is a Java jar file while the rest of our topology is in C#. We've open sourced a simple skeleton topology for building your own Storm solution at [http://github.com/timfpark/data-pipeline](http://github.com/timfpark/data-pipeline) that includes a preconfigured Event Hub to Storm spout and instructions on how to configure it.  This provides a solid foundation to start from to build your own set of Spouts and Bolts and a Topology for local development runs and for submitting it to a hosted Storm cluster.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image003.png)
+![]({{site.baseurl}}/images/2015-07-21-Processing-Time-Series-Data-with-HDInsight-Storm_images/image003.png)
 
 Figure 3: Overview of Sample Storm Pipeline
 

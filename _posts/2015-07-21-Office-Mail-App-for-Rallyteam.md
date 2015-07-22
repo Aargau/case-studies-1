@@ -43,7 +43,7 @@ Mail apps for Outlook have the ability to activate an actionable link, then prov
 
 The following illustrates the high level flow from email creation (outside of Rallyteam and Mail apps for Outlook) to the point where the Rallyteam Action is triggered by the recognition of the key words in any email, then to the creation of a Rallyteam opportunity.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image001.png)
 
 Figure 1 - High level flow
 
@@ -55,7 +55,7 @@ Here are some screenshots illustrating the user experience when the system recog
 
 For a high level overview of the flow, see the diagram Figure 8 - High level deployment.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image002.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image002.jpg)
 
 Figure 2 - Mail app not about a project
 
@@ -65,7 +65,7 @@ In the following example, the system has recognized an opportunity and a new app
 
 ## Example of an Email – triggered
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image003.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image003.jpg)
 
 Figure 3 -Mail app about a project
 
@@ -73,7 +73,7 @@ When the users open the email, they are presented with an opportunity to partici
 
 ## Mail App – Opened
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image004.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image004.jpg)
 
 Figure 4 - Mail App opened and ready for action
 
@@ -81,7 +81,7 @@ Of course, this also works in the browser-based version (Outlook Web Access, or 
 
 ## Also Working in Browser – Office Web App (OWA)
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image005.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image005.jpg)
 
 Figure 5 - App activated in Browser OWA
 
@@ -103,13 +103,13 @@ If you deploy to your own Azure Web Site a different host name will be used. Not
 
 ### 3. Open “Manage Apps” from OWA
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image006.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image006.jpg)
 
 Figure 6 - Mange Apps in OWA
 
 ### 4. Click on the ‘+’
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image007.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image007.jpg)
 
 Figure 7 - Adding an App with a URL
 
@@ -123,7 +123,7 @@ Then click "Next", then accept the “warning” regarding the app NOT being ver
 
 ### List of Mail Apps
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image008.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image008.jpg)
 
 Figure 8 - App shown in the Manage App list
 
@@ -133,7 +133,7 @@ Once you’re done adding the mail application, it shows in the list "Manage App
 
 ## High Level Deployment
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image009.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image009.jpg)
 
 Figure 9 - High level deployment
 
@@ -159,7 +159,7 @@ The page interactivity is basic JavaScript and AngularJS, along with Bootstrap f
 
 During development, you simply press F5 – this will deploy the “manifest” to an Office 365 Exchange Tenant – the following dialog box will appear. You will require permissions to deploy this to your email account.  You can obtain a Trial Tenant from MSDN subscriptions if you wish to isolate (recommended) from your production email.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image010.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image010.jpg)
 
 Figure 10 - Visual Studio Office Tools Authentication
 
@@ -173,7 +173,7 @@ There are three ways to deploy; the first two below bypass the Office Store – 
 
 3. Via Office Store – this requires a publishing process and will make the application available for other Office 365 Tenants and Users to install.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image011.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image011.jpg)
 
 Figure 11 - Warning when using non-Office Store App
 
@@ -193,7 +193,7 @@ a. Not needed if using **Visual Studio 2015 RC or better (do not use any of the 
 
 The following shows installation of the tools using Web Platform Installer which can be obtained from: [http://www.microsoft.com/web/downloads/platform.aspx](http://www.microsoft.com/web/downloads/platform.aspx)  (or [http://go.microsoft.com/fwlink/?LinkId=255386](http://go.microsoft.com/fwlink/?LinkId=255386) ).
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image012.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Office-Mail-App-for-Rallyteam_images/image012.jpg)
 
 Figure 12 - Web Platform Installer
 

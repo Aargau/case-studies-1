@@ -14,7 +14,7 @@ With the arrival of commodity depth-capable cameras, specifically the Microsoft 
 
 The overall goal of this project is to decode the communications of dogs. This TED Case Study covers one aspect of this project, specifically, progress in visually tracking dogs. Future papers will cover feature detection and analysis (e.g., ear position, mouth expressions, tail decoding); audio analysis (barks); and development and deployment an application. Eventually the objective is to analyze all of these _in toto_ and be able to infer (for example) if ears are up, mouth is open, tail is up, dog is silent: _I’m alert, I’m paying attention, I’m not feeling aggressive or threatened._
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Dog-Tracking_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image001.png)
 
 Figure 1\. Conceptual Goal of Project
 
@@ -22,7 +22,7 @@ Figure 1\. Conceptual Goal of Project
 
 Project “Dolittle” initially leveraged the open source computer vision library OpenCV ([http://www.opencv.org](http://www.opencv.org)). OpenCV supports image detection, object recognition, various machine learning algorithms, classifiers, and video analysis, among other capabilities. Initial work focused on training OpenCV’s Haar cascades to recognize one dog, in this case a Smooth-Haired Collie named “Mici”.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-Dog-Tracking_images/image002.jpg)
+![]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image002.jpg)
 
 Figure 2. Mici
 

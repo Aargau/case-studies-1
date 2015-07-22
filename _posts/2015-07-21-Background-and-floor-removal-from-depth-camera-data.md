@@ -24,7 +24,7 @@ The Microsoft Research assets for hand tracking provided a useful baseline for u
 
 As an example scenario, we recorded depth data of a space with Ilkka’s dog Mici posing majestically for us. Below is a sample raw depth frame from the Kinect sensor – let’s take a look at how to strip out the uninteresting background from the data.
 
-![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image001.jpg)
+![Figure 1]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image001.jpg)
 
 Initially our assumption was that it would be enough to separate objects of interest by removing the redundant background by implementing floor removal functionality with Kinect SDK API and setting the background clipping distance to remove also the walls and other rigid parts of the observed space. Although initial results with this approach were promising, those clipping plane settings wouldn’t work with all of our Kinect depth recording reference data. Therefore, we had to design a universal solution that wouldn't be affected by variations in the setup.
 

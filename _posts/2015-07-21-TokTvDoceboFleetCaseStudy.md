@@ -31,7 +31,7 @@ We used a private Docker registry to deploy the Docker images for service deploy
 
 The private registry server is deployed from the Docker Hub and its image store is backed by Azure blob storage. This makes our Docker registry ‘portable’ allowing us to deploy services using Fleet by pushing images to our private repository from anywhere with access to Azure storage, including your local machine:
 
-![]({{ site.url }}/case-studies/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image001.png)
+![]({{site.baseurl}}/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image001.png)
 
 Figure 1\. Service Deployment via Azure Storage-backed Private Docker Registry
 
@@ -47,7 +47,7 @@ Using an external image store allows us to run a private Docker image repository
 
 CoreOS uses <u>etcd</u>, a demon service that is essentially a distributed key-value store that allows services to announce their presence by publishing keys with a Time-to-live (TTL). Each deployed application instance is deployed with an accompanying 'announcer' service which is simply a bash script that periodically writes its host ip address and port number for it's corresponding web server.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image002.png)
+![]({{site.baseurl}}/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image002.png)
 
 Figure 2\. Service Discovery with 'Sidekick' Services & Etcd
 
@@ -89,19 +89,19 @@ The entire cluster sits behind a load balancer and has one public virtual IP add
 
 One advantage of using an external load balancer for the cluster is that you only need one public IP address, rather than a unique one for each instance. Cloud service providers such as Microsoft Azure have limits to public IP allocation per subscription. Also, as machines go up and down, the public IP address doesn't change and simplifies DNS zone file settings.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image003.png)
+![]({{site.baseurl}}/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image003.png)
 
 Figure 3\. Azure Load Balancer spreads loads to each internal NginX instance
 
 When a user request comes in, because we have the **router** running and listening on port 80 and port 443 on each node, we can handle the request no matter what node it comes to. Further, because of **etcd** service discovery each router has knowledge about where all the services are located and can route the request the appropriate container.
 
-![]({{ site.url }}/case-studies/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image004.png)
+![]({{site.baseurl}}/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image004.png)
 
 Figure 4\. Internal NginX instance routes request and load balances between app containers
 
 This means that the actual container, which provides the service, doesn't necessarily need to be on the machine that the Azure load balancer selects, as show in **Figure 5.**
 
-![]({{ site.url }}/case-studies/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image005.png)
+![]({{site.baseurl}}/images/2015-07-21-TokTvDoceboFleetCaseStudy_images/image005.png)
 
 Figure 5\. The Machines Selected by Azure Load Balancer doesn't need to actually run requested App
 
