@@ -2,7 +2,7 @@
 layout: post
 title:  "Background and floor removal from depth camera data"
 author: "Petro Soininen"
-#author-link: "http://#"
+author-link: "https://twitter.com/petrosoininen"
 #author-image: "{{ site.baseurl }}/images/PetroSoininen/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
 categories: Camera
@@ -57,7 +57,7 @@ Foreach(spacePoint in cameraSpacePoints)
 
 The screenshots below illustrate our reference depth data before and after applying floor removal.
 
-![](Background%20and%20floor%20removal%20from%20depth%20camera%20data_files/image002.jpg)![](Background%20and%20floor%20removal%20from%20depth%20camera%20data_files/image003.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image002.jpg)![Screenshot]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image003.jpg)
 
 ## Background removal and Region of Interest estimation
 
@@ -215,12 +215,12 @@ For (kernel = 0; kernel < HorizontalBlocks*VerticalBlocks; kernel++)
 
 With the foreground object boundaries calculated, the final step is to [extract the region](https://github.com/kainiemi/kinect-bits/blob/master/BackgroundRemovalSample/DepthBasics.cpp#L604) – and in our example app, draw it to the screen with a bounding box. Below are example screenshots of our extracted region of interested, starting point, and the intermediate step after applying floor removal.
 
-![](Background%20and%20floor%20removal%20from%20depth%20camera%20data_files/image004.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image004.jpg)
 
 Extracted region of interest
 
-![](Background%20and%20floor%20removal%20from%20depth%20camera%20data_files/image005.jpg)
-![](Background%20and%20floor%20removal%20from%20depth%20camera%20data_files/image006.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image005.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Background-and-floor-removal-from-depth-camera-data_images/image006.jpg)
 
 # Code artifacts and opportunities for reuse
 

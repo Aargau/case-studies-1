@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "A framework to bootstrap enterprise single page applications with continuous Azure integration"
-author: "Felix Rieseberg?"
-#author-link: "http://#"
+author: "Erik Schlegel"
+author-link: "#"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure, SailsJS, Continuous integration
+categories: Azure SailsJS Continuous-Integration
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: A framework to bootstrap enterprise single page applications with continuous Azure integration
@@ -110,7 +110,7 @@ $ (Linux) sudo npm install
 
 You should see this message coming back from Sails to confirm that you’re site is ready for use.
 
-You can access your new site by accessing the site at [http://localhost:1337](http://localhost:1337) 
+You can access your new site by accessing the site at `http://localhost:1337`.
 
 # Implementation
 

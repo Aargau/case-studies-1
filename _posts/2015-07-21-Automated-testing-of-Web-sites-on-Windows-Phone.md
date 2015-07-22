@@ -2,10 +2,10 @@
 layout: post
 title:  "Automated testing of Web sites on Windows Phone"
 author: "Ville Rantala"
-#author-link: "http://#"
+author-link: "http://github.com/vjrantal"
 #author-image: "{{ site.baseurl }}/images/VillaRantala/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Windows Phone, WebDriver, Automated Testing, Web Sites, Internet Explorer
+categories: Windows-Phone WebDriver Automated-Testing Websites Internet-Explorer
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Testing with web sites on Windows Phone.
@@ -119,6 +119,6 @@ $ node example.js
 
 If the connection to the device works, the script should exit without any errors and the device should have a screen that shows something like this:
 
-![]({{site.baseurl}}/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image002.png)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Automated-testing-of-Web-sites-on-Windows-Phone_images/image002.png)
 
 In above screen, we can see that the right page was loaded, the text was inputted to the right input field and results were received to the search made.

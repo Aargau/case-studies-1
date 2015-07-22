@@ -2,7 +2,7 @@
 layout: post
 title:  "Parallelized Bulk Copy of Data from Amazon AWS to Microsoft Azure"
 author: "Barry Briggs"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
 categories: Azure, AWS
@@ -28,7 +28,7 @@ The solution, called “awcopy,” consists of several components:
 
 Conceptually, the pieces fit together as follows:
 
-![]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image001.png)
+![Architecturee]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image001.png)
 
 Figure 1. Block diagram of AWcopy
 
@@ -81,9 +81,9 @@ It is possible to bypass the cloud service to copy files locally (meaning, the f
 
 Additionally the /L switch will recursively list the contents of an AWS S3 bucket. This command will also estimate egress charges for moving the data out of S3\. Here is a screen shot (credentials have been blacked out):
 
-![]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image002.png)
-![]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image003.png)
-![]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image004.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image002.png)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image003.png)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image004.jpg)
 
 Figure 2. Listing AWS S3 files with estimated egress charges
 
@@ -106,7 +106,7 @@ Because the files can be copied by many separate actors, and because actors can 
 
 A simple dashboard written using angular.js shows job status:
 
-![]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image005.jpg)
+![Dashboard]({{site.baseurl}}/images/2015-07-21-Parallelized-Bulk-Copy-of-Data-From-Amazon-AWS-To-Azure_images/image005.jpg)
 
 Figure 3. AWcopy Dashboard
 

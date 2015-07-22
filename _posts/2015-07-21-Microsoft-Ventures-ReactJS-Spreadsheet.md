@@ -2,10 +2,10 @@
 layout: post
 title:  "A ReactJS Spreadsheet Component for the Microsoft Ventures Hackathon"
 author: "Felix Rieseberg"
-#author-link: "http://#"
+author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: ReactJS, Spreadsheet
+categories: ReactJS Spreadsheet
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: During the Microsoft Ventures hackathon in May 2015 it became obvious that one of the startups (CreativeWorx) [required a standalone Excel-like spreadsheet component for the web](https://github.com/felixrieseberg/React-Spreadsheet-Component). This post describes the resulting React component, how it was built, and how it can be used today.
@@ -23,8 +23,7 @@ ReactJS, React, Web Components, JSX, Spreadsheet, Excel, Microsoft Ventures, MV
 
 CreativeWorx is the company behind the CreativeWorx time tracker, which enables users to document time spent on a project in a calendar view. While this feature is the unique value proposition for the app, many users have requested an Excel-like input method to augment the information captured by the CreativeWorx calendar. Building such an input is surprisingly difficult: Users have grown fond of Excel’s keyboard navigation, allowing them to quickly switch cells and edit their inputs without mouse clicks.  They wanted the same experience in CreativeWorx time tracker.
 
-![]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image001.png)
-Screenshot: Initial mockup of the data entry table
+![Screenshot: Initial mockup of the data entry table]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image001.png)
 
 # Overview of Solution
 
@@ -32,7 +31,7 @@ The CreativeWorx team was working on a significant rearchitecture of their appli
 
 To solve that need, we used [Facebook’s ReactJS](https://facebook.github.io/react/), which is optimized for standalone components. [The developed Spreadsheet Component](https://github.com/felixrieseberg/React-Spreadsheet-Component) is a self-contained spreadsheet component that can be run in a heavily styled mode, but also allows other developers to use it in a more Excel-like spread sheeting mode.
 
-![]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image002.png)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image002.png)
 
 # Implementation
 
@@ -136,7 +135,7 @@ Dispatcher.subscribe('cellValueChanged', function (cell, newValue, oldValue) {
 }, "spreadsheet-1")
 ```
 
-Other events are available for even more complex scenarios[1](#_ftn1). The selection/deselection of cells, click on head cells, creation of new rows or columns, or even the beginning or ending of a cell edit process can be captured by external listeners.
+Other events are available for [even more complex scenarios](https://github.com/felixrieseberg/React-Spreadsheet-Component/#usage). The selection/deselection of cells, click on head cells, creation of new rows or columns, or even the beginning or ending of a cell edit process can be captured by external listeners.
 
 # Challenges
 
@@ -174,12 +173,3 @@ grunt
 ```
 
 - Open the example in `example/index.html`.
-
-
-* * *
-
-<div id="ftn1">
-
-[1](#_ftnref1) https://github.com/felixrieseberg/React-Dropzone-Component#usage
-
-</div>

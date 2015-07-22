@@ -2,12 +2,12 @@
 layout: post
 title:  "Efficiently extracting XML data from HDFS sequence files"
 author: "Beat Schwegler"
-#author-link: "http://#"
-#author-image: "{{ site.baseurl }}/images/BeatSchwegler/photo.jpg" //should be square dimensions
+author-link: "http://blogs.msdn.com/b/beatsch/"
+#author-image: "{{site.baseurl}}/images/BeatSchwegler/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure, Hadoop
+categories: Azure Hadoop
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+#image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: Efficiently extracting XML data from HDFS sequence files
 ---
 
@@ -31,7 +31,7 @@ The class `XmlExtractor` implements the extraction job (see Figure 1) and takes 
 - The path where the extracted elements are stored
 - The path to the extraction configuration file
 
-![]({{site.baseurl}}/images/2015-07-21-Hadoop-Efficiently-extract-data-from-XML-files-stored-in-hdfs-sequence-files_images/image001.png)
+![Architecture]({{site.baseurl}}/images/2015-07-21-Hadoop-Efficiently-extract-data-from-XML-files-stored-in-hdfs-sequence-files_images/image001.png)
 
 Figure 1: Anatomy of an extraction job
 

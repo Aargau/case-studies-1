@@ -2,12 +2,12 @@
 layout: post
 title:  "Turning Images into Entities Using Project Oxford"
 author: "Michael Lanzetta"
-#author-link: "http://#"
-#author-image: "{{ site.baseurl }}/images/MichaelLanzetta/photo.jpg" //should be square dimensions
+author-link: "http://www.mikelanzetta.com/"
+#author-image: "{{site.baseurl}}/images/MichaelLanzetta/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure, image recognition, project oxford
+categories: Azure image-recognition project-oxford
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+#image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: Image recognition through project oxford.
 ---
 
@@ -15,7 +15,7 @@ One of the startups in the [MSVentures Redmond Accelerator](https://www.microsof
 
 Ideally, we would be extracting information from a clean image (below left), but in reality we would more often be confronted by warped partial images (below right) or multiple images attempting to encompass an entire curved surface.
 
-![]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image002.png)
+![Photo 1]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image002.png)
 
 There are three major areas that need to be addressed in order to successfully tackle this problem:
 
@@ -29,11 +29,11 @@ There are three major areas that need to be addressed in order to successfully t
 
 To develop the initial solution, we started with the clean image above as a “best case scenario” to determine how well Project Oxford’s Vision API and LUIS would work. The Vision OCR API provides a simple RESTful endpoint for submitting images either via URIs or octet-streams in a variety of formats. Submitting an image results in a payload containing regions identified as containing text, with lines and words within – all with appropriate bounding box information. For instance, with the example image we see:
 
-![]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image003.jpg)
+![Photo 2]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image003.jpg)
 
 We extract lines of text from this payload and use them to train a model in LUIS, with intents mapping different components of the prescription, and entities within pulling details out. LUIS is trained by adding “utterances” and labeling them with a given intent, then tagging parts of them as different entities. We can look at images like the above after we’ve extracted lines of text and infer examples - such as “TAKE 1 TABLET BY MOUTH” has an “Instruction” intent, with “1 TABLET” being the dosage amount. Such labeled utterances in LUIS look like the following:
 
-![]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image004.jpg)
+![Photo 3]({{site.baseurl}}/images/2015-07-21-Case_Study-Images_To_Entities_Using_Oxford_images/image004.jpg)
 
 You can see intents and entities clearly labeled, and the latest trained model’s prediction accuracy to the right. Publishing a model allows you to make RESTful calls against it with new utterances and receive back a JSON payload containing any detected entities and predictions with confidence levels of possible intent. We can then use these to build out a Prescription data model with the various medication, dosage, and instruction details we’ve been able to discover.
 
