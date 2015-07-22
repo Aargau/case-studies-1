@@ -2,18 +2,18 @@
 layout: post
 title:  "AllJoyn 101: Getting Started with AllJoyn using the Heatworks Model 1"
 author: "Ivan Judson"
-#author-link: "http://#"
+author-link: "http://irjudson.azurewebsites.net/"
 #author-image: "{{ site.baseurl }}/images/ivanjudson/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
 categories: AllJoyn 
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+#image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: This document provides an overview of Alljoyn and working with the Heatworks water heater.
 ---
 
 The problem ISI Technology – and all companies developing Internet-of-Things devices -- faced was the challenge of adding network accessibility to their physical device. ISI chose AllJoyn as the protocol the Heatworks Model 1 would implement to enable it to work with a variety of other devices. During the Microsoft Ventures Redmond Accelerator’s Fall 2014 session, ISI started working with Qualcomm to build a hardware interface board to enable IoT integration with their product, using the AllJoyn protocol.   After the hardware interface is built, the Heatworks Model 1 device will still need software to expose it as an AllJoyn Service so that AllJoyn enabled applications can interact with it.
 
-![Figure 1]({{site.baseurl}}/images/2015-07-21-alljoyn-heatworks_images/image001.jpg)
+![Figure 1]({{site.baseurl}}/images/2015-07-21-alljoyn-heatworks_images/image001.png)
 
 # Overview of the Solution
 
@@ -34,7 +34,7 @@ The AllJoyn Interface Description is written by the application programmer and i
 
 Here is the AllJoyn Interface Description for the Heatworks Model 1:
 
-``
+```
 <node name="/control">
   <interface name="com.myheatworks.model1">
     <method name="setPoint">
@@ -57,13 +57,13 @@ Here is the AllJoyn Interface Description for the Heatworks Model 1:
     </method>
   </interface>
 </node>
-``
+```
 
 Here is a sample of the generated server code, highlighting the two sections of device-specific code that the developer needs to add.
 
 **model1_service.c:**
 
-``
+```
 #define BASIC_SERVICE_SETPOINT             AJ_APP_MESSAGE_ID(0, 0, 0)
 #define BASIC_SERVICE_CURRENT_TEMP         AJ_APP_MESSAGE_ID(0, 0, 1)
 #define BASIC_SERVICE_SOFT_CURRENT_LIMIT   AJ_APP_MESSAGE_ID(0, 0, 2)
@@ -162,7 +162,7 @@ case BASIC_SERVICE_SETPOINT:
     AJ_AlwaysPrintf(("Basic service exiting with status %d.\n", status));
     return status;
 }
-``
+```
 
 # Opportunities for Reuse
 

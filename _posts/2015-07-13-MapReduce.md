@@ -2,7 +2,7 @@
 layout: post
 title:  "MapReduce Code Generation Using a DAG Model"
 author: "Masayoshi Hagiwara"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/masayh/"
 #author-image: "{{site.baseurl}}/images/authors/photo.jpg" #should be square dimensions
 date:   2015-07-13 23:34:28
 categories: Hadoop
@@ -21,7 +21,7 @@ To overcome the problem, the Asakusa Framework was developed.  The Asakusa Frame
 
 The DSL will compile business applications described at a business level of abstraction into a directed acyclic graph (DAG) as an intermediate language, then generates the MapReduce programs based on the resulting DAG. The DAG model is adopted because it defines the partial order of stages of MapReduce programs including concurrent processes. For the same reason, several open source projects such as Apache [_Spark_](http://spark.apache.org/), [_Storm_](http://storm.apache.org/) and [_Tez_](http://tez.apache.org/) have adopted the DAG model, originating with Dryad, from Microsoft Research, available here: [_http://research.microsoft.com/en-us/projects/Dryad_](http://research.microsoft.com/en-us/projects/Dryad).
 
-![Figure 1]({{site.baseurl}}/images/mapreduce_{{site.baseurl}}/images/image001.jpg)
+![Figure 1]({{site.baseurl}}/images/mapreduce_images/image001.jpg)
 
 
 Figure 1: a DAG model and its topological sort
@@ -239,7 +239,7 @@ Internally, flow DSL analyzes a flow definition to generate the FlowGraph (Figur
 ![Figure 2 (below)]({{site.baseurl}}/images/mapreduce_images/image003.jpg)
 
 
-Figure 2: MapReduce code generation of a retail application - Data operations of the data flow (above) and the result of MapReduce layout analysis (below). Visualized by [_Graphviz_](http://graphviz.org/).
+Figure 2: MapReduce code generation of a retail application - Data operations of the data flow (above) and the result of MapReduce layout analysis (below). Visualized by Graphviz.
 
 ### Code Artifacts
 

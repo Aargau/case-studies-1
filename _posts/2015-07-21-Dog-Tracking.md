@@ -2,10 +2,10 @@
 layout: post
 title:  "Communicating with Man’s Best Friend, Part I - Dog Tracking"
 author: "Barry Briggs"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Kinect, Dog tracking
+categories: Kinect Tracking
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 ---
@@ -14,7 +14,7 @@ With the arrival of commodity depth-capable cameras, specifically the Microsoft 
 
 The overall goal of this project is to decode the communications of dogs. This TED Case Study covers one aspect of this project, specifically, progress in visually tracking dogs. Future papers will cover feature detection and analysis (e.g., ear position, mouth expressions, tail decoding); audio analysis (barks); and development and deployment an application. Eventually the objective is to analyze all of these _in toto_ and be able to infer (for example) if ears are up, mouth is open, tail is up, dog is silent: _I’m alert, I’m paying attention, I’m not feeling aggressive or threatened._
 
-![]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image001.png)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image001.png)
 
 Figure 1\. Conceptual Goal of Project
 
@@ -22,7 +22,7 @@ Figure 1\. Conceptual Goal of Project
 
 Project “Dolittle” initially leveraged the open source computer vision library OpenCV ([http://www.opencv.org](http://www.opencv.org)). OpenCV supports image detection, object recognition, various machine learning algorithms, classifiers, and video analysis, among other capabilities. Initial work focused on training OpenCV’s Haar cascades to recognize one dog, in this case a Smooth-Haired Collie named “Mici”.
 
-![]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image002.jpg)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image002.jpg)
 
 Figure 2. Mici
 
@@ -32,9 +32,9 @@ Nevertheless, object detection – especially moving objects such as animals –
 
 Various other approaches were considered including the Berkeley’s image processing machine learning library caffe ([http://caffe.berkeleyvision.org/](http://caffe.berkeleyvision.org/)), internal Kinect code, and others.
 
-Eventually the team collaborated with a group in Microsoft Research, which had built software for very high resolution real-time hand tracking. Unlike other approaches, MSR used _both_ machine learning _and_ model fitting in real time to identify and track hands with extremely high fidelity. Supplementing machine learning with the ability to match a 3D mesh against the Kinect video stream enabled considerably more accuracy, as shown in the video located [here](https://www.youtube.com/watch?v=A-xXrMpOHyc). See as well the hand tracking paper presented at SIGCHI 2015 [here](http://research.microsoft.com/pubs/238453/pn362-sharp.pdf).
+Eventually the team collaborated with a group in Microsoft Research, which had built software for very high resolution real-time hand tracking. Unlike other approaches, MSR used _both_ machine learning _and_ model fitting in real time to identify and track hands with extremely high fidelity. Supplementing machine learning with the ability to match a 3D mesh against the Kinect video stream enabled considerably more accuracy, as shown in the video located [here](http://www.youtube.com/watch?v=A-xXrMpOHyc). See as well the hand tracking paper presented at SIGCHI 2015 [here](http://research.microsoft.com/pubs/238453/pn362-sharp.pdf).
 
-![](Dog%20Tracking_files/image003.jpg)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image003.jpg)
 
 Figure 3. Hand Tracking Video
 
@@ -47,13 +47,13 @@ However, the problem of dog tracking (and by extension similar large objects tha
 
 A multi-stage pipeline is used to recognize an object. The process matches predefined depth-aware “poses” (approximately 100,000 of them)[2](#_ftn2) to what the Kinect sees. To do this matching a jungle ML algorithm[3](#_ftn3) is used to detect a set of candidate poses and then a particle swarm optimization algorithm to perform “model fitting.” In model fitting, the observed image is matched against prebuilt poses and the best choice is selected.
 
-![](Dog%20Tracking_files/image004.jpg)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image004.jpg)
 
 Figure 4. Model Fitting Visualization
 
 To create the poses a “rigged” (articulated) Blender 3D model such as the hand model below is used:
 
-![](Dog%20Tracking_files/image005.jpg)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image005.jpg)
 
 Figure 5. Rigged Hand Model in Blender
 
@@ -61,7 +61,7 @@ Figure 5. Rigged Hand Model in Blender
 
 An example of a dog model (a border collie) in Blender is shown below:
 
-![](Dog%20Tracking_files/image006.jpg)
+![Photo]({{site.baseurl}}/images/2015-07-21-Dog-Tracking_images/image006.jpg)
 
 Figure 6. Border Collie in Blender
 
@@ -87,8 +87,8 @@ The resolution of the tracking enables scenarios previously difficult or impossi
 
 * * *
 
-[1](#_ftnref1) For more specifics on the Kinect, see [here](http://channel9.msdn.com/coding4fun/kinect/Kinect-1-vs-Kinect-2-a-side-by-side-reference); for the Kinect SDK, see [here](http://www.microsoft.com/en-us/kinectforwindows/).
+<a id="_ftn1"></a> For more specifics on the Kinect, see [here](http://channel9.msdn.com/coding4fun/kinect/Kinect-1-vs-Kinect-2-a-side-by-side-reference); for the Kinect SDK, see [here](http://www.microsoft.com/en-us/kinectforwindows/).
 
-[2](#_ftnref2) Initial set. One of the goals of the project is to see if we can match with substantially fewer prebuilt poses.
+<a id="_ftn2"></a> Initial set. One of the goals of the project is to see if we can match with substantially fewer prebuilt poses.
 
-[3](#_ftnref3) For more on decision jungles, see [here](http://research.microsoft.com/pubs/205439/DecisionJunglesNIPS2013.pdf). To quote: “Unlike conventional decision trees that only allow one path to every node, a DAG [Directed Acyclic Graph] in a decision jungle allows multiple paths from the root to each leaf.”
+<a id="_ftn3"></a> For more on decision jungles, see [here](http://research.microsoft.com/pubs/205439/DecisionJunglesNIPS2013.pdf). To quote: “Unlike conventional decision trees that only allow one path to every node, a DAG [Directed Acyclic Graph] in a decision jungle allows multiple paths from the root to each leaf.”

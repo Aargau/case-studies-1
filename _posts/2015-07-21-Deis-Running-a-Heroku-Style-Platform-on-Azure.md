@@ -2,10 +2,10 @@
 layout: post
 title:  "Deis: Running a Heroku-Style Platform on Azure"
 author: "Felix Rieseberg"
-#author-link: "http://#"
+author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Deis, Azure
+categories: Azure Deis
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 ---
@@ -16,7 +16,7 @@ Prior to the coding engagement, installing the Deis platform on Azure was both c
 
 Required were four things: 1) We needed to agree on a recommended path for installation; 2) Fix remaining issues in CoreOS and Deis; 3) Automate the provisioning and installation process; 4) Document the solution.
 
-![]({{site.baseurl}}/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/image001.png)
+![Deis on Azure]({{site.baseurl}}/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/image001.png)
 
 # Overview of the Solution
 
@@ -26,19 +26,29 @@ Next, we fixed remaining issues in CoreOS and Deis, enabling us to document a fe
 
 Installing a full cluster basically requires four commands:
 
-``azure-coreos-cluster``
+```
+azre-coreos-cluster
+```
 
 Automatically creates a CoreOS cluster. The command accepts a number of parameters for full customization, but also provides useful defaults.
 
-``deisctl config platform`` 
+```
+desctl config platform
+```
+
 
 Configures the local Deis client for communication with the newly-created cluster.
 
-``deisctl install platform``
+```
+desctl install platform
+```
 
 Installs Deis on the cluster.
 
-``deisctl start platform`` 
+```
+desctl start platform
+```
+
 
 Starts Deis – the cluster is now running!
 
@@ -78,11 +88,11 @@ Note: the following steps assume the user is running Unix.
 
 First, install the requirements (the Deis repo, Python 2.7 with pip and the Azure SDK for Python).
 
-``
+```
 $ git clone https://github.com/deis/deis.git && cd ./deis/contrib/azure 
 $ brew install python
 $ sudo pip install azure
-``
+```
 
 The script will automate most of the cluster setup, but we do need to authorize it with a certificate. Enter the folder contrib/azure and run ./generate-mgmt-cert.sh - the command will use details in cert.conf to create a management certificate, so feel free to change it to your liking. To let Azure know that this is your certificate, [log in to the Azure portal's certificate management](https://manage.windowsazure.com/#Workspaces/AdminTasks/ListManagementCertificates). Select upload and select the just created azure-cert.cer file. While in the portal, also save the ids of the subscription and the name of the blob storage container you'd like to create the cluster in. If you don't have one yet, create one.
 
@@ -90,7 +100,7 @@ The script will automate most of the cluster setup, but we do need to authorize 
 
 The script create-azure-user-data will use defaults in ../coreos/user-data.example to create a configuration for you. If you want to stick with the defaults, run ./create-azure-user-data $(curl -s https://discovery.etcd.io/new) to create a custom date file. You can now run the script:
 
-``
+```
 ./azure-coreos-cluster [cloud service name]
      --subscription [subscription id]
      --azure-cert azure-cert.pem
@@ -101,9 +111,9 @@ The script create-azure-user-data will use defaults in ../coreos/user-data.examp
      --blob-container-url https://[blob container].blob.core.windows.net/vhds/
      --data-disk
      --custom-data azure-user-data
-``
+```
 
-By default, the script will provision a three-node cluster, but you can increase the number of nodes with the num-nodes parameter. Note that for scheduling to work properly, [clusters must consist of at least three nodes and always have an odd number of members](https://github.com/coreos/etcd/blob/master/Documentation/optimal-cluster-size.md).
+By default, the script will provision a three-node cluster, but you can increase the number of nodes with the num-nodes parameter. Note that for scheduling to work properly, clusters must consist of at least three nodes and always have an odd number of members.
 
 Once the script is done, you'll have a running CoreOS cluster with three machines and one Cloud Service (working as a load balancer). To get its public IP, [go back to the Azure Portal](https://manage.windowsazure.com/#Workspaces/CloudServicesExtension/CloudService) and check out your load balancer Cloud Service. We'll also need the public IP of one of its boxes (which you can find under Input Endpoints).  
 
@@ -111,29 +121,29 @@ Once the script is done, you'll have a running CoreOS cluster with three machine
 
 Deis has a command line tool that helps finish the installation of all required parts. Let's install it:
 
-``
+```
 $ mkdir ~/bin
 $ cd ~/bin && curl -sSL http://deis.io/deisctl/install.sh | sh -s
 $ sudo ln -fs $PWD/deisctl /usr/local/bin/deisctl
-``
+```
 
 With deisctl installed, go back to the deis/contrib/azure directory to inform the tool about our created cluster - by adding the domain and SSH private key.
 
 A quick word about domains and DNS: Ideally, you want a domain with a wildcard DNS record (*.domain.com), being the home to all of your apps that are going to run on that cluster. For demo purposes, we'll just go with the Cloud Service's domain here, [but check out the Deis documentation](http://docs.deis.io/en/latest/managing_deis/configure-dns/) if you the cluster is supposed to run in production.
 
-``
+```
 $ export DEISCTL_TUNNEL=104.40.93.17:22001 // One of the Input Endpoints  
  $ ssh-add ./ssh-cert.key  
  $ deisctl config platform set domain=mycluster.cloudapp.net  
  $ deisctl config platform set sshPrivateKey=ssh-cert.key
-``
+```
 
 We're basically done at this point, but we can now run the heavy-lifting stuff - putting Deis in control of the cluster. Give these commands a bit of time.
 
-``
+```
 $ deisctl install platform  
 $ deisctl start platform
-``
+```
 
 Once you see "Deis started", your Deis platform is running on your cluster and you're now ready to go! At this point, you can treat the whole cluster like your own version of DEIS. There's a ton of possibilities from here, so go and [check out the full manual for tutorials on the many things you can do](http://docs.deis.io/en/latest/using_deis/#using-deis).
 

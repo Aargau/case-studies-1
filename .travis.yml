@@ -3,7 +3,7 @@ rvm:
 - 2.1
 
 install: gem install jekyll html-proofer
-script: jekyll build --config _config_ci.yml && htmlproof ./_site --href-ignore "#"
+script: jekyll build --config _config_ci.yml && htmlproof ./_site --href-ignore "#,/https:\/\/www\.youtube\.com\/.*/,/http:\/\/www\.youtube\.com\/.*/"
 
 # branch whitelist
 branches:

@@ -2,18 +2,18 @@
 layout: post
 title:  "Leveraging HDInsight from on-premises Hadoop"
 author: "Beat Schwegler"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/beatsch/"
 #author-image: "{{ site.baseurl }}/images/BeatSchwegler/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure, Hadoop, HDInsight
+categories: Azure Hadoop HDInsight
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+#image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: Leveraging HDInsight from on-premises Hadoop
 ---
 
 In big data solutions, compute is expected to takes place where the data resides, mainly due to the cost of moving very large scale data across clusters. However there exist scenarios where more compute capacity is needed than the on-premises cluster provides. To avoid moving large chunk of data around, the beneficial scenario consists of a comparable small dataset (in big data terms) that requires an indirect proportional amount of compute capacity. This is usually the case when building Monte Carlo models or calculating multiple models based on one dataset.
 
-In this case study you will learn how take advantage of [Microsoft Azure HDInsight](http://azure.microsoft.com/en-us/services/hdinsight/) to run a remote [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.2.1/index.html#MapReduce) job using [Apache Templeton](http://people.apache.org/~thejas/templeton_doc_latest/).
+In this case study you will learn how take advantage of [Microsoft Azure HDInsight](http://azure.microsoft.com/en-us/services/hdinsight/) to run a remote [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.2.1/index.html#MapReduce) job using Apache Templeton.
 
 # Overview of the Solution
 
@@ -21,9 +21,9 @@ The solution realizes a simple data flow that extracts a dataset from an on-prem
 
 For simplicity purposes, we decided to describe and execute the data flow using a bash script. It schedules the on-premises MapReduce jobs for data extraction, runs the PIG statements that anonymize the data, leverages the [Azure Command-Line Interface (CLI)](https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/) for data upload/download and the interaction with HDInsight.
 
-At the heart of the solution is [Apache Templeton](http://people.apache.org/~thejas/templeton_doc_latest/): It provides a REST-like web API which can be used to make HTTP requests to MapReduce, Pig and Hive. Using the HDInsight Templeton endpoint allows us to start, monitor and stop our remote MapReduce jobs.
+At the heart of the solution is Apache Templeton: It provides a REST-like web API which can be used to make HTTP requests to MapReduce, Pig and Hive. Using the HDInsight Templeton endpoint allows us to start, monitor and stop our remote MapReduce jobs.
 
-![]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image001.png)
+![Architecture]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image001.png)
 
 Figure 1: the data flow script runs on-premises and orchestrates all involved tasks
 
@@ -72,8 +72,8 @@ azure storage blob download default "$OUTPUTBASE/output" $OUTPUTBASE/output
 
 The described way to run and monitor an HDInsight job from a Linux or Windows server can be used even without involving an on-premises Hadoop cluster. However for performance reasons, it is crucial that the amount of off-premises compute is highly indirect proportional to the size of the data which is moved between off- and on-premises. The following two formulas help to evaluate whether running jobs off-premises yield to a capacity and/or time gain:  
 
-![]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image002.png)
+![Formula 1]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image002.png)
 
-![]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image003.png)
+![Formula 2]({{site.baseurl}}/images/2015-07-21-Leveraging-HDInsight-from-on-premise-Hadoop_images/image003.png)
 
 In the case of an on-premises Windows to HDInsight scenario, the [Microsoft Azure Data Factory](http://azure.microsoft.com/en-us/documentation/services/data-factory/) should be considered. It provides a reliable platform for building rich data processing pipelines across multiple data stores.

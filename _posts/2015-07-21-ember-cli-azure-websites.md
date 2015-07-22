@@ -2,10 +2,10 @@
 layout: post
 title:  "Building Ember Apps on Azure Websites"
 author: "Felix Rieseberg"
-#author-link: "http://#"
+author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure Websites, Ember
+categories: Azure Azure-Web-Apps Ember
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Building Ember Apps on Azure Websites

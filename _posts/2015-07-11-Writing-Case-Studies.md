@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing Great Case Studies"
 author: "Sara Spalding"
-#author-link: "http://#"
+author-link: "#"
 #author-image: "{{ site.baseurl }}/images/authors/photo.jpg" //should be square dimensions
 date:   2015-07-11 23:34:28
 categories: CaseStudies GitHub process 

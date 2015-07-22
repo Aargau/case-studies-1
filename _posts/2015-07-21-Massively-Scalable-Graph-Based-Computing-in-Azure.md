@@ -2,10 +2,10 @@
 layout: post
 title:  "Massively Scalable Graph-Based Computing in Azure"
 author: "Barry Briggs"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure, Graph-Based Computing
+categories: Azure Graph-Based Computing
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Massively Scalable Graph-Based Computing in Azure 
@@ -33,7 +33,7 @@ This simplicity enables us to recreate the notion of a spreadsheet graph in a ve
 
 The CloudSheet project used actor-model programming to implement “cells” in a cloud-based spreadsheet-like engine. We say “spreadsheet-like” because in CloudSheet the user interface is completely decoupled from the calculation engine, as shown below:
 
-![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image001.png)
+![Architecture]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image001.png)
 
 Figure 1. CloudSheet Architecture
 
@@ -54,7 +54,7 @@ _User Interface_
 
 Of course, the most obvious UI for such a calculation engine is that of a spreadsheet:
 
-![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image002.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image002.jpg)
 
 Figure 2. CloudSheet UI Sample
 
@@ -64,7 +64,7 @@ The application data format of the messages is very simple: it is Excel. Any app
 
 Here is a trivial little XAML/C# application to prove the point:
 
-![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png) 
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png) 
 
 Figure 3. Another UI
 
@@ -98,7 +98,7 @@ Since in the cloud we now have memory and compute resources limited only by the 
 
 One approach is to enhance the entire semantic of a cell. The new formula type _=DATA(file)_ permits users to load a tabular file into a single cell. Here is an example of such a file (an excerpt):
 
-![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image004.jpg)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image004.jpg)
 
 Figure 4. GSOD for Greenland, 1986
 
@@ -137,7 +137,7 @@ CloudSheet currently holds the record (as far as we know) for the largest spread
 
 Here is a screenshot of the “record.” Each cell holds the number of data items in the file loaded by the cell; for example, in cell cc6 the file in that cell has 8052 data points. (Note not every station reports every year, for various reasons – wars, closings, etc.; hence the blank cells.) The red circle holds a simple _=sum()_ formula (typed in manually, after the data was loaded) to add the total number of data items.
 
-![]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image005.png)
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image005.png)
 
 Figure 5\. CloudSheet Holding All the World's Weather
 
@@ -213,48 +213,34 @@ Ultimately, services like CloudSheet and frameworks such as the actor model prov
 
 * * *
 
-<div id="ftn1">
+<a id="_ftn1"></a>
 
-[1](#_ftnref1) NOTE: a patent application has been submitted to the USPTO for technology described in this paper.
+[1](#_ftn1) NOTE: a patent application has been submitted to the USPTO for technology described in this paper.
 
-</div>
+<a id="_ftn2"></a>
 
-<div id="ftn2">
+[2](#_ftn2) A video describing CloudSheet and its architecture can be found here: [https://www.youtube.com/v/IxqkcgKEX8I](https://www.youtube.com/v/IxqkcgKEX8I)
 
-[2](#_ftnref2) A video describing CloudSheet and its architecture can be found here: [https://youtu.be/IxqkcgKEX8I](https://youtu.be/IxqkcgKEX8I)
+<a id="_ftn3"></a>
 
-</div>
+[3](#_ftn3) Wikipedia, [http://en.wikipedia.org/wiki/Actor_model](http://en.wikipedia.org/wiki/Actor_model)
 
-<div id="ftn3">
+<a id="_ftn4"></a>
 
-[3](#_ftnref3) Wikipedia, [http://en.wikipedia.org/wiki/Actor_model](http://en.wikipedia.org/wiki/Actor_model)
+[4](#_ftn4) If multiple actor instances are calling a single method, the framework (Orleans) manages the queuing. This is opaque to the actual actors themselves.
 
-</div>
+<a id="_ftn5"></a>
 
-<div id="ftn4">
+[5](#_ftn5) The cell actor class supports approximate 60 Excel-style formula types (_=sum(), =pow,_ etc) and formulas can be of arbitrary complexity and depth.
 
-[4](#_ftnref4) If multiple actor instances are calling a single method, the framework (Orleans) manages the queuing. This is opaque to the actual actors themselves.
+<a id="_ftn6"></a>
 
-</div>
+[6](#_ftn6) An enhancement will be to add an HTTP endpoint to this function. H/T to scicoria.
 
-<div id="ftn5">
+<a id="_ftn7"></a>
 
-[5](#_ftnref5) The cell actor class supports approximate 60 Excel-style formula types (_=sum(), =pow,_ etc) and formulas can be of arbitrary complexity and depth.
+[7](#_ftn7) Consider the formula _=sum(a1:cc1000000)_, a perfectly legitimate formula in CloudSheet. If the code were to reference each individual cell, it would actually instantiate it, even if only one cell in the entire range actually had a value.
 
-</div>
+<a id="_ftn8"></a>
 
-<div id="ftn6">
-
-[6](#_ftnref6) An enhancement will be to add an HTTP endpoint to this function. H/T to scicoria.
-
-</div>
-
-<div id="ftn7">
-
-[7](#_ftnref7) Consider the formula _=sum(a1:cc1000000)_, a perfectly legitimate formula in CloudSheet. If the code were to reference each individual cell, it would actually instantiate it, even if only one cell in the entire range actually had a value.
-
-</div>
-
-<div id="ftn8">
-
-[8](#_ftnref8) [https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx](https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx)
+[8](#_ftn8) [https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx](https://msdn.microsoft.com/en-us/library/dd460717(v=vs.110).aspx)
