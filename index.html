@@ -11,7 +11,7 @@ layout: default
           <div class="card-image {{ post.color }}">
             <a href="{{ post.url | prepend: site.baseurl }}">
                 {% if post.image %}
-                <img class="card-back" src="{{ post.image | prepend: site.baseurl }}"/>    
+                <img class="card-back" src="{{ post.image}}"/>
                 <span class="card-title">
                     <span class="card-date">{{ post.date | date: "%b %-d, %Y" }}</span>
                     {{ post.title }}
