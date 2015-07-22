@@ -13,5 +13,6 @@ github_username:  catalystcode
 # highlighter: pygments
 # extensions: [tables fenced_code_blocks]
 
+exclude: [vendor]
 kramdown:
    input: GFM
