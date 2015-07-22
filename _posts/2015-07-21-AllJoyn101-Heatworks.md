@@ -25,7 +25,7 @@ AllJoyn, IoT, Devices, MS Ventures
 
 The problem ISI Technology – and all companies developing Internet-of-Things devices -- faced was the challenge of adding network accessibility to their physical device. ISI chose AllJoyn as the protocol the Heatworks Model 1 would implement to enable it to work with a variety of other devices. During the Microsoft Ventures Redmond Accelerator’s Fall 2014 session, ISI started working with Qualcomm to build a hardware interface board to enable IoT integration with their product, using the AllJoyn protocol.   After the hardware interface is built, the Heatworks Model 1 device will still need software to expose it as an AllJoyn Service so that AllJoyn enabled applications can interact with it.
 
-![Figure 1]({{ site.url }}/images/2015-07-21-alljoyn-heatworks_images/image001.jpg)
+![Figure 1]({{ site.url }}/case-studies/images/2015-07-21-alljoyn-heatworks_images/image001.jpg)
 
 # Overview of the Solution
 
