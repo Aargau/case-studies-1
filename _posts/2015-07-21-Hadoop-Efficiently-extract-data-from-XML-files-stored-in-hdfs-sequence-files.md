@@ -15,13 +15,13 @@ A partner we work with collects large quantities of diagnostic data from a wide 
 
 In this paper, you will learn how to implement a MapReduce job to efficiently extract XML data from HDFS sequence files using a custom RecordReader.
 
-#  Overview of the Solution
+## Overview of the Solution
 
 To avoid the performance penalty of loading and parsing the complete XML document, we created a custom record reader that implements a scanner to search the raw byte stream for specific XML nodes to extract. These extracted nodes provide the input data for the map job, which then loads the XML fragment into a DOM and runs XPath expressions against it. This allows for an efficient extraction while still providing the use of XPath (the de facto standard) to select the nodes of interest.
 
 An illustrative example is a data scientist who wants to analyze the performance of a particular control unit (e.g. the thermostat) across the last 4 years. The data scientist would define an extraction rule for all thermostats and run the job against the last 4 years of sequence files. The output of this job contains all the thermostat data including additional metadata such as timestamps, location or device identification.
 
-# Implementation
+## Implementation
 
 The full source code of this solution can be found on GitHub: [https://github.com/cloudbeatsch/HadoopXmlExtractor](https://github.com/cloudbeatsch/HadoopXmlExtractor)
 
@@ -112,7 +112,7 @@ public void reduce(XmlReducerKeyWritable key,
 }
 ```
 
-## Definition of the extraction configuration file
+### Definition of the extraction configuration file
 
 The extraction configuration file configures the scanner, provides the XPath expression and defines the position of the output columns. Below an example configuration which extracts all XML nodes named header:
 

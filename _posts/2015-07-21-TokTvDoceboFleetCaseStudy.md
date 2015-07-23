@@ -15,7 +15,7 @@ Micro-service architecture, the concept of providing a large scale service as a 
 
 In this post, we'll explore how we collaborated with two Italian tech companies for a week to show how Fleet, a distributed init system and CoreOS, an operating system designed for clusters can be deployed on Microsoft Azure as a collection of high-availability 'Dockerized' microservices.
 
-# The Problem
+## The Problem
 
 Docebo.com and TOK.tv are two Italian tech companies whose infrastructure currently runs on Amazon Web Services. Docebo.com is an E-Learning platform and hosts instances of its application for various organizations. TOK.tv is the voice social platform designed to help soccer teams offer their fans a unique engagement experience and powers the Real Madrid and Juventus apps, integrating its Social Button and allowing fans of the clubs to talk with voice, send stadium sounds and take social selfies.
 
@@ -23,7 +23,7 @@ Docebo.com already uses Docker containers for its customer deployments and has c
 
 Tok.tv at the time did not have any containerized services and wanted an orchestration solution that was transparent and flexible enough to run their app services. In particular Tok.tv is primarily composed of a PHP web application API and a real-time voice service.
 
-# Overview of the Solution
+## Overview of the Solution
 
 We worked face to face with the partners to create a prototype solution of deploying Dockerized microservices across a cluster of CoreOS machines using fleet. Fleet is a distributed init system which can deploy arbitrary processes across a cluster of machines. Often it's used to deploy Docker containers. It contains settings to ensure that a service runs on separate nodes within the cluster to ensure high availability. To provision CoreOS we used an Azure CoreOS [resource manager template](https://github.com/Azure/azure-quickstart-templates/tree/master/coreos-with-fleet-multivm) which allows easy creation of a CoreOS cluster with an external load balancer.
 
@@ -58,26 +58,26 @@ Fleet allows us to specifically define announcer or '[sidekick](https://coreos.c
 Here's what the App1 [service](file:///\\Users\steve\Documents\fleet-boostrapper\example-app\example-app@.service) [file](https://github.com/sedouard/fleet-bootstrapper/blob/master/example-app/example-app%40.service) looks like:
 
 ```
-# example-app@.service 
+# example-app@.service
 # the '@' in the file name denotes that this unit file is a model Description=Example High-Availabilty Web App After=router.service  
 
-[Service] 
-EnvironmentFile=/etc/environment 
+[Service]
+EnvironmentFile=/etc/environment
 ExecStartPre=/usr/bin/docker pull localhost:5000/example-app:latest
-ExecStart=/usr/bin/docker run --name example -p 3000:3000 localhost:5000/example-app:latest ExecStop=/usr/bin/docker stop example 
-ExecStopPost=/usr/bin/docker kill example 
+ExecStart=/usr/bin/docker run --name example -p 3000:3000 localhost:5000/example-app:latest ExecStop=/usr/bin/docker stop example
+ExecStopPost=/usr/bin/docker kill example
 ExecStopPost=/usr/bin/docker rm example
 
-[X-Fleet] 
+[X-Fleet]
 Conflicts=example-app@*.service
 ```
 
 This [Unit File](https://coreos.com/docs/launching-containers/launching/fleet-unit-files/) refers to the docker image example-app in our private azure docker registry. To start this unit we simply do:
 
 ```
-# upload the service model to fleet 
-fleetctl submit example-app@.service 
-# start an instance of the service 
+# upload the service model to fleet
+fleetctl submit example-app@.service
+# start an instance of the service
 fleetctl start example-app@1.service
 ```
 
@@ -109,12 +109,12 @@ Furthermore, the Azure load balancer load balances requests amongst our router, 
 
 This prototype solution we built during the hackfest will be the basis of Tok.tv and Docebo’s microservice architecture.
 
-# Code Artifacts
+## Code Artifacts
 
 [How to Deploy High Availability Apps to Azure using CoreOS with Fleet & etcd  – A getting started guide & code sample for Docker Orchestration w/ Fleet](https://github.com/sedouard/fleet-bootstrapper)
 
 [Azure Storage driver for Docker Registry Server](https://github.com/docker/distribution/blob/master/docs/storage-drivers/azure.md)
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 The [Fleet bootstrapper guide](https://github.com/sedouard/fleet-bootstrapper) can be reused for anyone who wants to use portable, private Docker registries along with Fleet to deploy high-availability apps across a CoreOS cluster.

@@ -14,24 +14,24 @@ Our customer develops connected blood glucose meters to provide innovative diabe
 
 This case study describes the approach we took to create a Microsoft Azure Machine Learning (MAML) model which predicts diabetes hypos based on blood glucose measurements only.
 
-# Overview of the Solution
+## Overview of the Solution
 
 Figure 1 shows an overview of our approach:
 
-![Architecture]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image001.png) 
+![Architecture]({{site.baseurl}}/images/2015-07-21-Prediction-of-diabetes-hypoglycemic-events_images/image001.png)
 
 Figure 1: overview of the approach
 
-- We extracted the relevant information from the operational system and stored it as a comma separated values (csv) file. 
-- We used Python to transform the data and create the dataset containing the needed features and labels. 
-- After uploading the dataset to MAML, we started to build experiments and evaluated their results. 
+- We extracted the relevant information from the operational system and stored it as a comma separated values (csv) file.
+- We used Python to transform the data and create the dataset containing the needed features and labels.
+- After uploading the dataset to MAML, we started to build experiments and evaluated their results.
 
 
 Development was comprised of multiple iterations, where each iteration we refined the Python script for feature and label creation, then rebuilt and re-evaluated the MAML model.
 
 Once the model was sufficiently accurate, we published the model as a Web Service, which was then integrated into the real-time data pipeline.
 
-# Implementation
+## Implementation
 
 The first step was to extract the historical measurements and to store them in a csv file. This file contains the following four columns:
 
@@ -53,7 +53,7 @@ starting at 1 for each patient, this is used to split the dataset into a trainin
 - the label: did a hypo occur within the next 24 hours? (a hypo is defined as glucose value < 4.0)
 - the high, low and average glucose values across the last 3 measurements
 - the time between the current and the 3rd last measurement in minutes
-- the high, low and average glucose value for each day for the last 7 days 
+- the high, low and average glucose value for each day for the last 7 days
 - the number of measurements within the last 7 days
 
 A reusable python script for creating such time series datasets has been published to [GitHub](http://github.com):
@@ -101,8 +101,8 @@ To create our required format, we run the script using the following arguments:
 - add one additional column (DiabetesTypeValue) from the input dataset to the output dataset
 
 ````
-python CreateTimeSeriesData.py 
-	input.csv output.csv 4 86400 3 7 86400 --id=ID --value=ValueMmol 
+python CreateTimeSeriesData.py
+	input.csv output.csv 4 86400 3 7 86400 --id=ID --value=ValueMmol
 	-a DiabetesTypeValue
 ````
 
@@ -124,18 +124,18 @@ While 35% isn’t an amazing result yet, it’s a great start to helping people 
 
 Because the model is not tied to a specific patient, its benefit can be made available to existing and new patients, without going through a lengthy learning phase.
 
-# Challenges
+## Challenges
 
 Given the data at hand, it took some cycles to understand the type of questions we are able to answer:
 
-_"What is the chance that a hypo occurs within the next 24 hours_ 
-versus 
+_"What is the chance that a hypo occurs within the next 24 hours_
+versus
 _"what will be the glucose value in 3 hours"_
 
 While creating the time series data, it was crucial not to leak any information about the label into features. For instance, we had one dataset that yielded great results, results which were a bit too good to be true. No surprise, the creation of the dataset had an error and we leaked the hypo information into one of the features.
 
 We required many cycles to land at a dataset which had the right features and yielded the results we wanted. The described Python script made it quite straight forward to experiment with different datasets and algorithms.
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 The described approach of transforming data into time series for machine learning is widely applicable. The published Python script can be used and adapted to translate csv files containing series of events into a dataset that can be effectively used within MAML. Depending on the quality of data and the available time windows, such data can be used for regression and/or for classifications tasks.

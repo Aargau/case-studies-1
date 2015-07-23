@@ -25,7 +25,7 @@ There are three major areas that need to be addressed in order to successfully t
 
 [Project Oxford](https://www.projectoxford.ai/) provides solutions for steps #2 and #3 through the [Vision API](https://www.projectoxford.ai/vision) and Language Understanding Intelligent Service ([LUIS](https://www.projectoxford.ai/luis)), and this case study will show how to wire those components together to provide a solution, as well as outline some options for tackling problem #1 and similar problems.
 
-# Overview of the Solution
+## Overview of the Solution
 
 To develop the initial solution, we started with the clean image above as a “best case scenario” to determine how well Project Oxford’s Vision API and LUIS would work. The Vision OCR API provides a simple RESTful endpoint for submitting images either via URIs or octet-streams in a variety of formats. Submitting an image results in a payload containing regions identified as containing text, with lines and words within – all with appropriate bounding box information. For instance, with the example image we see:
 
@@ -41,7 +41,7 @@ Once the pipeline from OCR to LUIS is in place, we can attempt to tackle the war
 
 I’ve published a blog post [http://www.mikelanzetta.com/2015/05/using-project-oxford-to-pull-entities-from-images/](http://www.mikelanzetta.com/2015/05/using-project-oxford-to-pull-entities-from-images/) with details of this pipeline as applied to meme images. With memes, a different set of image processing problems occur due to the odd nature of text overlaid on existing images, and I provide some guidance on how to tackle those issues as well via image transformations.
 
-# Code Artifacts
+## Code Artifacts
 
 Microsoft TED has published all of the code for the general OCR=>LUIS pipeline in GitHub:
 
@@ -49,6 +49,6 @@ Microsoft TED has published all of the code for the general OCR=>LUIS pipeline i
 
 However, some of the code involved in Lionheart’s particular case for image stitching is theirs, and not in that repository.
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 Any situation where a customer is trying to pull structured information from text within images could benefit from this pipeline. For instance, augmenting a Twitter sentiment analysis flow to cope with meme-based images included in tweets. Additionally, you could wire this through to the Oxford Speech API to allow scenarios like helping blind users by pulling text from images and reading it to them.

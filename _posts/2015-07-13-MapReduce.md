@@ -15,7 +15,7 @@ Business batch applications can make use of modern batch frameworks such as Hado
 
 SQL on Hadoop or Hive does not help to solve this problem, because the SQL statements describing a business application having a lot of exceptions become so complicated that they are just as hard to develop and maintain as custom MapReduce code.
 
-### Overview of the Solution
+## Overview of the Solution
 
 To overcome the problem, the Asakusa Framework was developed.  The Asakusa Framework is a domain specific language (DSL) for business applications, coupled with the enterprise level quality of runtime support. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [_http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html_](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
 
@@ -241,12 +241,12 @@ Internally, flow DSL analyzes a flow definition to generate the FlowGraph (Figur
 
 Figure 2: MapReduce code generation of a retail application - Data operations of the data flow (above) and the result of MapReduce layout analysis (below). Visualized by Graphviz.
 
-### Code Artifacts
+## Code Artifacts
 
 This case study is based on the development of the Asakusa Framework, batch processing runtime on top of Hadoop and its development environments which were developed by Nautilus Technologies, Inc. ([_http://www.nautilus-technologies.com/_](http://www.nautilus-technologies.com/)).
 
 The Asakusa Framework was designed in collaboration with Nautilus. The code for the Asakusa framework can be found on github: [_https://github.com/asakusafw/asakusafw_](https://github.com/asakusafw/asakusafw).
 
-### Opportunities for Reuse
+## Opportunities for Reuse
 
 Since a DAG model supports a generalized form of concurrent applications based on data flow programming, insight drawn from this case study will give many opportunities for reuse. That is, with a layout analysis for a particular constrained programming model like MapReduce, the DAG model as an intermediate language will improve concurrency using the partial order of concurrent processes. Consequently, developers of the Asakusa Framework, Spark or Tez will automatically gain the advantage of the DAG model.

@@ -15,7 +15,7 @@ At Microsoft, we are working with a number of car manufacturers on processing te
 
 As we connect more devices to the internet, the amount of data and context we collect from these devices is increasing geometrically. The conventional solution to processing these large scale sets of information is to process it Map-Reduce style with systems like Apache Hadoop.  However, for some problems, the latency in using a batch system does not enable you to exploit this incoming data in a timely enough manner to be applicable to certain business use cases.
 
-# Overview of the Solution
+## Overview of the Solution
 
 The real time, and incremental, nature of the problem means that we couldn't use Hadoop, so instead we opted to use Apache Storm. Azure's HDInsight provides a very convenient hosted solution of this platform that makes it very easy to deploy and operate.
 
@@ -37,7 +37,7 @@ This cleansed location data is passed into a downstream Bolt that uses it to det
 
 One of the other benefits of using a stream-based approach is that it is incremental.  We process the data as it arrives and don't have to manage creating batch jobs of it.  This is also one of the challenges: you have to scale the size of your HDInsight Storm cluster to match the incoming stream data rate.  Azure Event Hub helps us in this respect: it buffers data spikes so we can size our cluster at just above the average rate expected and not at peak rate.
 
-# Code Artifacts and Opportunities for Reuse
+## Code Artifacts and Opportunities for Reuse
 
 Spouts and Bolts can be written in a combination of C# and Java. The Event Hub spout is a Java jar file while the rest of our topology is in C#. We've open sourced a simple skeleton topology for building your own Storm solution at [http://github.com/timfpark/data-pipeline](http://github.com/timfpark/data-pipeline) that includes a preconfigured Event Hub to Storm spout and instructions on how to configure it.  This provides a solid foundation to start from to build your own set of Spouts and Bolts and a Topology for local development runs and for submitting it to a hosted Storm cluster.
 

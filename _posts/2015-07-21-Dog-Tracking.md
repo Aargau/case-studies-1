@@ -18,7 +18,7 @@ The overall goal of this project is to decode the communications of dogs. This T
 
 Figure 1\. Conceptual Goal of Project
 
-# Overview of the Solution
+## Overview of the Solution
 
 Project “Dolittle” initially leveraged the open source computer vision library OpenCV ([http://www.opencv.org](http://www.opencv.org)). OpenCV supports image detection, object recognition, various machine learning algorithms, classifiers, and video analysis, among other capabilities. Initial work focused on training OpenCV’s Haar cascades to recognize one dog, in this case a Smooth-Haired Collie named “Mici”.
 
@@ -42,7 +42,7 @@ However, the problem of dog tracking (and by extension similar large objects tha
 
 - For our purposes, extreme real-time tracking (that is, at 30 frames per second) is not really required as the goal is to detect the dog’s expressions, which do not change as fast
 - However, background removal is a significant issue that the hand tracking demo did not have to address
-- There is substantial variation in dog shapes (because of breeds): small, large, with large snouts, small, with tails, without tails, colors, and so on. 
+- There is substantial variation in dog shapes (because of breeds): small, large, with large snouts, small, with tails, without tails, colors, and so on.
 
 
 A multi-stage pipeline is used to recognize an object. The process matches predefined depth-aware “poses” (approximately 100,000 of them)[2](#_ftn2) to what the Kinect sees. To do this matching a jungle ML algorithm[3](#_ftn3) is used to detect a set of candidate poses and then a particle swarm optimization algorithm to perform “model fitting.” In model fitting, the observed image is matched against prebuilt poses and the best choice is selected.
@@ -71,13 +71,13 @@ Initially, the goal of this project was modest:  to track one or two specific do
 
 We have been able to track Ilkka’s dog Mici in real time, with some limitations (see the TED Case Study entitled “Background and Floor Removal from Depth Camera Data” for a discussion of one of the thorniest issues). The next step is improve the tracking and then move on to identify features on the dog – ear position, tail wag rate, and so forth – in order to infer the dog’s state of mind. In addition, work is also under way to use machine learning algorithms to decipher dog vocalizations; these topics and others will be discussed in future case studies.
 
-# Code Artifacts
+## Code Artifacts
 
 OpenCV is at [http://www.opencv.org](http://www.opencv.org) .
 
 The Kinect SDK is at [http://www.microsoft.com/en-us/kinectforwindows/](http://www.microsoft.com/en-us/kinectforwindows/)
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 We believe this project has numerous possibilities for reuse. The most significant accomplishment of the project to date is to demonstrate that real time, very high fidelity reconstruction (far more significant than that 3D cameras out of the box) is possible. Further, since the model fitting uses 3D models that can be tagged, feature extraction (e.g., ear position) is made possible, and this capability leads to a number of important scenarios.
 

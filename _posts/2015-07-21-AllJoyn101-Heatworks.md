@@ -5,7 +5,7 @@ author: "Ivan Judson"
 author-link: "http://irjudson.azurewebsites.net/"
 #author-image: "{{ site.baseurl }}/images/ivanjudson/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: AllJoyn 
+categories: AllJoyn
 color: "blue"
 #image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: This document provides an overview of Alljoyn and working with the Heatworks water heater.
@@ -15,7 +15,7 @@ The problem ISI Technology – and all companies developing Internet-of-Things d
 
 ![Figure 1]({{site.baseurl}}/images/2015-07-21-alljoyn-heatworks_images/image001.png)
 
-# Overview of the Solution
+## Overview of the Solution
 
 In order to accelerate ISI Technologies’ ability to network-enable their Heatworks Model 1, we built an example implementation of the AllJoyn interface, including the server side code and client test code.  It is published on github here: https://github.com/irjudson/heatworks-model1\.
 
@@ -23,7 +23,7 @@ This implementation leaves out the calls that would manipulate the hardware dire
 
 Through the process of developing this solution, it became clear that building AllJoyn services using the AllJoyn Thin Client is not difficult, but much of the work could be automated with smarter tooling. Once the device interface is defined, both server and client side code could be automatically generated, reducing the work for device manufacturers to enable their devices with AllJoyn capabilities. Both Microsoft and the AllSeen Alliance have released tools that simplify the creation of the solution. The AllSeen Alliance tool is here: https://wiki.allseenalliance.org/devtools/code_generator, and the Microsoft tool is here: https://msdn.microsoft.com/en-us/library/dn913809.aspx.
 
-# Code Artifacts
+## Code Artifacts
 
 All of the code for this case study lives in a GitHub repository at: [https://github.com/irjudson/heatworks-model1](https://github.com/irjudson/heatworks-model1). The code for this implementation is very small; illustrative snippets have been included it below.
 
@@ -115,16 +115,16 @@ case BASIC_SERVICE_SETPOINT:
                         AJ_AlwaysPrintf(("Setting set point to: %d F.\n", setPoint));
                         /* Make set setpoint call */
                         AJ_MarshalReplyMsg(&msg, &reply);
-                        AJ_InfoPrintf(("Set target water temperature returned %d, session_id=%u\n", status, sessionId));                       
+                        AJ_InfoPrintf(("Set target water temperature returned %d, session_id=%u\n", status, sessionId));
                     } else {
-                        
+
                     }
-                    status = AJ_DeliverMsg(&reply);                
+                    status = AJ_DeliverMsg(&reply);
                 }
                 break;
 
            <…>
-                
+
             case BASIC_SERVICE_SOFT_CURRENT_LIMIT:
                 {
                     uint8_t currentLimit = 10;
@@ -134,10 +134,10 @@ case BASIC_SERVICE_SETPOINT:
                     /* Actually set the soft current limit! */
                     AJ_MarshalReplyMsg(&msg, &reply);
                     AJ_InfoPrintf(("Setting soft current limit: returned %d, session_id=%u\n", status, sessionId));
-                    status = AJ_DeliverMsg(&reply);                
+                    status = AJ_DeliverMsg(&reply);
                 }
                 break;
-                
+
             <…>
 
             default:
@@ -164,9 +164,9 @@ case BASIC_SERVICE_SETPOINT:
 }
 ```
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
-This example implementation can be reused by anyone who wants to add AllJoyn support to their device.  Note that the implementation of the Heatworks Model1 AllJoyn functionality has device-specific code, so developers will need to customize this code to their own devices. 
+This example implementation can be reused by anyone who wants to add AllJoyn support to their device.  Note that the implementation of the Heatworks Model1 AllJoyn functionality has device-specific code, so developers will need to customize this code to their own devices.
 
 Having simple, easy-to-use example implementations that illuminate the required steps to implement AllJoyn for new devices is critical for AllJoyn Adoption. The AllSeen Alliance is embarking on a broad marketing and evangelism effort in 2015, having recently added 50 members – growing the number of members to 150 in the Alliance. Be sure to check the AllSeen Alliance website ([https://allseenalliance.org/](https://allseenalliance.org/)) regularly for new examples and updates.
 

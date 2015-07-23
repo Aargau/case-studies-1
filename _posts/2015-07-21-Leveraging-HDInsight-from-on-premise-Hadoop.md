@@ -15,7 +15,7 @@ In big data solutions, compute is expected to takes place where the data resides
 
 In this case study you will learn how take advantage of [Microsoft Azure HDInsight](http://azure.microsoft.com/en-us/services/hdinsight/) to run a remote [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.2.1/index.html#MapReduce) job using Apache Templeton.
 
-# Overview of the Solution
+## Overview of the Solution
 
 The solution realizes a simple data flow that extracts a dataset from an on-premises Hadoop cluster (in our case a Cloudera cluster running on Linux), runs an on-premises task to anonymize the data (if needed), then creates a [Microsoft Azure HDInsight](http://azure.microsoft.com/en-us/services/hdinsight/) cluster, uploads the anonymized dataset, and runs a set of compute intense translation/modeling jobs in HDInsight. Once the translation/modeling has been completed, the data will be downloaded from the cloud to the on-premises Hadoop cluster where the previously anonymized data will be de-anonymized. (The case study [Data Anonymizing in Hadoop](http://blogs.msdn.com/b/partnercatalystteam/archive/2015/06/04/data-anonymizing-in-hadoop-a-ted-case-study.aspx)  describes our anonymizing approach in detail and comes with a [code repository on GitHub](https://github.com/irjudson/jaglion))
 
@@ -27,14 +27,14 @@ At the heart of the solution is Apache Templeton: It provides a REST-like web AP
 
 Figure 1: the data flow script runs on-premises and orchestrates all involved tasks
 
-# Code Artifacts
+## Code Artifacts
 
 The bash script consists of a sequential flow of Azure CLI and Apache Templeton calls. While most of this is straight forward, starting and monitoring an HDInsight job from an on-premises Hadoop cluster required some trickery (the commands dealing with the HDInsight job are highlighted in bold):
 
 ```
 \# We copy the data and programs to blob store using the Azure CLI tools
-\# These blobs are mapped through the HDInsight cluster via wasb:// so they are available via 
-\# the local cluster file system. 
+\# These blobs are mapped through the HDInsight cluster via wasb:// so they are available via
+\# the local cluster file system.
 azure storage blob upload anonymized default "/user/jaglion/input/"
 azure storage blob upload bin/jaglion.jar default "/user/jaglion/jaglion.jar"
 
@@ -47,7 +47,7 @@ CRED=”user.name=jaglion –u jaglion:<password>”
 
 \# Run the job in HDInsight
 \#  This invocation sends a request to Hadoop via Templeton that requests the cluster to run
-\#  the Jaglion.Job class with the arguments defined with ‘–d arg=’. 
+\#  the Jaglion.Job class with the arguments defined with ‘–d arg=’.
 \#  The other arguments, specifically (jar, callback, statusdir, hdInsightJobName) are information \#  for Hadoop to successfully run the job requested.
 \#
 JOBID=$(curl -d $CRED -d jar=$OUTPUTBASE/jaglion.jar -d hdInsightJobName=$BASEDIR \
@@ -68,7 +68,7 @@ mkdir -p $OUTPUTBASE/translated
 azure storage blob download default "$OUTPUTBASE/output" $OUTPUTBASE/output
 ```
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 The described way to run and monitor an HDInsight job from a Linux or Windows server can be used even without involving an on-premises Hadoop cluster. However for performance reasons, it is crucial that the amount of off-premises compute is highly indirect proportional to the size of the data which is moved between off- and on-premises. The following two formulas help to evaluate whether running jobs off-premises yield to a capacity and/or time gain:  
 
