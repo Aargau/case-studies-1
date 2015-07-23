@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <footer class="site-footer">
     <div class="wrapper">
-        <div class="footer-col-wrapper">
+        {% if include.slim %}
+        <div class="container">
+        {% endif %}
+        <div class="footer-col-wrapper {% if include.slim %}slim{% endif %}">
             <div class="footer-col">
                 <span id="FooterLinks">
                     <span id="Footer_title">{{ site.title }}</span>
@@ -62,5 +65,8 @@
                 </div>
             </div>
         </div>
+        {% if include.slim %}
+        </div>
+        {% endif %}
     </div>
 </footer>
