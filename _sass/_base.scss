@@ -106,7 +106,10 @@ pre, code {
     font-size: 15px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
-    background-color: #eeeeff;
+    padding: 10px;
+    overflow: auto;
+    background-color: #f8f8f8;
+    font-family: Consolas, Monaco, Lucida Console, monospace;
 }
 
 code {
