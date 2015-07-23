@@ -4,7 +4,7 @@
 .site-header {
     border-top: 5px solid $grey-color-dark;
     border-bottom: 1px solid $grey-color-light;
-    min-height: 56px;
+    min-height: 65px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -13,13 +13,21 @@
 .site-title {
     font-size: 0px;
     line-height: 0px;
-    margin: 0 2px 0 16px;
+    margin: 9px 2px 0 16px;
     float: left;
 
     &,
     &:visited {
         color: $grey-color-dark;
     }
+}
+
+.site-title.slim {
+    margin: 9px 2px 0 0;
+}
+
+.site-title.slim::before {
+    margin: 0;
 }
 
 .site-title::before {
@@ -153,6 +161,16 @@
     color: $grey-color;
     margin-left: $spacing-unit / 2;
     @extend %clearfix;
+}
+
+.footer-col-wrapper.slim {
+    margin-left: 0;
+    padding-left: 0;
+
+    .footer-col {
+        margin-left: 0;
+        padding-left: 0;
+    }
 }
 
 .footer-col {

@@ -1,7 +1,13 @@
 <header class="site-header">
     <div class="wrapper">
-        <a class="site-title" href="{{ site.baseurl }}/" title="">{{ site.title }}</a>
-
+        {% if include.slim %}
+            <div class="container">
+                <a class="site-title slim" href="{{ site.baseurl }}/" title="">{{ site.title }}</a>
+            </div>
+        {% else %}
+            <a class="site-title" href="{{ site.baseurl }}/" title="">{{ site.title }}</a>
+        {% endif %}
+        <!-- In the freezer until we have pages
         <nav class="site-nav">
             <a href="#" class="menu-icon">
                 <svg viewBox="0 0 18 15">
@@ -15,8 +21,6 @@
                 {% for page in site.pages %} {% if page.title %}
                 <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> {% endif %} {% endfor %}
             </div>
-        </nav>
-
+        </nav> -->
     </div>
-
 </header>
