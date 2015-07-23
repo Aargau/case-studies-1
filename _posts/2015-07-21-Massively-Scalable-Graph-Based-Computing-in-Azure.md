@@ -50,7 +50,7 @@ ValType v = await thecell.CellGrainCreateNewCellV(text, addr);
 
 The `GetGrain()` call creates a local reference to the soon-to-be-instantiated cell. `GetGrain()` can take a long, a string, or a GUID as its parameter; here we have converted the cell address into a long. The second call, which actually instantiates the cell in the cloud, passes the text to placed and evaluated in the cell (a number, text or formula) and the cell’s address as a structure. (A `Valtype` is a structure holding the cell’s input, formula, type, and other data useful in for a user interface.)
 
-_User Interface_
+### User Interface
 
 Of course, the most obvious UI for such a calculation engine is that of a spreadsheet:
 
@@ -90,7 +90,7 @@ When a given cell is recalculated, in turn, it iterates through the list of pred
 
 The argument passed to the `Recalc()` method is a list of cells recalculated so far as part of this chain. If a given cell _finds itself_ in the chain, then a circular reference error is declared and recalculation of this chain is terminated.
 
-_Taking Advantage of Cloud Scale_
+### Taking Advantage of Cloud Scale
 
 It is not enough that CloudSheet simply replicates Excel semantics and syntax in the cloud. What else can we do to take advantage of the scale available in Azure?
 
@@ -112,7 +112,7 @@ _=DATA_ cells evolve the notion of a spreadsheet to that of what was once called
 
 Given that CloudSheet lives in the cloud, and thus, on the web, other things are easy to implement. CloudSheet is Web-native. For example, an _=STOCK(symbol)_ retrieves real-time values of a particular equity. _=LOCATION(cell1, cell2)_ uses the values of two cells as latitude and longitude and, using Bing Maps API’s, returns the city and state/country in text.
 
-_Events_
+### Events
 
 It is trivially easy to enable cells to accept events from other sources (say, IoT devices or a streaming stock feed, for an active trader trade station analytical tool):
 
@@ -127,7 +127,7 @@ public async Task<bool> UpdateValue(int val)
 
  Since cells are .NET objects, incidentally, it is also quite easy to create a new cell type (say, a “sensor” cell to receive events).
 
-_Why This Matters_
+### Why This Matters
 
 Unlike traditional big data solutions, CloudSheet implements a live, in-memory calculation engine in which new data or formulas can be added at any time, or interactively, in a manner that is very approachable by ordinary mortals. Thus, when a massive amount of data is loaded, users can easily manipulate directly – as they do today with Excel – but potentially using the scale of the cloud.
 
@@ -159,7 +159,7 @@ In CloudSheet, therefore, there is a CellDirectory actor which holds a list of e
 
 And then if so, retrieving the value.
 
-_To Parallelize or Not?_
+### To Parallelize or Not?
 
 It is tempting with a massively distributed system to make extensive use of the Task Parallel Library (TPL)[8](#_ftn8) and in particular use scatter/gather approaches in certain cases. For example, when refreshing the screen, one can conceive of a number of parallel “get” operations (to retrieve the values from cell instances), concluding with a `.WhenAll` when all the values are in; something conceptually like this:
 
@@ -174,7 +174,7 @@ await tall;
 
 It turns out that on each server actors run as DLLs in a single-threaded address space and so the degree of parallelism isn’t as significant as might appear. When retrieving a lot of data (hundreds of cell values for example) this approach is surprisingly slow – and is far better implemented as a cache.
 
-_Reentrancy_
+### Reentrancy
 
 For speed, it is possible to make actors “reentrant” by adding the [Reentrant] directive. For example, here is the class declaration for the cell actor:
 
