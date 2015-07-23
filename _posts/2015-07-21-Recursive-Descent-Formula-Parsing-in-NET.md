@@ -8,12 +8,12 @@ date:   2015-07-21 23:34:28
 categories: .NET, Cloudsheet
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
-excerpt: Recursive Descent Formula Parsing in C# in .NET. 
+excerpt: Recursive Descent Formula Parsing in C# in .NET.
 ---
 
 Intrinsic to any script-based application is the notion of parsing. In CloudSheet, described in detail in the forthcoming TED Case Study entitled “Massively Scalable Graph-Based Computation in Azure,” a formula parser tokenizes arbitrarily complex Excel-like formulas making subsequent evaluation faster and more efficient. This paper will cover the parsing component.[1](#_ftn1)
 
-# Overview of the Solution
+## Overview of the Solution
 
 The objective of the parser is to tokenize arbitrarily complex formulas of differing types to enable rapid and accurate evaluation. Example formulas include:
 
@@ -32,7 +32,7 @@ And so on. As can be seen, formulas can return either numeric or string-based re
 
 Handed to the parser, which is contained within the “Cell” grain (actor) in CloudSheet, is a text string passed from the client (either typed in by a user or loaded from a file). After tokenizing, the result is passed to the evaluator which calculates a response. As the model is recalculated, the evaluator is called to update its result based on potentially new data. The parser is only invoked when the input formula is changed; the evaluator is called on every recalculation where necessary (i.e., in which a predecessor value is updated).
 
-# Implementation
+## Implementation
 
 The implementation chosen is a recursive-descent parser.[2](#_ftn2) The parsing method is invoked with two arguments:
 
@@ -64,7 +64,7 @@ public enum TokenTypes
     UNARY = 7,
     PRECEDENCE = 8,
     DATE=9,
-    ARGSEP=10, 
+    ARGSEP=10,
     LPAREN=11,
     RPAREN=12,
     FUNC = 13,
@@ -78,11 +78,11 @@ public enum TokenTypes
 
 Note that a Formentry can describe either arguments or operators. Some descriptions follow:
 
-- CELLREF indicates that the token refers to another cell. Cells referred to in this way are predecessors to the current cell; the current cell is thus a successor to the referred-to cell. As predecessors change, the recalculation method in this cell is invoked to get the most recent value of the referred-to cell(s). 
-- ARGSEP indicates a separator between arguments in a formula – the comma in =sum(3,4) for example. 
-- LPAREN and RPAREN indicate parentheses and thus subexpressions (and thus recursion as will be described below) 
-- NUMBERs are always maintained internally in double-precision format even if they are input as integers in order to have a common cast-less format for operations. The client is responsible for presentation formatting. 
-- A FUNCTION is a numeric function returning a double-precision value; a STRINGFUNCTION returns a string. 
+- CELLREF indicates that the token refers to another cell. Cells referred to in this way are predecessors to the current cell; the current cell is thus a successor to the referred-to cell. As predecessors change, the recalculation method in this cell is invoked to get the most recent value of the referred-to cell(s).
+- ARGSEP indicates a separator between arguments in a formula – the comma in =sum(3,4) for example.
+- LPAREN and RPAREN indicate parentheses and thus subexpressions (and thus recursion as will be described below)
+- NUMBERs are always maintained internally in double-precision format even if they are input as integers in order to have a common cast-less format for operations. The client is responsible for presentation formatting.
+- A FUNCTION is a numeric function returning a double-precision value; a STRINGFUNCTION returns a string.
 
 The GetToken() method is the lexer. It converts a text element into a token, represented by a Formentry. Here is an excerpt:
 
@@ -105,7 +105,7 @@ if ((comp = ScanForComparison()) != -1)
 }
 ```
 
-The lexer calls various worker subroutines (here: unary and comparisons) sequentially to determine the type of token and returns it to the main parsing routine. This makes it trivial to add new types of lexemes, or tokens. (The _index global variable points to the current location in the input string. The lexer is responsible for ensuring that it always points to the next character after the detected lexeme.) 
+The lexer calls various worker subroutines (here: unary and comparisons) sequentially to determine the type of token and returns it to the main parsing routine. This makes it trivial to add new types of lexemes, or tokens. (The _index global variable points to the current location in the input string. The lexer is responsible for ensuring that it always points to the next character after the detected lexeme.)
 
 A parenthesis indicates a subexpression, and thus recursion. When this circumstance is detected, new instances of the number stack and operator are created and the parser invokes itself.  For example, when a function is detected, a new level of precedence (recursion) is created:
 
@@ -118,17 +118,17 @@ if (tok.tokentype == TokenTypes.FUNCTION)
     f.func = (int)tok.value;
     Parse(f.newnumstack, f.newopstack);
     this.expectingvalue = false;
-    continue; 
+    continue;
 }
 ```
 
 Note the `push()` function which:
 
 - Creates a special PRECEDENCE Formentry
-- Creates new instances of the number stack and operator stack 
+- Creates new instances of the number stack and operator stack
 - Increases the stack depth
 - Creates a STARTPARSE Formentry on the new stack
-- Creates and returns the first token Formentry on the new stack 
+- Creates and returns the first token Formentry on the new stack
 
 
 A corresponding `pop()` function also exists.
@@ -145,7 +145,7 @@ A more complex example is depicted below:
 
 Here, multiple levels of recursion are shown. Each instance of a PRECEDENCE formentry indicates a subexpression. At evaluation time, a depth-first traversal of the tree occurs such that as evaluation progresses, the deepest subexpression is evaluated (here: A1/12), then the next-deepest, and so on. The parser supports an arbitrary level of depth and complexity.
 
-# Challenges
+## Challenges
 
 Of course, what is difficult in any general purpose parser with a relatively open syntax is accounting for every possible case. A formula like `=pmt((a1/12),(a2*30),a3)` is quite easy to parse as the precedence is made explicit by the existence of parentheses, while an equally valid version (far more popular with users because of its intuitiveness) exists:  `=pmt(a1/12, a2*30, a3)`. Here the ARGSEP (comma) signals that backtracing must be used to reparse the now-delimited expression.
 

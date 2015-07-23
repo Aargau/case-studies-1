@@ -18,7 +18,7 @@ Required were four things: 1) We needed to agree on a recommended path for insta
 
 ![Deis on Azure]({{site.baseurl}}/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/image001.png)
 
-# Overview of the Solution
+## Overview of the Solution
 
 A hackfest with Deis engineers and Microsoft DX engineers was organized to solve underlying issues, automate deployment, and agree on a path forward. First, we built upon prior work done with Tutum around [automated provisioning of CoreOS clusters on Azure](https://github.com/chanezon/azure-linux/tree/master/coreos/cluster) – adding features, optimizing performance and removing bugs.
 
@@ -52,7 +52,7 @@ desctl start platform
 
 Starts Deis – the cluster is now running!
 
-# Implementation
+## Implementation
 
 Deis requires a CoreOS cluster as host; the first step is therefore provisioning a CoreOS cluster in Azure. The created script with the name azure-coreos-cluster is a mere 307 lines long.  It interacts with the Azure SDK for Python to create such a cluster in an automated fashion, doing what used to be hours of work in a few minutes. While it comes with a set of useful defaults, it also accepts a number of parameters enabling full customization:
 
@@ -82,21 +82,21 @@ Deis requires a CoreOS cluster as host; the first step is therefore provisioning
 
 Clearly, the created script allows for a number of customizations. At the same time, the full flow is simple.
 
-## Creating a Deis Cluster in Minutes
+### Creating a Deis Cluster in Minutes
 
 Note: the following steps assume the user is running Unix.
 
 First, install the requirements (the Deis repo, Python 2.7 with pip and the Azure SDK for Python).
 
 ```
-$ git clone https://github.com/deis/deis.git && cd ./deis/contrib/azure 
+$ git clone https://github.com/deis/deis.git && cd ./deis/contrib/azure
 $ brew install python
 $ sudo pip install azure
 ```
 
 The script will automate most of the cluster setup, but we do need to authorize it with a certificate. Enter the folder contrib/azure and run ./generate-mgmt-cert.sh - the command will use details in cert.conf to create a management certificate, so feel free to change it to your liking. To let Azure know that this is your certificate, [log in to the Azure portal's certificate management](https://manage.windowsazure.com/#Workspaces/AdminTasks/ListManagementCertificates). Select upload and select the just created azure-cert.cer file. While in the portal, also save the ids of the subscription and the name of the blob storage container you'd like to create the cluster in. If you don't have one yet, create one.
 
-### Cluster Creation
+#### Cluster Creation
 
 The script create-azure-user-data will use defaults in ../coreos/user-data.example to create a configuration for you. If you want to stick with the defaults, run ./create-azure-user-data $(curl -s https://discovery.etcd.io/new) to create a custom date file. You can now run the script:
 
@@ -117,7 +117,7 @@ By default, the script will provision a three-node cluster, but you can increase
 
 Once the script is done, you'll have a running CoreOS cluster with three machines and one Cloud Service (working as a load balancer). To get its public IP, [go back to the Azure Portal](https://manage.windowsazure.com/#Workspaces/CloudServicesExtension/CloudService) and check out your load balancer Cloud Service. We'll also need the public IP of one of its boxes (which you can find under Input Endpoints).  
 
-### Cluster Configuration
+#### Cluster Configuration
 
 Deis has a command line tool that helps finish the installation of all required parts. Let's install it:
 
@@ -149,13 +149,13 @@ Once you see "Deis started", your Deis platform is running on your cluster and y
 
 If you're interested in a practical deployment example, check out the case study on DemocracyOS - which was deployed on a Deis cluster running on Azure.
 
-# Challenges
+## Challenges
 
 The number of challenges was high – Deis was not entirely prepared for Azure, while Azure itself had some trouble running CoreOS. The main issue involved machines within a CoreOS cluster running into clock synchronization issues due to a non-running NTP process, meaning that the clocks keeping time on individual nodes inside a cluster would slowly drift apart over the course of weeks. Time is an important feature in the orchestration of a cluster, asynchronous nodes would therefore not be able to work together – leaving the cluster with lost quorum. Once quorum was lost, the whole cluster was lost. The issue was extremely difficult to debug, but with the help of Azure, CoreOS and Deis, many components involved are now hardened against clock desynchronization.
 
 Other issues involved the virtual network name, support for Azure Affinity Groups, the load balancer timeout limits, and slow I/O. On CoreOS, issues with sshd, the kernel (earlyprintk), and the console as well as the WAAgent(Azure now uses ttyS0) had to be solved.
 
-# **Opportunities for Reuse**
+## Opportunities for Reuse
 
 The open source Linux cluster provisioning tool created for Deis has been reused in several customer engagements – it provides a huge amount of convenience to anybody wishing to run their own Deis cluster. In addition, the CoreOS provisioning tool is a useful path for the creation of Linux clusters in Azure until the Azure Resource Management API goes out of private beta.
 

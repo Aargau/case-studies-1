@@ -51,7 +51,7 @@
     .menu-icon {
         display: none;
     }
-    
+
     .trigger {
         display: inline-block;
         vertical-align: bottom;
@@ -120,8 +120,20 @@
  * Site footer
  */
 .site-footer {
+    margin-top: 20px;
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
+    background-color: rgb(47, 47, 47);
+    color: #fff;
+
+    a {
+        color: rgb(169, 169, 169);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
 }
 
 .footer-heading {
@@ -163,6 +175,33 @@
 .footer-col-3 {
     width: -webkit-calc(45% - (#{$spacing-unit} / 2));
     width:         calc(45% - (#{$spacing-unit} / 2));
+}
+
+.FooterLogoMsSvg {
+    margin-left: 1px;
+}
+
+#FooterLinks {
+    display: block;
+    margin-bottom: 10px;
+
+    span {
+        margin-right: 20px;
+    }
+
+    span:last-child {
+        margin-right: 0;
+    }
+
+    #Footer_title {
+        color: #fff;
+    }
+}
+
+#FooterCopyright {
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 @include media-query($on-laptop) {
@@ -220,11 +259,6 @@
 /**
  * Posts
  */
- 
-.post {
-    margin: 0 $spacing-unit;      
-} 
-
 .post-header {
     margin-bottom: $spacing-unit;
     margin-top: $spacing-unit * 2;
@@ -234,7 +268,7 @@
     font-size: 42px;
     letter-spacing: -1px;
     line-height: 1;
-    
+
 
     @include media-query($on-laptop) {
         font-size: 36px;
@@ -272,7 +306,7 @@
 /**
  * Home
  */
- 
+
  #container {
 	margin:8px 0px 0px 16px;
 }
@@ -301,11 +335,11 @@
 	border-radius: 0 !important;
 }
 
-.card-image {   
+.card-image {
     a:hover{
       text-decoration: none !important;
     }
-    
+
     img {
 	   max-height: 350px;
     }
@@ -327,11 +361,11 @@
         margin: 0;
         color: $brand-color;
         text-decoration: none;
-        
+
         &:visited {
             color: darken($brand-color, 15%);
         }
-    
+
         &:hover {
             color: $text-color;
             text-decoration: underline;
@@ -365,15 +399,15 @@
 	color: #fff;
 	background-color: #000;
     padding-top: 40px;
-    
+
     a {
         text-decoration: underline;
         color: #fff;
-        
+
         &:hover {
             color: #fff;
         }
-        
+
         &:visited {
             color: #fff;
         }

@@ -17,13 +17,13 @@ An important part of Ember is the powerful tool chain: A command line interface 
 
 This case study describes how to deploy Ember Cli apps automatically to Azure Web Apps – and how we built the small automation tool, [ember-cli-azure-deploy](https://github.com/felixrieseberg/ember-cli-azure-deploy). A smaller tutorial [was also made available on the Ember Cli homepage](http://www.ember-cli.com/user-guide/#azure).
 
-# Don’t Commit your Compilation
+## Don’t Commit your Compilation
 
 It is a golden rule that one does not commit the compiled output of source code into a code repository. The rational is more than just code sanity – committing compiled output dramatically increases the size of a repository, makes the commit history confusing, and requires developer-driven compilation before every commit.
 
 In a perfect world, one would simply commit all the source code and instruct Azure Web Apps to automatically compile and deploy the output. While not impossible, this task does require some deeper understanding of the deployment mechanics in Azure Websites – a task that can be automated.
 
-# Implementation: Just Run This Command
+## Implementation: Just Run This Command
 
 The engine behind Azure Websites, Kudu, is capable of running customized deployment commands. The flow is roughly this: When a new commit is made to the code repository (for instance on GitHub), Azure is notified by the repository via git hook and pulls the latest code. Once copied to the Web App’s machine, a custom set of instructions can be run – when done, the output is copied to the wwwroot folder of the website.
 
@@ -31,7 +31,7 @@ To successfully compile and run an Ember Web App, we simply need to customize th
 
 You may have noticed that this requires action in both the code repository as well as on Azure Web Apps – we have written a small tool named [ember-cli-azure-deploy](https://github.com/felixrieseberg/ember-cli-azure-deploy) that automates that task both on the developer’s machine as well as on Azure Web App’s servers.
 
-## Orchestrating the Deployment
+### Orchestrating the Deployment
 
 Let’s take a look at some code, starting with the customized deployment. The deployment is driven by two files: A .deployment file telling Kudu which command to execute and a deploy.sh bash script that contains the actual set of instructions.
 
@@ -82,7 +82,7 @@ EMBER_CMD="\"$NODE_EXE\" \"$EMBER_PATH\""
 Once that is done, we can move on to install the requirements for Ember Cli. To avoid issues with outdated and native packages, we install certain Socket.io-related packages directly from GitHub, where various issues are already fixed (as opposed to npm, which only has older versions available). We also instruct npm to avoid bin links and optional dependencies: Instead of optimizing for fast build speeds and performance, we want to make the build and installation process as failsafe as possible.
 
 ```
-\# Installing dependencies to take load of ember-cli install 
+\# Installing dependencies to take load of ember-cli install
 \# -----  
 
 eval $NPM_CMD install --no-optional --no-bin-links Automattic/engine.io-client  
@@ -148,7 +148,7 @@ cp = exec('node ' + execPath + '\\ember build -prod', {
  }.bind(this));
 ```
 
-# Running the Code: Deploying an App to Azure Web Apps
+## Running the Code: Deploying an App to Azure Web Apps
 
 Start by ensuring that you have Node.js, npm, Bower, and ember-cli installed on your machine. If you’re only missing the node modules, you can simply install them with the following commands:
 

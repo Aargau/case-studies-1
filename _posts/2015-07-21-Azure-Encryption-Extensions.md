@@ -28,7 +28,7 @@ Two core types of encryption are supported.  Symmetric and Asymmetric.  Here we 
 
 The **asymmetric mode** provides encryption when you prefer to use a Public-Private Key pair, such as an X509 certificate. This provider allows you to encrypt data with the public key, and decrypt data with the private key. It is useful in scenarios where you want to let systems encrypt data but not give them access to decrypt it. **You can share the public (encryption) key broadly while maintaining the security of your data by protecting the private (decryption) key.**
 
-Asymmetric encryption is valued for the flexibility in managing encryption and decryption keys separately, however it can be very slow for larger datasets. 
+Asymmetric encryption is valued for the flexibility in managing encryption and decryption keys separately, however it can be very slow for larger datasets.
 
 Azure Encryption Extensions solves this by implementing an industry standard pattern of first encrypting your data with a random symmetric key (very fast) and only using asymmetric encryption to protect the random key.  This random key is then encrypted asymmetrically using your key-pair. The encrypted random key is prepended to the encrypted stream so that it can be recovered as part of the decryption process. This whole process happens on-the-fly during reads and writes with no buffering or disk access required.
 
@@ -36,7 +36,7 @@ The **symmetric mode** is designed for scenarios where you prefer to use the sam
 
 ## Storing your keys
 
-Azure Encryption Extensions is intentionally non-opinionated about key storage and permits a wide variety of options for key generation and use. 
+Azure Encryption Extensions is intentionally non-opinionated about key storage and permits a wide variety of options for key generation and use.
 
 For all encryption types default constructors will generate cryptographically random and secure keys, which you can then export easily as a JSON string, or write to a file, and store as appropriate.
 
@@ -54,7 +54,7 @@ CloudBlockBlob blob = container.GetBlockBlobReference("TestBlob");
 // Create an Asymmetric provider from an X509Certificate2
 var provider = new AsymmetricBlobCryptoProvider(certificate);
 
-// Encrypt and upload the file to Azure, passing in our provider            
+// Encrypt and upload the file to Azure, passing in our provider
 blob.UploadFromFileEncrypted(provider, path, FileMode.Open);
 
 // Download and decrypt the file
@@ -63,7 +63,7 @@ blob.DownloadToFileEncrypted(provider, destinationPath, FileMode.Create);
 
 Note that the Upload and Download methods have signatures which are very similar to those from the underlying Azure Storage SDK.  Simply append the word “Encrypted” to the end of the methods to leverage the encrypted version and include one additional parameter to reference the encryption provider.  Defaults for all optional parameters will match the original methods.
 
-# Code Artifacts
+## Code Artifacts
 
 Azure Encryption Extensions is available as a library released under a MIT license.  It is fully open source on GitHub and compatible with .Net 3.5 or later.
 

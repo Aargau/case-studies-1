@@ -15,11 +15,11 @@ When developers embark on a new web application project, they often seek technic
 
 Another problem developers often face is the lack or delay of a stable test environment after development is complete. This leaves the sustainability of an app at a vulnerable state; code often needs to be refactored to be testable in a production-ready environment.
 
-# The Audience
+## The Audience
 
 Developers on small to large sized web development teams
 
-# The Solution
+## The Solution
 
 The goal of this project was to provide developers with a framework to simplify the process of creating a modern web platform that includes the most common core requirements (listed below).  After extensive research, prototyping and performance benchmarking, the following technologies were selected for each of the core requirements:  
 
@@ -39,15 +39,15 @@ The goal of this project was to provide developers with a framework to simplify 
 
 An additional goal was to create a framework that is agnostic to any particular front-end strategy(s), and make it easy for developers to customize and plug in their open source platform(s) of choice.
 
-# Tags
+## Tags
 
 SailsJS, Mocha, Node, NPM, ReactJS, Istanbul, Protractor, ESLint, Browserify, Express, Grunt
 
-# Github Code Repo
+## Github Code Repo
 
 [https://github.com/erikschlegel/sails-generate-reactjs](https://github.com/erikschlegel/sails-generate-reactjs)
 
-# Overview of the solution
+## Overview of the solution
 
 Sails has a concept called generators that allow developers to extend and create a templated solution to fit their needs. This project’s custom generator uses ReactJS as the toolset to create front-end components, and plugged in other battle-tested open source products to cover testing, web asset management and continuous integration.
 
@@ -57,15 +57,15 @@ This repo supports test driven development practices, which encourages simple de
 
 Because the framework uses Travis CI for build management, all unit tests are executed for each GIT commit and the team can be notified of any failed builds via Slack or email. We will also took a look at Deis as an exploration exercise to identify opportunities to take continuous integration one step further.
 
-Potential future extensions using Microsoft Kudu to synchronize an Azure web site with a successful Travis CI build. 
+Potential future extensions using Microsoft Kudu to synchronize an Azure web site with a successful Travis CI build.
 
 The steps to use this framework on your local environment are listed below.
 
-# Installation
+## Installation
 
 - Update your .sailsrc file
-- Create a file named .sailsrc 
-``
+- Create a file named .sailsrc
+```
 {
     "generators" : {
         "modules" : {
@@ -73,7 +73,7 @@ The steps to use this framework on your local environment are listed below.
         }
     }
 }
-``
+```
 
 **Note**: for Linux or Ubuntu environments, you'll need to run all the commands below as sudo (_i.e. sudo npm install vs npm install_).
 
@@ -81,26 +81,26 @@ The steps to use this framework on your local environment are listed below.
 
 2. Install the project from the published NPM module.
 
-``
+```
 $ (Windows) npm install -g sails
 $ (Windows) npm install -g sails-generate-reactjs
 $ (Linux) sudo npm install -g sails
 $ (Linux) sudo npm install -g sails-generate-reactjs
-``
+```
 
 3.This command will create your Sails Site
 
-``
+```
 $ (Windows) sails new <%-newAppName> --force
 $ (Linux) sudo sails new <%-newAppName> --force
-``
+```
 4. This command will install all packages and dependencies.
 
-``
+```
 $ cd <%-newAppName>
 $ (Windows) npm install
 $ (Linux) sudo npm install
-``
+```
 
 5. Fire up your web server
 
@@ -112,7 +112,7 @@ You should see this message coming back from Sails to confirm that you’re site
 
 You can access your new site by accessing the site at `http://localhost:1337`.
 
-# Implementation
+## Implementation
 
 Sails is delivered with a baseline site generator, and a standard set of GRUNT tasks for building and packaging the assets of your web site. This framework is an extension of that baseline, and provides a bower template and NPM package template file that can be overridden by the developer.
 
@@ -120,7 +120,7 @@ Asset Packages
 
 Bower template file – **templates/bower.ejs**
 
-``
+```
 {
   "name": "<%= appName %>",
   "version": "0.0.0",
@@ -137,7 +137,7 @@ Bower template file – **templates/bower.ejs**
     "sails.io.js" : "*"
   }
 }
-``
+```
 
 The default provided bower file includes dependencies for fontawesome and bootstrap, which will be installed when you run Sails new.
 
@@ -145,7 +145,7 @@ Node Package Dependencies
 
 Node Package.json template – **templates/package.json**
 
-``
+```
    "dependencies": {
     "sails": "~0.11.0",
     "sails-disk": "~0.10.0",
@@ -177,7 +177,7 @@ Node Package.json template – **templates/package.json**
     "debug": "node debug app.js",
     "test": "mocha -b"
   },
-``
+```
 
 These are the default node packages installed with your app, and can be overridden by the developer. The baseline comes included with grunt modules necessary for build management tasks, testing(_mocha_) and code quality checks_(ESLint_).
 
@@ -185,7 +185,7 @@ Continuous Integration
 
 Travis configuration template - **.travis.yml**
 
-``
+```
 language: node_js
 node_js:
   - "0.12"
@@ -207,11 +207,11 @@ script:
  - "sails lift"
 
 branches:
-  only:	
+  only:
     - master
 matrix:
   fast_finish: true
-``
+```
 
 - To enable continuous integration with Travis, your app will need two things, one a .travis.yml file and enabling your account on the [Travis portal](https://travis-ci.org/) (_this part cannot be automated_).  You’ll find a .travis.yml file in your working directory that a developer controls. By default, Travis will invoke npm test (_listed above_) on every code commit, build your app on their VM, and a development team is notified of the results based. Travis also supports .NET builds as well.
 
@@ -221,7 +221,7 @@ The site will come bundled with a starter default [bootstrap template](http://ge
 
 **App.js** (_this is only an example to illustrate a sample react component_)
 
-``
+```
 var React = require('react');
 var LikeButton = React.createClass({
   getInitialState: function() {
@@ -239,12 +239,12 @@ var LikeButton = React.createClass({
 );
   }
 });
- 
+
 React.render(
   <LikeButton />,
   document.getElementById('example')
 );
-``
+```
 
 If a developer chooses to use ReactJS as its component framework, Browserify is setup to pull in React components referenced at ‘working directory/assets/app/app.js’ . A sample app.js file with a component defined is shown above. The browserify location can be configured within ‘working directory/tasks/pipeline.js’
 
@@ -254,7 +254,7 @@ All unit tests are re-invoked when any of your source files change, and the resu
 
 **/test/components/LikeButton.js**
 
-``
+```
 var assert = require("assert");
 var React = require('react/addons');
 var LikeButtonComponent = require('./components/LikeButton');
@@ -280,16 +280,16 @@ describe('TestSet1', function(){
     })
   })
 })
-``
+```
 
-# Challenges
+## Challenges
 
 Sails is such a powerful framework that scaffolds a fully functional enterprise Node app that’s easily configurable. The main challenge I faced when working with Sails was the limited documentation. This forced me to crawl through the source code to answer questions and address issues I encountered. There were also only a couple examples where other engineers built custom Sails Generators. I tried to simplify some of the SailsJS issues that I ran into by abstraction and customizable hooks into Sails that can be leveraged in the sails-generate-reactjs project.
 
-# Technologies used in this project
+## Technologies used in this project
 
 SailsJS, Socket.io, Express, Bower, NodeJS, NPM, Browserify, Handlerbars, ESLint, Babel, Kudu, Azure, Travis CI, Mocha, Protractor, Istanbul, ReactJS, Bootstrap
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 This project provides developers with a starting point to scaffold a Node JS Web application, and plugin additional packages and customize the base install so the development environment fit’s the needs of their project.

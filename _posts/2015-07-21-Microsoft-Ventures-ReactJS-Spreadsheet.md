@@ -13,19 +13,11 @@ excerpt: During the Microsoft Ventures hackathon in May 2015 it became obvious t
 
 During the Microsoft Ventures hackathon in May 2015 it became obvious that one of the startups (CreativeWorx) [required a standalone Excel-like spreadsheet component for the web](https://github.com/felixrieseberg/React-Spreadsheet-Component). This post describes the resulting React component, how it was built, and how it can be used today.
 
-Felix Rieseberg, May 14, 2015, Version 1
-
-# Tags
-
-ReactJS, React, Web Components, JSX, Spreadsheet, Excel, Microsoft Ventures, MV
-
-# Customer Problem
-
 CreativeWorx is the company behind the CreativeWorx time tracker, which enables users to document time spent on a project in a calendar view. While this feature is the unique value proposition for the app, many users have requested an Excel-like input method to augment the information captured by the CreativeWorx calendar. Building such an input is surprisingly difficult: Users have grown fond of Excel’s keyboard navigation, allowing them to quickly switch cells and edit their inputs without mouse clicks.  They wanted the same experience in CreativeWorx time tracker.
 
 ![Screenshot: Initial mockup of the data entry table]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image001.png)
 
-# Overview of Solution
+## Overview of Solution
 
 The CreativeWorx team was working on a significant rearchitecture of their application, and wanted to not add any additional dependencies.  The Spreadsheet component was required to be entirely independent from the rest of the application.
 
@@ -33,11 +25,11 @@ To solve that need, we used [Facebook’s ReactJS](https://facebook.github.io/re
 
 ![Screenshot]({{site.baseurl}}/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/image002.png)
 
-# Implementation
+## Implementation
 
 The component is made up by three React Component Classes – the overarching spreadsheet component implements “row components” that in return implement “cell components”. This enables the spreadsheet to implement as many rows and columns as needed, including the dynamic addition of rows and columns.
 
-## Usage
+### Usage
 
 The component is initialized with a configuration object. If desired, initial data for the spreadsheet can be passed in as an array of rows. In addition, one can pass in a second array filled with class names for each cell, enabling the developer to style each cell differently.
 
@@ -47,7 +39,7 @@ var SpreadsheetComponent = require('./src/spreadsheet');
 React.render(<TableComponent initialData={initialData} config={config} spreadsheetId="1" cellClasses={classes} />, document.getElementsByTagName('body'));
 ``
 
-### Configuration
+#### Configuration
 
 To ensure that the component could also be used by other developers and by CreativeWorx in different contexts, the configuration allows for a number of settings:
 
@@ -78,7 +70,7 @@ var config = {
 };
 ```
 
-### Initial Data Object
+#### Initial Data Object
 
 The initial data object contains an array of rows, which itself contains an array for every single row. Each index in the array represents a cell. It is used by the component to pre-populate the cells with data.
 
@@ -94,7 +86,7 @@ var initialData = {
 };
 ```
 
-### Cell Classes Object
+#### Cell Classes Object
 
 You can assign custom classes to individual cells. Follow the same schema as for the initial data object.
 
@@ -110,11 +102,11 @@ var classes = {
 };
 ```
 
-### Data Lifecycle
+#### Data Lifecycle
 
 The initialData object is only used in initialization to populate the state, so user input is not written to it. To capture user input, one can subscribe callbacks to the cellValueChanged and dataChanged events on the dispatcher. This enables the spreadsheet component to be used in more complex scenarios, like external data validation.
 
-##### **Get the full data state after each change**
+###### **Get the full data state after each change**
 
 ```
 var Dispatcher = require('./src/dispatcher');
@@ -124,7 +116,7 @@ Dispatcher.subscribe('dataChanged', function (data) {
 }, "spreadsheet-1")
 ```
 
-##### **Get the data change before state change**
+###### **Get the data change before state change**
 
 ```
 var Dispatcher = require('./src/dispatcher');
@@ -137,19 +129,19 @@ Dispatcher.subscribe('cellValueChanged', function (cell, newValue, oldValue) {
 
 Other events are available for [even more complex scenarios](https://github.com/felixrieseberg/React-Spreadsheet-Component/#usage). The selection/deselection of cells, click on head cells, creation of new rows or columns, or even the beginning or ending of a cell edit process can be captured by external listeners.
 
-# Challenges
+## Challenges
 
 Cross-browser support was challenging. A lot of progress has been made recently on user input, but the Spreadsheet component could not make full use of the new DOM and JavaScript APIs and still be usable by older browsers.
 
 Another challenge was interaction with the clipboard. CreativeWorx deemed it unnecessary, but if the popularity of the component continues to rise, we may consider revisiting it.  Being able to copy and paste values without the current hiccups is likely to be a popular request. It's important to point out that browsers heavily restrict the interaction with the clipboard for security reasons, which is why this feature is unavailable in Excel Online.
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 The component is currently listed on Facebook’s own [‘Complementary Tools’ page](https://github.com/facebook/react/wiki/Complementary-Tools) and became [Felix Rieseberg’s most popular GitHub repository within two days](https://github.com/felixrieseberg/React-Spreadsheet-Component), so it’s clear that many developers are already considering reusing this component for their own apps.
 
 Since the component is entirely standalone, it can be reused in any number of websites and web apps that require user table input.
 
-# How to run the Example
+## How to run the Example
 
 - Clone the repository from GitHub and open the created folder:
 
@@ -161,7 +153,7 @@ cd React-Spreadsheet-Component
 - Install npm packages and compile JSX
 
 ```
-npm install 
+npm install
 grunt
 ```
 

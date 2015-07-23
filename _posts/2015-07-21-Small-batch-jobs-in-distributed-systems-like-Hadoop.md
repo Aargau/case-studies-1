@@ -17,7 +17,7 @@ A typical business batch application consists of many jobs which are mixture of 
 
 In this paper you learn how to write efficient small batch jobs using Hadoop's MapReduce framework.
 
-# Overview of the Solution                                                        
+## Overview of the Solution
 
 Processing small files is an old problem in Hadoop. A small file for our purposes is one that is significantly smaller than the HDFS block size (default 64MB). There are two major problems:  first, HDFS is inefficient when it contains many files, and second, a large number of map tasks causes increased load on the cluster, which slows down job execution.
 
@@ -42,7 +42,7 @@ In Figure 1, you can see that there are many communication procedures between th
 
 Figure 1: [YARN](http://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html) architecture
 
-## <span lang="DE-CH">Asakusa Framework</span>
+### Asakusa Framework
 
 The Asakusa Framework provides solutions to these challenges with small jobs and files. The Asakusa Framework is an open-source mission-critical batch processing framework that supports multi-processing, restart, data transfer and development environments including DSLs. The Framework is in wide use in Japan and documentation can be found here:  [http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html](http://asakusafw.s3.amazonaws.com/documents/latest/release/ja/html/index.html).
 
@@ -199,10 +199,10 @@ Depending on the ratio of small jobs in a batch application, the effect of local
 
 It is evaluated that the local in-process executor can execute jobs 5-10x faster than Hadoop for 10MB input data. And as many kind of business batch applications have more than 50% ratio of small jobs, we can say that local in-process executor is very effective.
 
-# Code Artifacts
+## Code Artifacts
 
 This case study is based on the development of Asakusa framework, batch processing runtime on top of Hadoop and its development environments which were developed by Nautilus Technologies, Inc. ([http://www.nautilus-technologies.com/](http://www.nautilus-technologies.com/)) Code artifacts of Asakusa framework are located at [https://github.com/asakusafw/asakusafw](https://github.com/asakusafw/asakusafw).
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 Because this is a common problem for business data pipelines, there are a large number of opportunities for reuse.

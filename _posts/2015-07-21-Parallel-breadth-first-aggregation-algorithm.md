@@ -23,7 +23,7 @@ That said, if we use Hadoop or its cloud service like HDInsight to execute busin
 
 In this figure, Assembly X-2 is built by Part G, Part H and Part I, and Part G is built by Part B, Part H is built by Part B and Part C, and Part I is built by Part D and Part E. In the same way, we can build the tree structure describing the dependency relationships of assemblies, intermediate parts, and final unit parts. By this tree structure, we can calculate how much each assembly costs, by traversing which part(s) build this assembly from the root to the leaves. This traversal is called depth-first traversal/search. But as depth-first search is known to be an inherently sequential algorithm, it does not fit closely with parallel processing on top of Hadoop.
 
-# Overview of the Solution
+## Overview of the Solution
 
 Instead of depth-first search, here we consider breadth-first search to aggregate the price/cost of each data item.
 
@@ -75,7 +75,7 @@ main() {
 }
 ```
 
-# Code Artifacts
+## Code Artifacts
 
 This case study is based on the development of Asakusa framework, batch processing runtime on top of Hadoop and its development environments which were developed by Nautilus Technologies, Inc. ([http://www.nautilus-technologies.com/](http://www.nautilus-technologies.com/)) I was collaborating with Nautilus in the design phase of Asakusa framework. The code artifacts of Asakusa framework is [https://github.com/asakusafw/asakusafw](https://github.com/asakusafw/asakusafw)
 
@@ -98,7 +98,7 @@ for each product
 	get the total sales price - the total cost
 ```
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 In real world, it is almost impossible to calculate the net price/cost of products and services, for example, how much the net profit is by selling one product in a supermarket. Because its price contains the net price of product, its materials, and various operational cost of the facility like warehouses, shops, transportation, staff payroll, tax, interest and so on.
 

@@ -8,14 +8,14 @@ date:   2015-07-21 23:34:28
 categories: Azure Graph-Based Computing
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
-excerpt: Massively Scalable Graph-Based Computing in Azure 
+excerpt: Massively Scalable Graph-Based Computing in Azure
 ---
 
 Many customers are looking for ways to exploit the massive computing capability afforded by Microsoft Azure. On the one hand, enterprises are gathering, in real time, enormous amounts of data, gigabytes or even terabytes per day. On the other hand, they see the almost unlimited capacity in the cloud: but how best to take advantage of it to extract insights from all this data? This Case Study describes a computing pattern called “actor model” with one sample implementation that has been adapted for use by customers.
 
 The sample application (more accurately, a _service)_ is a massively scalable parallelized, graph-based compute engine. Astute readers will recognize that graph-based processing is at the heart of one of the most compelling and popular computing paradigms of all time, the electronic spreadsheet. If such graphs could be placed in the cloud, could be spread out over dozens or hundreds of processors, then real-time computation (in this case using the world’s most common scripting language, Excel formulas) could be exponentially expanded.[2](#_ftn2)
 
-# Overview of the Solution
+## Overview of the Solution
 
 This project has an unlikely underpinning: video games. The “Orleans” project at Microsoft was created to support multi-player gaming. Each user in multi-player mode communicates with a small body of code in Microsoft Azure which tracks that user’s relevant state – is s/he online, where in the game is s/he, and so on. Each such object communicates with other such objects representing other users in the particular game instance.
 
@@ -64,7 +64,7 @@ The application data format of the messages is very simple: it is Excel. Any app
 
 Here is a trivial little XAML/C# application to prove the point:
 
-![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png) 
+![Screenshot]({{site.baseurl}}/images/2015-07-21-Massively-Scalable-Graph-Based-Computing-in-Azure_images/image003.png)
 
 Figure 3. Another UI
 
@@ -121,7 +121,7 @@ public async Task<bool> UpdateValue(int val)
 {
     _value = val;
     await _celldir.CellChange(_celladdr);
-    return true; 
+    return true;
 }
 ```
 
@@ -143,7 +143,7 @@ Figure 5\. CloudSheet Holding All the World's Weather
 
 Second, as mentioned in passing earlier, CloudSheet is _not_ an application. It is a _service_ in the cloud. As such it is intrinsically multi-user. Moreover any application can use its REST API’s to send and receive data – regardless of user interface modality.
 
-# Challenges
+## Challenges
 
 There are a number of challenges and potential “gotcha’s” in a massively distributed system such as Orleans/Cloudsheet.
 
@@ -154,7 +154,7 @@ Orleans does not, out of the box, provide a “directory” function, that is, a
 In CloudSheet, therefore, there is a CellDirectory actor which holds a list of every cell that has been instantiated in the sheet. Any range operation, then, will iterate over the range in a two-step process, first ascertaining if the cell actually exists:
 
 ```
-¬bool bExists=await _cellDirectory.CellExists(long celladdress); 
+¬bool bExists=await _cellDirectory.CellExists(long celladdress);
 ```
 
 And then if so, retrieving the value.
@@ -169,7 +169,7 @@ ICell cellb=GetCellInterface(b1);
 Task<double> a= cella.GetCellValue();
 Task<double> b= cellb.GetCellValue();
 Task tall=Task.WhenAll(a,b);
-await tall; 
+await tall;
 ```
 
 It turns out that on each server actors run as DLLs in a single-threaded address space and so the degree of parallelism isn’t as significant as might appear. When retrieving a lot of data (hundreds of cell values for example) this approach is surprisingly slow – and is far better implemented as a cache.
@@ -196,13 +196,13 @@ public Task<int> AddCellToDirectory(CellAddress cell)
 
 However, we may also have another method which is iterating over the list, in this case `_mdcells`. This will cause an unexpected error as the List size will change during the iteration, causing an exception.
 
-# Code Artifacts
+## Code Artifacts
 
 As CloudSheet has been filed for a US patent, the source code is not, at this writing, available, as licensing terms are being worked out.
 
 The Orleans framework can be viewed and downloaded from [http://www.github.com/dotnet/orleans](http://www.github.com/dotnet/orleans).
 
-# Opportunities for Reuse
+## Opportunities for Reuse
 
 The architectural pattern in CloudSheet – a directory, a large number of same-type actors, one or more caches of various types – is one that has potential for considerable reuse. In fact, one large financial services customer has already adapted some of CloudSheet’s architectural patterns for an application which is going into production imminently (2QCY15).
 
