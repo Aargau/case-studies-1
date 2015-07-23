@@ -5,8 +5,8 @@ author: "Sara Spalding"
 author-link: "#"
 #author-image: "{{ site.baseurl }}/images/authors/photo.jpg" //should be square dimensions
 date:   2015-07-11 23:34:28
-categories: CaseStudies GitHub process 
-color: "red"
+categories: CaseStudies GitHub process
+color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: This document provides an overview of the case study process and provides details about writing, reviewing, and publlishing case studies.  Any TED engineer who wants to write or review case studies will want to read this document to get started.
 ---
