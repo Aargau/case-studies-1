@@ -38,7 +38,7 @@ $grey-color-dark:  darken($grey-color, 25%);
 // Also serves as the "desktop" media query when needed
 $content-width:    100%;
 
-// These responsive points are based on legible columns 
+// These responsive points are based on legible columns
 // combined with relative-pixel resolutions for common targets.
 // They are also max-widths.
 $on-palm:          600px;
@@ -47,6 +47,10 @@ $on-tablet:        993px;
 $on-laptop:        1600px;
 $on-desktop:       10000px;
 
+// Color Overrides
+.blue {
+    background-color: rgb(0, 120, 215);
+}
 
 
 // Using media queries with like this:
