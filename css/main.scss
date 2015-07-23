@@ -47,12 +47,6 @@ $on-tablet:        993px;
 $on-laptop:        1600px;
 $on-desktop:       10000px;
 
-// Color Overrides
-.blue {
-    background-color: rgb(0, 120, 215);
-}
-
-
 // Using media queries with like this:
 // @include media-query($on-palm) {
 //     .wrapper {
