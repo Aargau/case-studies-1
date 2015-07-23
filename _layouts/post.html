@@ -1,33 +1,31 @@
----
-layout: default
----
+--- layout: default ---
 <div class="post">
     <div class="row article-hero" style="{% if page.color %}background-color: {{ page.color }};{% endif %}{% if page.image %}background-image: url('{{ site.baseurl}}/{{page.image}}');{% endif %}">
-      <div class="container">
-        <div class="row">
-          <div class="col s12">
-            <h4>{{ page.title }}</h4>
+        <div class="container">
             <div class="row">
-              <div class="col ss12  valign-wrapper">
-                {% if page.author %}
-                {% if page.author-image %}<img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
-                <span class="author-name">
-                  <a href="{{ page.author-link }}">{{ page.author }}</a>
-                </span>{% endif %}-
-                <span class="article-date">{{ page.date | date: "%b %-d, %Y" }}</span>
-              </div>
+                <div class="col s12">
+                    <h4>{{ page.title }}</h4>
+                    <div class="row">
+                        <div class="col ss12  valign-wrapper">
+                            {% if page.author %} {% if page.author-image %}
+                            <img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
+                            <span class="author-name">
+                                <a href="{{ page.author-link }}">{{ page.author }}</a>
+                            </span>{% endif %}-
+                            <span class="article-date">{{ page.date | date: "%b %-d, %Y" }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col s12 article-content">
-          <article class="post-content">
-            {{ content }}
-          </article>
+        <div class="row">
+            <div class="col s12 article-content">
+                <article class="post-content">
+                    {{ content }}
+                </article>
+            </div>
         </div>
-      </div>
-      <div class="divider"></div>
+        <div class="divider"></div>
     </div>

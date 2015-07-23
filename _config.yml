@@ -1,8 +1,7 @@
 # Site settings
 title: Partner Catalyst Team Case Studies
 email: sarasp@outlook.com
-description: > # this means to ignore newlines until "baseurl:"
-  testbed for case study publication
+# description: 
 baseurl: "/case-studies" # the subpath of your site, e.g. /blog/
 url: http://catalystcode.github.io" # the base hostname & protocol for your site
 twitter_username: saraspalding
