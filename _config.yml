@@ -16,3 +16,5 @@ encoding: utf-8
 exclude: [vendor]
 kramdown:
    input: GFM
+gems:
+  - jekyll-sitemap
