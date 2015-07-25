@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    var hitBottom = false;
+    var hasScrolled = false;
+
+    window.addEventListener('scroll', function (e) {
+        
+        if(!hasScrolled)
+        {
+            hasScrolled = true;
+            appInsights.trackEvent('Page:Scrolled');
+        }
+        
+        if(!hitBottom && ((window.innerHeight + window.scrollY) >= document.body.scrollHeight)) 
+        {
+            hitBottom = true;
+            appInsights.trackEvent('Page:End');
+        }
+    })
+
+    document.body.addEventListener('copy', function (e) {
+        appInsights.trackEvent('Clipboard:Copy');
+    })
+    document.body.addEventListener('cut', function (e) {
+        appInsights.trackEvent('Clipboard:Cut');
+    })
+</script>
