@@ -2,7 +2,7 @@
 layout: post
 title:  "AllJoyn 101: Getting Started with AllJoyn using the Heatworks Model 1"
 author: "Ivan Judson"
-author-link: "http://irjudson.azurewebsites.net/"
+author-link: "#"
 #author-image: "{{ site.baseurl }}/images/ivanjudson/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
 categories: AllJoyn
