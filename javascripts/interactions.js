@@ -9,7 +9,6 @@ var interactions = (function () {
     }
 
     function scrollInterval() {
-        console.log('hi');
         if (!appInsights || !hasScrolled) {
             return;
         }
