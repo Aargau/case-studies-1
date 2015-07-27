@@ -2,7 +2,7 @@ var interactions = (function () {
     var hitBottom = false,
         hasScrolled = false,
         hasTrackedScroll = false,
-        interval, listener;
+        interval, listener, mod = {};
 
     function scrollListener() {
         hasScrolled = true;
@@ -33,13 +33,17 @@ var interactions = (function () {
         }
     }
 
-    listener = window.addEventListener('scroll', scrollListener);
-    interval = window.setInterval(scrollInterval, 100);
+    mod.setup = function () {
+        listener = window.addEventListener('scroll', scrollListener);
+        interval = window.setInterval(scrollInterval, 100);
 
-    document.body.addEventListener('copy', function (e) {
-        appInsights.trackEvent('Clipboard:Copy');
-    })
-    document.body.addEventListener('cut', function (e) {
-        appInsights.trackEvent('Clipboard:Cut');
-    })
+        document.body.addEventListener('copy', function (e) {
+            appInsights.trackEvent('Clipboard:Copy');
+        });
+        document.body.addEventListener('cut', function (e) {
+            appInsights.trackEvent('Clipboard:Cut');
+        });
+    }
+
+    return mod;
 }());
