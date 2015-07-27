@@ -2,7 +2,7 @@ var interactions = (function () {
     var hitBottom = false,
         hasScrolled = false,
         hasTrackedScroll = false,
-        interval, listener, mod = {};
+        interval, mod = {};
 
     function scrollListener() {
         hasScrolled = true;
@@ -13,28 +13,27 @@ var interactions = (function () {
             return;
         }
 
-        if (hasScrolled && hitBottom) {
-            if (interval) {
-                window.clearInterval(interval);
-            }
-            if (listener) {
-                window.removeEventListener('scroll', listener)
-            }
-        }
-
         if (!hasTrackedScroll) {
             hasTrackedScroll = true;
             appInsights.trackEvent('Page:Scrolled');
         }
-        
+
         if (!hitBottom && ((window.innerHeight + window.scrollY) >= document.body.scrollHeight)) {
             hitBottom = true;
             appInsights.trackEvent('Page:End');
+
+            if (interval) {
+                window.clearInterval(interval);
+            }
+            window.removeEventListener('scroll', scrollListener);
+
         }
+
+        hasScrolled = false;
     }
 
     mod.setup = function () {
-        listener = window.addEventListener('scroll', scrollListener);
+        window.addEventListener('scroll', scrollListener);
         interval = window.setInterval(scrollInterval, 100);
 
         document.body.addEventListener('copy', function (e) {
