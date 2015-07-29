@@ -25,12 +25,14 @@ The following sections describe each step of the process in detail.
 We are adding a pre-review step to help the author make sure that his/her idea for the whitepaper is on target. For this review, the author writes a short abstract (less than 10 mins), and solicits review from . Based on the feedback from , the author will move into the authoring phase.
 
 ## Authoring
-Write the content in Markdown, using your favorite Markdown editor. If you're new to Markdown, please check out [the guide](https://help.github.com/articles/markdown-basics/).
+Write the content in Markdown using your favorite Markdown editor and place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md). Check out [the guide](https://help.github.com/articles/markdown-basics/) if you're new to Markdown.
 
 To include images, add the base url like so:
 ```
 ![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
 ```
+
+
 
 ## Peer Review
 When you have finished a draft of your case study that you feel is ready for peer review, create a pull request to this repository, where the actual peer review happens. If you've never done a pull request, [check out GitHub's tutorial](https://guides.github.com/activities/forking/).
