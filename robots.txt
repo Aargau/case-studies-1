@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://http://catalystcode.github.io/sitemap.xml
+Sitemap: http://partnercatalyst.azurewebsites.net/sitemap.xml
