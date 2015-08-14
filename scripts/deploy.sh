@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $TRAVIS_BRANCH == 'gh-pages' ]] ; then
-  cd ../_site
+  cd _site
   git init
 
   git config user.name "Travis CI"
@@ -14,6 +14,6 @@ if [[ $TRAVIS_BRANCH == 'gh-pages' ]] ; then
   # /dev/null to hide any sensitive credential data that might otherwise be exposed.
   git push --force --quiet "https://${git_user}:${git_password}@${git_target}" master:master > /dev/null 2>&1
 else
-  echo 'Invalid branch. You can only deploy from master and live.'
+  echo 'Invalid branch. You can only deploy from gh-pages.'
   exit 1
 fi
