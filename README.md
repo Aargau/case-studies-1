@@ -12,27 +12,51 @@ PCT Case studies describe an interesting customer problem that we have solved wi
 # Process Overview
 PCT has a multi-step review process to ensure that our content is accurate, actionable, well-written, and represents our best advice. Our process is changing for FY16 and includes the following steps:
 
-1. Pre-review
-2. Authoring
-3. Peer review
-4. LT review
-5. LCA/Product team/Customer approval
-6. Publishing
+ * Authoring
+ * Peer review
+ * LT review
+ * LCA / Product Team / Customer approval
+ * Publishing
 
 The following sections describe each step of the process in detail.
 
-## Pre-review
-We are adding a pre-review step to help the author make sure that his/her idea for the whitepaper is on target. For this review, the author writes a short abstract (less than 10 mins), and solicits review from . Based on the feedback from , the author will move into the authoring phase.
-
 ## Authoring
-Write the content in Markdown using your favorite Markdown editor and place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md). Check out [the guide](https://help.github.com/articles/markdown-basics/) if you're new to Markdown.
+Use `post-template.md` as a template, writing the content in Markdown using your favorite Markdown editor. Once done, place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md).
+
+#### GitHub Workflow
+We're following basic GitHub Flow. If ever contributed to an open source project on GitHub, you probably know it already - if you have no idea what we're talking about, check out [GitHub's official guide](https://guides.github.com/introduction/flow/). Here's a quick summary:
+
+ * Fork the repository and clone to your local machine
+ * You should already be on the default branch `gh-pages` - if not, check it out (`git checkout gh-pages`)
+ * Create a new branch of your case study `git checkout -b my-new-case-study`)
+ * Write your case study
+ * Stage the changed files for a commit (`git add .`)
+ * Commit your files with a *useful* commit message ([example](https://github.com/felixrieseberg/case-studies/commit/bbd3a4574769e7547d98cfa12a9766d480b8c393)) (`git commit`)
+ * Push your new branch to your GitHub Fork (`git push origin my-new-case-study`)
+ * Visit this repository in [GitHub and create a Pull Request](#peer-review)
+
+#### Markdown Tips
+Check out [the guide](https://help.github.com/articles/markdown-basics/) if you're new to Markdown.
+
+Preface your post with a table like outlined below. Jekyll (the static site generator) will use the information provided to turn your Markdown file into sparkling HTML.
+
+```
+---
+layout: post
+title:  "Title of the Post"
+author: "Felix Rieseberg"
+author-link: "http://www.felixrieseberg.com"
+date:   2015-08-30 10:00:00
+categories: Azure DevOps Flynn
+color: "blue"
+excerpt: "A small desription"
+---
+```
 
 To include images, add the base url like so:
 ```
 ![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
 ```
-
-
 
 ## Peer Review
 When you have finished a draft of your case study that you feel is ready for peer review, create a pull request to this repository, where the actual peer review happens. If you've never done a pull request, [check out GitHub's tutorial](https://guides.github.com/activities/forking/).
