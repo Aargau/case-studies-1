@@ -28,7 +28,7 @@ We are adding a pre-review step to help the author make sure that his/her idea f
 Use `post-template.md` as a template, writing the content in Markdown using your favorite Markdown editor. Once done, place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md).
 
 #### GitHub Workflow
-We're following basic GitHub Flow. If ever contributed to an open source project on GitHub, you probably know it already - if you have no idea what we're talking about, check out [GitHub's official guide](https://guides.github.com/introduction/flow/). Here's a quick summary:
+We're following basic GitHub Flow. If you have ever contributed to an open source project on GitHub, you probably know it already - if you have no idea what we're talking about, check out [GitHub's official guide](https://guides.github.com/introduction/flow/). Here's a quick summary:
 
  * Fork the repository and clone to your local machine
  * You should already be on the default branch `gh-pages` - if not, check it out (`git checkout gh-pages`)
