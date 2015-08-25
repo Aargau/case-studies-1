@@ -12,6 +12,7 @@ PCT Case studies describe an interesting customer problem that we have solved wi
 # Process Overview
 PCT has a multi-step review process to ensure that our content is accurate, actionable, well-written, and represents our best advice. Our process is changing for FY16 and includes the following steps:
 
+ * Pre-Review
  * Authoring
  * Peer review
  * LT review
@@ -19,6 +20,9 @@ PCT has a multi-step review process to ensure that our content is accurate, acti
  * Publishing
 
 The following sections describe each step of the process in detail.
+
+## Pre-Review
+We are adding a pre-review step to help the author make sure that his/her idea for the whitepaper is on target. For this review, the author writes a short abstract (less than 10 mins), and solicits review from peers (ideally via the `#case-studies` slack channel). Based on the feedback from peers, the author will move into the authoring phase.
 
 ## Authoring
 Use `post-template.md` as a template, writing the content in Markdown using your favorite Markdown editor. Once done, place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md).
