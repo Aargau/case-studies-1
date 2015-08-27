@@ -39,6 +39,8 @@ We're following basic GitHub Flow. If you have ever contributed to an open sourc
  * Push your new branch to your GitHub Fork (`git push origin my-new-case-study`)
  * Visit this repository in [GitHub and create a Pull Request](#peer-review)
 
+**For a detailed tutorial, [please check out git-tutorial.md](https://github.com/CatalystCode/case-studies/blob/gh-pages/git-tutorial.md)!**
+
 #### Markdown Tips
 Check out [the guide](https://help.github.com/articles/markdown-basics/) if you're new to Markdown.
 
