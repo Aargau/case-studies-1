@@ -81,7 +81,7 @@ git remote add upstream https://github.com/CatalystCode/case-studies
 Entering `git remote -v` again should give you both repositories - both yours (called "origin") and the one for the whole team (called "upstream").
 
 ### Creating a new Branch for your Case Study
-In modern Git development, every single change that you want to make to the code base will be made in a "branch". Like a tree branch, the branch is "based" on a different branch. In our case, your base branch will always be `gh-pages`, which is the default branch name for GitHub pages. In order to create a new branch, you can always run:
+In modern Git development, every single change that you want to make to the code base will be made in a "branch". Like a tree branch, the branch is "based" on a different branch, and unlike other SCM systems Git branches are very lightweight. In our case, your base branch will always be `gh-pages`, which is the default branch name for GitHub pages. In order to create a new branch, you can always run:
 
 ```
 # This makes sure that your new branch is based on gh-pages
@@ -136,7 +136,7 @@ Now, head over to the [catalystcode/case-studies](https://github.com/CatalystCod
 Click that button. GitHub will open up the 'Create a Pull Request Page'. It is probably a good idea to notify potential reviewers in your pull request. Be sure to @mention (at least) two reviewers: (1) a domain expert in the topic you cover, and (2) an engineer who is not familiar with the topic.
 
 As soon as you hit the 'Create Pull Request' button, it'll show up in the list of pull requests and the bots will take over.
-
+ 
 ### Bonus: Squashing Commits
 You should commit often. It's a great backup and safety net in case you mess up. At the same time, you don't want your pull request to contain all your commits - in practice, a pull request should contain one commit. There are obvious exceptions to this rule (like epic projects - think 'Windows support for Docker'), but your little case study should most definitely be just one commit. For that to happen, we need to rewrite history.
 
@@ -190,3 +190,20 @@ If you never pushed the branch before, you can use the normal push command - the
 ```
 git push -u origin NAME_OF_YOUR_BRANCH
 ```
+
+### Bonus 2: Syncing Your Fork
+
+After some time, you'll find that your fork has become out of sync with the upstream repository (as others add case studies and they get merged in). To sync your fork up, you just need to do a local merge and then push those changes. There are a few different ways to do this, but this is the method [recommended by GitHub](https://help.github.com/articles/syncing-a-fork/):
+
+```
+# Get all of the latest from upstream for all branches
+git fetch upstream
+# Now make sure you're on gh-pages - the main branch for this project
+git checkout gh-pages
+# Merge in the changes from upstream (note: this commits locally)
+git merge upstream/gh-pages
+# And then push those to your fork on GitHub
+git push
+```
+
+Now you can start from a clean state, knowing your next case study will be the only divergence from `upstream` you'll have to deal with.
