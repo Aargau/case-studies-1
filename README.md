@@ -63,10 +63,26 @@ To include images, add the base url like so:
 ```
 ![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
 ```
-
+ 
 ## Peer Review
 When you have finished a draft of your case study that you feel is ready for peer review, create a pull request to this repository, where the actual peer review happens. If you've never done a pull request, [check out GitHub's tutorial](https://guides.github.com/activities/forking/).
 
 It is probably a good idea to notify potential reviewers in your pull request. Be sure to @mention (at least) two reviewers: (1) a domain expert in the topic you cover, and (2) an engineer who is not familiar with the topic.
 
+Peer reviewers are recomended to add line level comments when they can. This is done on the pull request (PR) that the author has submitted. 
+
+### Identifying what needs Peer Review
+Any outstanding pull requests should be labled 
+[needs-peer-review](https://github.com/CatalystCode/case-studies/labels/needs-peer-review).
+
+By viewing these issues with the filter applied, you can easily identify what Case Studies need some love.
+
+### Case Study Epic Bot
+When they have completed their peer review, and any line level comments are provided, 
+they should provide the `LGTM` "looks good to me" which the 
+[Epic Stuff Bot](https://github.com/Epic-Stuff-Bot) will then identify if this is ready for the next step and update the 
+label to [peer-reviewed](https://github.com/CatalystCode/case-studies/labels/peer-reviewed).
+
+
+### Pull Request Acceptance
 After you have received and integrated their feedback, your pull request will be merged into the master case study repo.
