@@ -1,6 +1,19 @@
 ## Git Tutorial for the PCT Case Studies
 You probably heard of Git before, but it's possible that you haven't used it. Writing a case study doesn't require masterful Git skills, but you will need a few basics. This small tutorial will go over all the steps, taking you from zero to case study.
 
+#### Table of Contents
+- [Get Git](#get-git)
+- [Fork the Repository to your Account](#fork-the-repository-to-your-account)
+- [Clone the Case Study Repository to your Machine](#clone-the-case-study-repository-to-your-machine)
+- [Creating a new Branch for your Case Study](#creating-a-new-branch-for-your-case-study)
+- [Staging your Changes for a Commit](#staging-your-changes-for-a-commit)
+- [Commit your Changes](#commit-your-changes)
+- [Push your new Branch to Your Fork on GitHub](#push-your-new-branch-to-your-fork-on-github)
+- [Make a Pull Request](#make-a-pull-request)
+- [Updating Pull Requests](#updating-pull-requests)
+- [Squashing Commits](#squashing-commits)
+- [Syncing Your Fork](#syncing-your-fork)
+
 ### Get Git
 If you don't have Git installed, head over to the official [Git Download page and download it](https://git-scm.com/download/win). Once installed and downloaded, you might also want to install [Posh Git](https://github.com/dahlbyk/posh-git). If you're already using Chocolatey or Windows 10's package manager to install software, you can simply run the following command from an elevated PowerShell (right click, select 'Run as Administrator'):
 
