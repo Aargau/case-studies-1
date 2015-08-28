@@ -15,7 +15,16 @@ cinst git-credential-winstore
 cinst github
 ```
 
-##### A Word About Git Clients
+#### Ensure a Safe Push Behavior
+Git has multiple ways of pushing - and changed the default behavior a few years ago. `git config --global push.default` configures what branches will be pushed to the remote. The default in Git 2.0 is `simple` meaning that whenever `git push` is run, only the current branch is pushed. Prior to version 2.0, the default behavior was `matching`, meaning that a `git push` would push all branches with a matching branch on the remote.
+
+If you're installing a fresh version of Git, you're fine. If you want to make super-duper sure that everything will okay, run the following command:
+
+```
+git config --global push.default simple
+```
+
+#### A Word About Git Clients
 Many users are initially put off by the idea of having to work with Git through the command line. I distinctly remember not even considering the PowerShell/Terminal and instead downloading one of the man GUI tools that are available. As someone who went through the experience of trying to use a Git GUI without really understanding what Git is doing on the command-line-level, let me tell you: It will end in tears.
 
 In fact, I find it a lot easier today to work with the command-line. Git will do *exactly* what you tell it do - each step will be obvious to you. GUIs often try to combine multiple commands together into one fancy button, which will surely blow your whole project up, if you don't understand what's going on under the hood. For those reasons, I *heavily* recommend sticking with the command-line.
@@ -166,7 +175,9 @@ git commit --amend
 git push -f
 ```
 
-When we're ready to merge your Pull Request, it is very likely that I will ask you to "sqash your commits". To do so, read on below:
+Please note the advice further up [about default push behavior in old/outdated versions of Git](#ensure-a-safe-push-behavior).
+
+When we're ready to merge your Pull Request, it is very likely that I will ask you to "sqash your commits". To do so, read on below.
  
 ### Squashing Commits
 You should commit often. It's a great backup and safety net in case you mess up. At the same time, you don't want your pull request to contain all your commits - in practice, a pull request should contain one commit. There are obvious exceptions to this rule (like epic projects - think 'Windows support for Docker'), but your little case study should most definitely be just one commit. For that to happen, we need to rewrite history.
