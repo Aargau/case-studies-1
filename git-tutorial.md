@@ -136,8 +136,39 @@ Now, head over to the [catalystcode/case-studies](https://github.com/CatalystCod
 Click that button. GitHub will open up the 'Create a Pull Request Page'. It is probably a good idea to notify potential reviewers in your pull request. Be sure to @mention (at least) two reviewers: (1) a domain expert in the topic you cover, and (2) an engineer who is not familiar with the topic.
 
 As soon as you hit the 'Create Pull Request' button, it'll show up in the list of pull requests and the bots will take over.
+
+### Updating Pull Requests
+Once people have reviewed your pull request, it is very likely that you want to update it. Good news! Whenever you update the branch in your fork, your pull request will be automatically updated.
+
+Let's look at a scenario: You just pushed pushed your branch (using `git push -u origin NAME_OF_YOUR_BRANCH`), went to GitHub, and created a Pull Request.
+
+To update the PR with additional changes, edit your files in your branch - then, commit the changes and push them to GitHub:
+
+```
+git checkout NAME_OF_YOUR_BRANCH
+# Make changes, stage all changes for commit
+git add --all .
+# Commit
+git commit
+# Push to GitHub
+git push
+```
+
+If you want to update your Pull Request without creating a new commit, you can "amend" your last commit. To do so, call `git commit` with the `--amend` parameter and force-push the result to GitHub, overwriting the previous version.
+
+```
+git checkout NAME_OF_YOUR_BRANCH
+# Make changes, stage all changes for commit
+git add --all .
+# Commit
+git commit --amend
+# Push to GitHub
+git push -f
+```
+
+When we're ready to merge your Pull Request, it is very likely that I will ask you to "sqash your commits". To do so, read on below:
  
-### Bonus: Squashing Commits
+### Squashing Commits
 You should commit often. It's a great backup and safety net in case you mess up. At the same time, you don't want your pull request to contain all your commits - in practice, a pull request should contain one commit. There are obvious exceptions to this rule (like epic projects - think 'Windows support for Docker'), but your little case study should most definitely be just one commit. For that to happen, we need to rewrite history.
 
 Rewriting Git history is a little bit scary, but it's easy to do. Here's the setup: You just made six commits to your branch. Before making a pull request, you want all those commits to be turned into one. To change the history of your last six commits, run:
@@ -191,7 +222,7 @@ If you never pushed the branch before, you can use the normal push command - the
 git push -u origin NAME_OF_YOUR_BRANCH
 ```
 
-### Bonus 2: Syncing Your Fork
+### Syncing Your Fork
 
 After some time, you'll find that your fork has become out of sync with the upstream repository (as others add case studies and they get merged in). To sync your fork up, you just need to do a local merge and then push those changes. There are a few different ways to do this, but this is the method [recommended by GitHub](https://help.github.com/articles/syncing-a-fork/):
 
