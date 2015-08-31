@@ -55,7 +55,7 @@ The scenario we faced could be broken down to this pipeline.
 
 Capturing video frames in Windows apps has been well documented in Windows platform documentation. Use these MSDN resources to understand how to get the video data:
 
-[Quickstart: Capturing video by using the MediaCapture API](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/Dn642092(v=win.10))
+[Quickstart: Capturing video by using the MediaCapture API](https://msdn.microsoft.com/en-us/library/windows/apps/xaml/Dn642092)
 
 [Media capture using capture device sample app](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 
@@ -105,7 +105,7 @@ This [blog post explains the object locking and partial pixel map tracking](http
 
 Unsurprisingly, our scenario eventually ends up in a scenario very common in technology and life: We have raw and interesting data – what should we actually do to analyze it?
 
-![VaatturiObjectMotionCapturedScaled]({{site.baseurl}}/case-studies/images/2015-07-21-Using-camera-stream-for-real-time-object-tracking in-Windows-apps_images/image004.png)
+![VaatturiObjectMotionCapturedScaled]({{site.baseurl}}/images/2015-07-21-Using-camera-stream-for-real-time-object-tracking in-Windows-apps_images/image004.png)
 
 Object (USB cannon projectile wrapped with pink sticker) motion captured
 

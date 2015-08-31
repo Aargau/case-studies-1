@@ -33,7 +33,7 @@ Xerox executes signed service contracts with customers ensuring copiers, printer
 
 The Windows and Windows Phone Stores offer a variety of mechanisms for distributing applications to customers. The criteria in choosing the ideal distribution mechanism includes the target platform, target audience, and other factors (see Figure 1).
 
-![Windows and Windows Phone Application Distribution Mechanisms]({{site.baseurl}}/images//images/2015-07-21-Enterprise-Sideloading-Publishing-Line-of-Business-Applications_images/image001.png)
+![Windows and Windows Phone Application Distribution Mechanisms]({{site.baseurl}}/images/2015-07-21-Enterprise-Sideloading-Publishing-Line-of-Business-Applications_images/image001.png)
 
 Figure 1: Windows and Windows Phone Application Distribution Mechanisms
 
