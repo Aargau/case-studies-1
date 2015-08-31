@@ -2,7 +2,7 @@
 layout: post
 title:  "Using camera stream for real time object tracking in Windows apps"
 author: "Juhana Koski"
-#author-link: "http://#"
+#author-link: "http://catalystcode.github.io/case-studies/"
 #author-image: "{{ site.baseurl }}/images/JuhanaKoski/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
 categories: Image processing, Windows
