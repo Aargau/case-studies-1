@@ -2,17 +2,19 @@
 You probably heard of Git before, but it's possible that you haven't used it. Writing a case study doesn't require masterful Git skills, but you will need a few basics. This small tutorial will go over all the steps, taking you from zero to case study.
 
 #### Table of Contents
-- [Get Git](#get-git)
-- [Fork the Repository to your Account](#fork-the-repository-to-your-account)
-- [Clone the Case Study Repository to your Machine](#clone-the-case-study-repository-to-your-machine)
-- [Creating a new Branch for your Case Study](#creating-a-new-branch-for-your-case-study)
-- [Staging your Changes for a Commit](#staging-your-changes-for-a-commit)
-- [Commit your Changes](#commit-your-changes)
-- [Push your new Branch to Your Fork on GitHub](#push-your-new-branch-to-your-fork-on-github)
-- [Make a Pull Request](#make-a-pull-request)
-- [Updating Pull Requests](#updating-pull-requests)
-- [Squashing Commits](#squashing-commits)
-- [Syncing Your Fork](#syncing-your-fork)
+- [Git Tutorial for the PCT Case Studies](#git-tutorial-for-the-pct-case-studies)
+    - [Get Git](#get-git)
+    - [Fork the Repository to your Account](#fork-the-repository-to-your-account)
+    - [Clone the Case Study Repository to your Machine](#clone-the-case-study-repository-to-your-machine)
+    - [Creating a new Branch for your Case Study](#creating-a-new-branch-for-your-case-study)
+    - [Staging your Changes for a Commit](#staging-your-changes-for-a-commit)
+    - [Commit your Changes](#commit-your-changes)
+    - [Push your new Branch to Your Fork on GitHub](#push-your-new-branch-to-your-fork-on-github)
+    - [Make a Pull Request](#make-a-pull-request)
+    - [Updating Pull Requests](#updating-pull-requests)
+    - [Squashing Commits](#squashing-commits)
+    - [Syncing Your Fork](#syncing-your-fork)
+- [Using the Private Repository](#using-the-private-repository)
 
 ### Get Git
 If you don't have Git installed, head over to the official [Git Download page and download it](https://git-scm.com/download/win). Once installed and downloaded, you might also want to install [Posh Git](https://github.com/dahlbyk/posh-git). If you're already using Chocolatey or Windows 10's package manager to install software, you can simply run the following command from an elevated PowerShell (right click, select 'Run as Administrator'):
@@ -22,7 +24,7 @@ cinst git.install
 cinst poshgit
 
 # Restart PowerShell / CMDer before moving on - or run
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
 cinst git-credential-winstore
 cinst github
@@ -47,7 +49,7 @@ Before we can get started, you need to register with GitHub. Either create or lo
 
 ![Fork the repo](https://raw.githubusercontent.com/CatalystCode/case-studies/gh-pages/tutorial/fork.png)
 
-This will create a copy of the repository as it exists in the `catalystcode` organization (hence called catalystcode/case-studies) in your own account. In my case, I'm controlling both the original (also called "upstream") repository in `catalystcode` as well as in my own account, found at `felixrieseberg/case-studies`. 
+This will create a copy of the repository as it exists in the `catalystcode` organization (hence called catalystcode/case-studies) in your own account. In my case, I'm controlling both the original (also called "upstream") repository in `catalystcode` as well as in my own account, found at `felixrieseberg/case-studies`.
 
 ### Clone the Case Study Repository to your Machine
 Visit your fork (which should be at github.com/{your_name}/case-studies) and copy the "HTTPS Clone URL". Using this URL, you're able to `clone` the repository, which is really just a fancy way of saying "download the whole repository, including its history and information about its origin".
@@ -109,7 +111,7 @@ In modern Git development, every single change that you want to make to the code
 # This makes sure that your new branch is based on gh-pages
 git checkout gh-pages
 # This creates the new branch
-git checkout -b my-new-branch 
+git checkout -b my-new-branch
 ```
 You can now go ahead and make your changes - adding files, writing case studies, fixing typos. Keep in mind that a branch should host isolated changes: You would normally not fix someone else's case study and add a new one in branch. Instead, you create one branch that fixes typos; and another branch for your added case study.
 
@@ -191,7 +193,7 @@ git push -f
 Please note the advice further up [about default push behavior in old/outdated versions of Git](#ensure-a-safe-push-behavior).
 
 When we're ready to merge your Pull Request, it is very likely that I will ask you to "sqash your commits". To do so, read on below.
- 
+
 ### Squashing Commits
 You should commit often. It's a great backup and safety net in case you mess up. At the same time, you don't want your pull request to contain all your commits - in practice, a pull request should contain one commit. There are obvious exceptions to this rule (like epic projects - think 'Windows support for Docker'), but your little case study should most definitely be just one commit. For that to happen, we need to rewrite history.
 
@@ -262,3 +264,21 @@ git push
 ```
 
 Now you can start from a clean state, knowing your next case study will be the only divergence from `upstream` you'll have to deal with.
+
+## Using the Private Repository
+We now also maintain a [private version of this repository](https://github.com/CatalystCode/case-studies-pr). Using it works roughly the same way our public repository works, except that you should pay attention to not expose your data - after all, you're using a private repository to keep your data safe.
+
+> Note that while GitHub is awesome and fantastic, accidents do happen. Don't expose matters of life or death to a 3rd party. Be particular aware of information easily picked up by automatic scrapers and bots, like authorization tokes, certificates, or private keys.
+
+#### Forking and Cloning the Repository
+Forking and cloning the repository works the same way it does with a public repository. Your fork of the repo will be private, even if you are not a paying GitHub member. I do not recommend to manage the private and the public version of our repository from the same folder and local Git repo - while it is possible, you're just digging yourself a big hole to eventually fall into.
+
+![Fork the private repo](https://raw.githubusercontent.com/CatalystCode/case-studies/gh-pages/tutorial/fork-private.gif)
+
+#### Working with the Private Repository
+You can create Pull Requests and provide feedback to other Pull Requests just like you do on the public repository. Please see the above documentation for details.
+
+#### Publish Case Studies to the Public Repository
+Whenever you are ready to publish your case study to the public repository, notify Felix Rieseberg, who will cherry-pick the appropriate commit onto our public repository.
+
+Cherry-Picking is a process in which Git takes an individual commit and "plays it back" on top of a different parent. When your commit created a new file in the `_posts` directory, we can take that individual commit and apply the same changes to the public repository. It's a somewhat scary process (it's a time-machine!), but Felix is happy to help out.
