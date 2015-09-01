@@ -2,7 +2,7 @@
 layout: post
 title:  "Real-time Maps with Event Hubs and SignalR Using Leaflet"
 author: "Mike Lanzetta"
-author-link: "http://mikelanzetta.com"
+author-link: "http://www.mikelanzetta.com"
 #author-image: "{{ site.baseurl }}/images/Authors/MikeLanzetta.png" //should be square dimensions
 date:   2015-08-26 16:23:28
 categories: Azure EventHubs Leaflet SignalR Geo Maps
