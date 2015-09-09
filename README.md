@@ -25,7 +25,28 @@ The following sections describe each step of the process in detail.
 We are adding a pre-review step to help the author make sure that his/her idea for the whitepaper is on target. For this review, the author writes a short abstract (less than 10 mins), and solicits review from peers (ideally via the `#case-studies` slack channel). Based on the feedback from peers, the author will move into the authoring phase.
 
 ## Authoring
-Use `post-template.md` as a template, writing the content in Markdown using your favorite Markdown editor. Once done, place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md).
+The [case-studies-cli](https://github.com/jpoon/case-study-cli) will walk you through creating a new case study. 
+
+Alternatively, create one manually using `post-template.md` as a template, and writing the content in Markdown using your favorite Markdown editor. Once done, place the case study in the _posts directory with a file name of the form {DATE}-{HYPHENATED-TITLE} (eg. 2015-07-21-Recursive-Descent-Formula-Parsing-in-NET.md). Preface your post with a table like outlined below. Jekyll (the static site generator) will use the information provided to turn your Markdown file into sparkling HTML.
+
+```
+---
+layout: post
+title:  "Title of the Post"
+author: "Felix Rieseberg"
+author-link: "http://www.felixrieseberg.com"
+date:   2015-08-30 10:00:00
+categories: Azure DevOps Flynn
+color: "blue"
+excerpt: "A small desription"
+---
+
+```
+
+To include images, add the base url like so:
+```
+![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
+```
 
 #### GitHub Workflow
 We're following basic GitHub Flow. If you have ever contributed to an open source project on GitHub, you probably know it already - if you have no idea what we're talking about, check out [GitHub's official guide](https://guides.github.com/introduction/flow/). Here's a quick summary:
@@ -43,26 +64,6 @@ We're following basic GitHub Flow. If you have ever contributed to an open sourc
 
 #### Markdown Tips
 Check out [the guide](https://help.github.com/articles/markdown-basics/) if you're new to Markdown.
-
-Preface your post with a table like outlined below. Jekyll (the static site generator) will use the information provided to turn your Markdown file into sparkling HTML.
-
-```
----
-layout: post
-title:  "Title of the Post"
-author: "Felix Rieseberg"
-author-link: "http://www.felixrieseberg.com"
-date:   2015-08-30 10:00:00
-categories: Azure DevOps Flynn
-color: "blue"
-excerpt: "A small desription"
----
-```
-
-To include images, add the base url like so:
-```
-![Figure 1]({{site.baseurl}}/images/2015-07-21-Azure-Encryption-Extensions_images/image001.jpg)
-```
  
 ## Peer Review
 When you have finished a draft of your case study that you feel is ready for peer review, create a pull request to this repository, where the actual peer review happens. If you've never done a pull request, [check out GitHub's tutorial](https://guides.github.com/activities/forking/).
