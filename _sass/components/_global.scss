@@ -20,10 +20,6 @@ main {
   // flex: 1 0 auto;
 }
 
-ul {
-	list-style-type: none;
-}
-
 a {
 	color: $link-color;
 	text-decoration: none;
@@ -43,11 +39,18 @@ a {
   }
 }
 
-
+// Remove bullets from lists under menus and such
 ul {
-  padding: 0;
   li {
     list-style-type: none;
+  }
+}
+
+.page-content {
+  ul {
+    li {
+      list-style-type: inherit;
+    }
   }
 }
 
