@@ -13,12 +13,12 @@ Large scale 3D reconstructions created from aerial data captures are quickly bec
 
 In this case study we will present an option for viewing these large data-sets on any device by streaming them from cloud storage on-demand.  You will learn how the new Pyrite3D framework is able to process 3D mesh data and stream it from Azure to Unity3D clients.
 
-###Data Sources
+### Data Sources
 While developing [Pyrite3D](http://www.pyrite3d.org), Microsoft partnered with an industry leader in aerial image processing software, [Pix4D](http://www.pix4d.com).  The Pix4D Mapper application excels at reconstructing data from UAV and manned aircraft captures and provided us with industry proven scenarios for the development of the Pyrite3D framework.
 
 Large mesh data-sets may come from many different sources.  Medical imaging and Augmented Reality systems are fast-growing fields that both generate and consume large 3D models.  The tools described here can be used with any mesh data.
 
-###Introducing Pyrite3D
+### Introducing Pyrite3D
 Pyrite3D attempts to resolve issues associated with processing and displaying very large mesh data by applying traditional two-dimensional tiling techniques to a three-dimensional space.  Models are provided at varying levels of detail, and sliced into small chunks which can be easily transmitted to a client viewer.  Additionally texture data associated with the model is partitioned in smaller pieces which correlate to the chunks to reduce GPU memory requirements.
 
 These small chunks, available at varying levels of quality, can then be dynamically requested and assembled by the client in real-time based on the position of the camera or viewport - requiring the client to download only the visible data, and in only the quality appropriate for their screen.
@@ -32,19 +32,19 @@ Below is a rendering of a mesh captured by [WaldoAir](http://www.waldoair.com) C
 
 ![Begard Example]({{site.baseurl}}/images/2015-09-10-Pyrite3D-Overview_images/begard.png)
 
-###Challenges
+### Challenges
 There are a variety of challenges to this technique that Pyrite3D attempts to solve.
 
-#####Face reconstruction during slicing
+##### Face reconstruction during slicing
 To ensure the ability to mix and match model chunks from varying levels of detail and size it is critical that each chunk have perfectly flat sides.  Because meshes are created from a series of triangular faces we must alter and redraw triangles along the edges of chunks while maintaining the correct mapping to the texture image.  There are a significant number of ways these faces can intersect chunks and each requires a different repair.  Pyrite3D attempts to repair the most common cases but further work is required to ensure perfect chunks.
 
-#####Texture Partitioning
+##### Texture Partitioning
 Texture images provided with mesh data are typically broken into millions of small images that correlate to various contiguous areas in the mesh.  Because GPU's have very limited memory available for textures we must partition the texture into smaller pieces which can be sent on-demand in varying qualities.  This requires reverse engineering the assembled image, correlating the parts to our model chunks, and efficiently reassembling new textures.  Pyrite3D does this very well for textures up to 268 megapixels (which is four times larger than most industry visualization tools support).  An upgraded texture processing system is in-progress to accommodate larger textures.
 
-#####Bandwidth Requirements
+##### Bandwidth Requirements
 Pyrite3D supports a variety of output formats during processing to ensure adequate streaming performance.  These include [Wavefront OBJ](http://www.martinreddy.net/gfx/3d/OBJ.spec) and [OpenCTM](http://openctm.sourceforge.net/).  In most cases the OpenCTM format is the ideal solution for Unity3D or Javascript/WebGL clients.  Currently, the only format supported for texture chunks is JPEG.  Texture formats optimized for GPU are not compressed for transfer over the web, and as such are not practical for streaming.
 
-###Current State
+### Current State
 Pyrite3D is currently available as a suite of tools under an open source license (MIT). 
 
 This includes the pre-processing toolset, [PyriteCLI](https://github.com/PyriteServer/PyriteCli), a C#/.Net application.
@@ -57,7 +57,7 @@ This includes the pre-processing toolset, [PyriteCLI](https://github.com/PyriteS
 
 For demos, videos and code, reference http://www.pyrite3d.org/
 
-##Sample Walkthrough
+## Sample Walkthrough
 Perhaps the best way to understand the platform is to try it yourself.  The following is a simple end-to-end walkthrough which will help you process data and serve it to a Unity3D application.  In production scenarios it is likely that mesh data will be stored and served from Azure - however for the purposes of our initial walkthrough everything will be on your local machine.
 
 >**Required Tools**
@@ -70,15 +70,15 @@ Perhaps the best way to understand the platform is to try it yourself.  The foll
 
 >Git
 
-###Slicing
+### Slicing
 >Slicing is the process of preparing our data for use in the Pyrite system.  We use the Pyrite command line interface to partition our mesh data and textures into smaller chunks for streaming.  A pre-requisite to slicing is having our mesh data available at various quality levels, which is easily done with the free Meshlab tool.  For this walkthrough however, we have provided license-free data for you to work with.
 
 >Note: We will be using a sandbox folder located at d:\pyrite for all of these instructions.  Alter the commands as appropriate for your environment.
 
-#####Get PyriteCLI binaries
+##### Get PyriteCLI binaries
 Download the latest release build from https://github.com/PyriteServer/PyriteCli/releases and decompress.
 
-#####Get the sample mesh data
+##### Get the sample mesh data
 Download and decompress the mesh data from our repository https://github.com/PyriteServer/PyriteCli/tree/master/SampleModel.
 
 For this guide we are decompressing to d:\pyrite\sample
@@ -87,7 +87,7 @@ For this guide we are decompressing to d:\pyrite\sample
 
 
 
-#####Process the meshes
+##### Process the meshes
 Each of the three meshes must be processed into a different level of detail for the server.  Use the three provided processing commands as reasonable settings for the sample data.
 
 >Tip: Each of the slicing commands specifies the number of divisions with -x (y and z are optional, since we specify cubical slicing with -c which forces equal slicing in all dimensions).  The texture is partitioned based on the -u and -v parameters, and all data is output into folders named L1, L2, and L3 respectively.  These represent three quality levels available to the server.  As the quality of input data increases, the density of our slicing increases accordingly.
@@ -107,11 +107,12 @@ pyritecli -x 3 -u 3 -v 3 -p -c -s 0.25 -t d:\pyrite\sample\model.jpg d:\pyrite\o
 ```
  On a modern desktop machine, this slicing may take 20 to 30 minutes.  The CLI is designed to use all available CPU resources.
  
-###Server
-#####Prepare the set configuration data
+### Server
+##### Prepare the set configuration data
 To serve this data in the Pyrite server, we must provide configuration about our specific data set, as well as a server configuration that specifies which sets should be loaded.
 
 In the root of your output folder (d:\pyrite\output) create a file named index.json with the following contents:
+
 ```json
 {
   "MinimumLod" : 1,
@@ -121,6 +122,7 @@ In the root of your output folder (d:\pyrite\output) create a file named index.j
 This index.json tells the server how many levels of detail to expect.  We created levels 1, 2 and 3.
 
 Next to your index.json, create another file named demosets.json with the following contents:
+
 ```json
 [
     {
@@ -137,16 +139,17 @@ Next to your index.json, create another file named demosets.json with the follow
 ```
 Be sure to update the URL appropriately to point to your index.json.  Note that this is an array of sets, which contain an array of versions.  A single server instance can serve any number of versions of any number of sets.
 
-#####Clone the server
+##### Clone the server
 
 Clone the PyriteServer repo
+
 ```bat
 mkdir d:\pyrite\PyriteServer
 cd d:\pyrite\PyriteServer
 git clone https://github.com/PyriteServer/PyriteServer.git
 ```
 
-#####Configure the server
+##### Configure the server
 After cloning open PyriteServer.sln with Visual Studio 2015.
 
 We'll need to enter the location of our demosets.json in the **web.config**.  Open the web.config and enter the correct path for the SetRootUrl.
@@ -156,7 +159,7 @@ We'll need to enter the location of our demosets.json in the **web.config**.  Op
 ```
 >Tip: This can point to a local file, as in the example, or to a blob in Azure.  If you provide an Azure URL we look at the "Storage" App Setting for an Azure Storage connection string and dynamically handle authentication for all URL's if we find it.
 
-#####Run and test the server
+##### Run and test the server
 
 Ensure PyriteServer is your default project, and **run the server** from Visual Studio.  It should launch your default browser to our basic server UI.
 
@@ -164,10 +167,12 @@ Ensure PyriteServer is your default project, and **run the server** from Visual 
 
 >This server browser UI demonstrates some of the basic RESTful API calls and lets you navigate your dataset.  Press "Send Request" to enumerate loaded sets, and your Sample set should be returned.  You can then drill into the set's versions and metadata.
 
-###Client
-#####Stream your mesh to Unity
+### Client
+
+##### Stream your mesh to Unity
 
 Clone the Unity demo application repo and open in Unity3D.
+
 ```bat
 mkdir d:\pyrite\client
 cd d:\pyrite\client
