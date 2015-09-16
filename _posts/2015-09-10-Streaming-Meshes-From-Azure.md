@@ -108,6 +108,7 @@ pyritecli -x 3 -u 3 -v 3 -p -c -s 0.25 -t d:\pyrite\sample\model.jpg d:\pyrite\o
  On a modern desktop machine, this slicing may take 20 to 30 minutes.  The CLI is designed to use all available CPU resources.
  
 ### Server
+
 ##### Prepare the set configuration data
 To serve this data in the Pyrite server, we must provide configuration about our specific data set, as well as a server configuration that specifies which sets should be loaded.
 
