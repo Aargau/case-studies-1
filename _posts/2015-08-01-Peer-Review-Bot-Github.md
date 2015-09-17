@@ -5,7 +5,7 @@ author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
 #author-image: "{{site.baseurl}}/images/authors/felix.jpg"
 date:   2015-08-01 10:00:00
-categories: GitHub Automation Node
+tags: GitHub Automation Node
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: We built a peer review bot for GitHub, automating review workflows for pull requests - so that humans can spend their time with more fun things.

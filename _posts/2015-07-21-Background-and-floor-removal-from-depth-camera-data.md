@@ -5,7 +5,7 @@ author: "Petro Soininen"
 author-link: "https://twitter.com/petrosoininen"
 #author-image: "{{ site.baseurl }}/images/PetroSoininen/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Camera
+tags: Camera
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Background and floor removal from depth camera data.

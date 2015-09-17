@@ -5,7 +5,7 @@ author: "Mike Lanzetta"
 author-link: "http://www.mikelanzetta.com"
 #author-image: "{{ site.baseurl }}/images/Authors/MikeLanzetta.png" //should be square dimensions
 date:   2015-08-26 16:23:28
-categories: Azure EventHubs Leaflet SignalR Geo Maps
+tags: Azure EventHubs Leaflet SignalR Geo Maps
 color: "blue"
 #image: "{{ site.baseurl }}/images/2015-08-26-Real-Time-Maps-with-Event-Hubs-and-SignalR/route_animation.gif" #should be ~350px tall
 excerpt: Real-time Maps with Event Hubs and SignalR Using Leaflet

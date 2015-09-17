@@ -2,10 +2,10 @@
 layout: post
 title:  "Recursive Descent Formula Parsing in C# in .NET"
 author: "Barry Briggs"
-#author-link: "http://#"
+author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: .NET, Cloudsheet
+tags: .NET, Cloudsheet
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Recursive Descent Formula Parsing in C# in .NET.
@@ -135,13 +135,13 @@ A corresponding `pop()` function also exists.
 
 At the end of parsing, a set of data structures holding the tokens and their relationships to one another exists and is presented to the evaluator. Here is an example of the result of a simple parsing session:
 
-![]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
+![Simple example]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image001.png)
 
 Each box indicates a formentry. The STARTPARSE and ENDPARSE formentry’s are convenience structures which optimize the evaluation process. In this case there is obviously no recursion.[3](#_ftn3)
 
 A more complex example is depicted below:
 
-![]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image002.png)
+![A more complex example]({{site.baseurl}}/images/2015-07-21-Recursive-Descent-Formula-Parsing-in-NET_images/image002.png)
 
 Here, multiple levels of recursion are shown. Each instance of a PRECEDENCE formentry indicates a subexpression. At evaluation time, a depth-first traversal of the tree occurs such that as evaluation progresses, the deepest subexpression is evaluated (here: A1/12), then the next-deepest, and so on. The parser supports an arbitrary level of depth and complexity.
 
@@ -159,20 +159,8 @@ The parser can be reused in other contexts requiring parsing and evaluation (whi
 
 * * *
 
-<div id="ftn1">
+[1](#_ftn1) <a name="_ftn1">Leaving the evaluator as “an exercise to the reader.” There, I’ve always wanted to say that in a technical document.</a>
 
-[1](#_ftnref1) Leaving the evaluator as “an exercise to the reader.” There, I’ve always wanted to say that in a technical document.
+[2](#_ftn2) <a name="_ftn2">The curious reader is directed to the classic work on compilers: Alfred Aho, Ravi Sethi, and Jeffrey D. Ullman, _Compilers: Principles, Techniques and Tools;_ Addison-Wesley. I have the 1988 edition. A slightly simpler explanation can be found here: [http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm](http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm).</a>
 
-</div>
-
-<div id="ftn2">
-
-[2](#_ftnref2) The curious reader is directed to the classic work on compilers: Alfred Aho, Ravi Sethi, and Jeffrey D. Ullman, _Compilers: Principles, Techniques and Tools;_ Addison-Wesley. I have the 1988 edition. A slightly simpler explanation can be found here: [http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm](http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm) .
-
-</div>
-
-<div id="ftn3">
-
-[3](#_ftnref3) I trust readers will forgive the crudity of these diagrams. Perhaps we need a sort of “Feynmann diagram” for recursive data structures.
-
-</div>
+[3](#_ftn3) <a name="_ftn3">I trust readers will forgive the crudity of these diagrams. Perhaps we need a sort of “Feynmann diagram” for recursive data structures.</a>

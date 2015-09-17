@@ -5,7 +5,7 @@ author: "Erik Schlegel"
 author-link: "#"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure SailsJS Continuous-Integration
+tags: Azure SailsJS Continuous-Integration
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: A framework to bootstrap enterprise single page applications with continuous Azure integration

@@ -5,7 +5,7 @@ author: "Shawn Cicoria"
 author-link: "http://blogs.msdn.com/b/scicoria/"
 #author-image: "{{ site.baseurl }}/images/ShawnCicoria/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Azure Office365 Mail
+tags: Azure Office365 Mail
 color: "blue"
 # image: "images/rallyteam.png" #should be ~350px tall
 excerpt: Office Mail App for Rallyteam

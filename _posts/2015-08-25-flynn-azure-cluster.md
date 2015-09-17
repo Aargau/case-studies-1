@@ -5,7 +5,7 @@ author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-08-30 10:00:00
-categories: Azure DevOps Flynn
+tags: Azure DevOps Flynn
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: "Deploying Flynn Clusters on Azure"

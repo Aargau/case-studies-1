@@ -4,7 +4,7 @@ title:  "Visualize Large 3D Captures using Pyrite3D"
 author: "Stefan Gordon"
 author-link: "http://www.stefangordon.com"
 date:   2015-09-10 10:00:00
-categories: Azure 3D Unity3D Streaming Pyrite3D
+tags: Azure 3D Unity3D Streaming Pyrite3D
 color: "blue"
 excerpt: "Large scale 3D reconstructions created from aerial data captures are quickly becoming an important tool for many industries including commercial construction, agriculture and mining."
 ---

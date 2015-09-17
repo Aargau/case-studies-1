@@ -5,7 +5,7 @@ author: "Jason Poon"
 author-link: "http://www.jasonpoon.ca"
 #author-image: "{{ site.baseurl }}/images/JasonPoon/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Windows Phone
+tags: Windows Phone
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Enterprise Side Loading – Distributing Line of Business (LoB) Applications

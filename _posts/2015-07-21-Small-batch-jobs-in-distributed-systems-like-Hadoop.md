@@ -5,7 +5,7 @@ author: "Masayoshi Hagiwara"
 author-link: "http://blogs.msdn.com/b/masayh/"
 #author-image: "{{ site.baseurl }}/images/MasayoshiHagiwara/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Hadoop HDInsight Big-Data Batch-Processing MapReduce
+tags: Hadoop HDInsight Big-Data Batch-Processing MapReduce
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Small Batch Jobs in Distributed Systems like Hadoop
