@@ -5,7 +5,7 @@ author: "Ville Rantala"
 author-link: "http://github.com/vjrantal"
 #author-image: "{{ site.baseurl }}/images/VillaRantala/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Windows-Phone WebDriver Automated-Testing Websites Internet-Explorer
+tags: Windows-Phone WebDriver Automated-Testing Websites Internet-Explorer
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Testing with web sites on Windows Phone.

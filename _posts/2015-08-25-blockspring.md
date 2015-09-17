@@ -5,7 +5,7 @@ author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-categories: Office OfficeJS Excel Blockspring
+tags: Office OfficeJS Excel Blockspring
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Wicked Cool Excel Function with Blockspring
