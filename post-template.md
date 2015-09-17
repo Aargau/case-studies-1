@@ -4,7 +4,7 @@ title:  "Title of the Post"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
 date:   2015-08-30 10:00:00
-categories: Azure DevOps Flynn
+tags: [Azure, DevOps, Flynn]
 color: "blue"
 excerpt: "A small desription"
 ---

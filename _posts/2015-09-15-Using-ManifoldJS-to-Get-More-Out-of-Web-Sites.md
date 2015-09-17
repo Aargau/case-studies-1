@@ -4,7 +4,7 @@ title:  "Using ManifoldJS to Get More Out of Web Sites"
 author: "Ville Rantala"
 author-link: "http://vjrantal.net"
 date: 2015-09-15 13:33:00
-categories: [Web sites, ManifoldJS, W3C Manifest, App Stores, Windows Store, Android, iOS]
+tags: [Web sites, ManifoldJS, W3C Manifest, App Stores, Windows Store, Android, iOS]
 color: "blue"
 excerpt: "A case study about leveraging existing Web assets when creating a mobile app."
 ---
