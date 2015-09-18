@@ -1,0 +1,39 @@
+/**
+ * Site footer
+ */
+.site-footer {
+    margin-top: 20px;
+    border-top: 1px solid $grey-color-light;
+    padding: $spacing-unit 0;
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+.FooterLogoMsSvg {
+    margin-left: 1px;
+}
+
+#FooterLinks {
+    display: block;
+    margin-bottom: 10px;
+
+    span {
+        margin-right: 20px;
+    }
+
+    span:last-child {
+        margin-right: 0;
+    }
+}
+
+#FooterCopyright {
+    font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}

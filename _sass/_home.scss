@@ -1,0 +1,54 @@
+/**
+ * Home
+ */
+ 
+ #post-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    @include clearfix;
+
+    > li {
+        margin-bottom: 30px;
+    }
+    
+    figure.media {
+        img {
+            //max-height:280px;
+        } 
+        .media-img {
+            padding-bottom: 62%;
+        } 
+        .media-img-label {
+            padding: $spacing-unit;
+            background: rgba(0,0,0,0.6);
+            white-space: normal;
+            font-size: 24px;
+            font-weight: 200;
+            line-height: 24px;
+            
+            .media-img-label-sub {
+                @include clearfix;
+                font-size: 12px;
+                font-weight: 400;
+            }
+        }   
+        figcaption {
+            padding-top: $spacing-unit;
+            
+        }
+    }
+    
+}
+
+.item {
+    float: left;
+    width: calc(33.333% - 20px);
+    @include media-query($screen-xl)  { width: calc(33.333% - 20px); }
+    @include media-query($screen-lg)  { width: calc(50% - 15px);     }
+    @include media-query($screen-md)  { width: 100%;    }
+}
+
+.gutter-sizer {
+  width:30px;
+}
