@@ -1,34 +1,122 @@
 ---
-layout: slim
+layout: default
 ---
 <div class="post">
     <div class="row article-hero {% if page.color %}{{ page.color }}{% endif %}" {% if page.image %}style="background-image: url('{{ site.baseurl}}/{{page.image}}');"{% endif %}>
-        <div class="container">
+        <div class="col-xs-24">
+            <h3 itemprop="headline">{{ page.title }}</h3>
             <div class="row">
-                <div class="col s12">
-                    <h4 itemprop="headline">{{ page.title }}</h4>
-                    <div class="row">
-                        <div class="col ss12  valign-wrapper">
-                            {% if page.author %} {% if page.author-image %}
-                            <img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
-                            <span class="author-name">
-                                <a href="{{ page.author-link }}" itemprop="author">{{ page.author }}</a>
-                            </span>{% endif %}-
-                            <span class="article-date">{{ page.date | date: "%b %-d, %Y" }}</span>
-                            <meta itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"/>
-                        </div>
-                    </div>
+                <div class="col-xs-24">
+                    {% if page.author %} {% if page.author-image %}
+                    <img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
+                    <span class="author-name">
+                        <a href="{{ page.author-link }}" itemprop="author">{{ page.author }}</a>
+                    </span>{% endif %}-
+                    <span class="article-date">{{ page.date | date: "%b %-d, %Y" }}</span>
+                    <meta itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}"/>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col s12 article-content">
-                <article class="post-content">
-                    {{ content }}
-                </article>
+    <div class="row">
+        <div class="article-content col-lg-16">
+            <article class="post-content">
+                {{ content }}
+            </article>
+            <div class="article-links visible-lg">
+                <div class="link-section">
+                    <span class="section-title">Code resources</span>
+                    <div class="code-resource">
+                      http://github.com/samplepath/reponame
+                    </div>
+                </div>
+                <div class="link-section">
+                    <span class="section-title">Share this article</span>
+                    <ul class="social-links-small">
+                        <li><a href="#" class="btn btn-social-icon btn-twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a></li>
+                        <li><a href="#" class="btn btn-social-icon btn-facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a></li>
+                        <li><a href="#" class="btn btn-social-icon btn-google">
+                            <i class="fa fa-google"></i>
+                        </a></li>
+                        <li><a href="#" class="btn btn-social-icon btn-linkedin">
+                            <i class="fa fa-linkedin"></i>
+                        </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="divider"></div>
-    </div>
+        <div class="col-lg-8 sidebar-content">
+            <div class="link-section">
+                <span class="section-title">Code resources</span>
+                <div class="code-resource">
+                  http://github.com/samplepath/reponame
+                </div>
+            </div>
+            <div class="link-section">
+                <span class="section-title">Share this article</span>
+                <ul class="social-links-small">
+                    <li><a href="#" class="btn btn-social-icon btn-twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a></li>
+                    <li><a href="#" class="btn btn-social-icon btn-facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a></li>
+                    <li><a href="#" class="btn btn-social-icon btn-google">
+                        <i class="fa fa-google"></i>
+                    </a></li>
+                    <li><a href="#" class="btn btn-social-icon btn-linkedin">
+                        <i class="fa fa-linkedin"></i>
+                    </a></li>
+                </ul>
+            </div>
+            <!--<div class="link-section">
+                <span class="section-title">Other articles by {{ page.author }}</span>
+                <ul>
+                {% for authorpost in page.authorposts %}  
+                    <li><a href="{{ authorpost.url | prepend: site.baseurl }}">
+                        {{ authorpost.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>  -->
+            <!--<div class="link-section">
+                <span class="section-title">Related articles</span>
+                <ul>
+                {% for relatedpost in page.relatedposts %}  
+                    <li><a href="{{ relatedpost.url | prepend: site.baseurl }}">
+                        {{ relatedpost.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div> -->
+            <!--<div class="link-section">
+                <span class="section-title">Most popular articles</span>
+                <ul>
+                {% for popularpost in page.popularposts %}  
+                    <li><a href="{{ popularpost.url | prepend: site.baseurl }}">
+                        {{ popularpost.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div> -->
+            <!--<div class="link-section">
+                <span class="section-title">Tags for this case study</span>
+                <ul class="tag-cloud">
+                {% for tag in page.tags %}  
+                    <li><a href="{{ tag | prepend: site.baseurl }}">
+                        <span class="label">{{ tag }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div> -->
+        </div>
+    <div class="divider"></div>
+</div>

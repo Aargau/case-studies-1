@@ -1,0 +1,147 @@
+/**
+ * Posts
+ */
+ 
+ .article-hero {
+    position: relative; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+      url('../images/post_default.jpg');
+    height: 200px;
+
+    a {
+        text-decoration: underline;
+        color: #fff;
+
+        &:hover {
+            color: #fff;
+        }
+
+        &:visited {
+            color: #fff;
+        }
+    }
+    
+    > .col-xs-24:first-child {
+      position: absolute;
+      bottom: $spacing-unit;
+    }
+}
+
+.post {
+  > .row {
+    margin: 0;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  @include type(t7, set-line-height responsive);
+  
+  blockquote {
+    padding: ($spacing-unit / 2) $spacing-unit;
+    margin: ($spacing-unit / 2) 0;
+    p {
+      padding: 0;
+    }
+  }
+  
+  ul {
+    list-style-type: initial;
+  }
+}
+
+.post-meta {
+    font-size: $font-size-small;
+    color: $grey-color;
+}
+
+.post-link {
+    display: block;
+    font-size: 24px;
+}
+
+.post-header {
+    margin-bottom: $spacing-unit;
+    margin-top: $spacing-unit * 2;
+}
+
+.author-image {
+	height: 32px;
+	width: 32px;
+    padding-right: 16px;
+}
+
+.author-name,
+.article-date {
+	padding-right: 4px;
+}
+
+.article-date {
+    padding-left: 4px;
+}
+
+.sidebar-content {
+  padding: map-deep-get($fonts-spacing, p3, "space-sm");
+  padding-left: 32px;
+  
+  @include media-query($screen-lg) {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+.link-section {
+  padding-bottom: 48px;
+  
+  .section-title {
+    font-weight: 400;
+    font-family: $font-normal;
+    //font-size: 14px;
+  }
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+     @include clearfix;
+     
+    li {
+      padding: 12px 0 0 0;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+       
+      a {
+        white-space: nowrap;
+      }
+    }
+  }
+  
+  ul.tag-cloud {
+    li {
+      float:left;
+      .label {
+        background-color: $color-accent;
+        font-size: 14px;
+        line-height: 28px;
+      }
+    }
+  }
+  
+  
+  ul.social-links-small {
+      li {
+        float:left;
+        margin-right: $spacing-unit;
+      } 
+    }
+}
+
+.article-links {
+  margin-top: 30px;
+}
+
