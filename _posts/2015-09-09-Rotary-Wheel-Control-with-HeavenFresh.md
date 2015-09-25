@@ -4,7 +4,7 @@ title: Rotary Wheel Control with HeavenFresh
 author: Jason Poon
 author-link: http://www.jasonpoon.ca
 date: 2015-09-09 04:35:31
-tags: universal-windows-app csharp uwp
+tags: universal-windows-app csharp uwp Desktop
 color: blue
 excerpt: Rotary Wheel Control with HeavenFresh
 ---

@@ -5,7 +5,7 @@ author: "Tim Park & David Makogon"
 author-link: "http://timpark.io"
 #author-image: "{{ site.baseurl }}/images/TimPark/photo.jpg" //should be square dimensions
 date:   2015-08-24 16:23:28
-tags: ARM MongoDB Azure
+tags: ARM MongoDB Azure Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: High Performance MongoDB Clusters with Azure Resource Manager

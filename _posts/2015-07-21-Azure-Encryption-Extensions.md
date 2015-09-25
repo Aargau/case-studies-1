@@ -5,7 +5,7 @@ author: "Stefan Gordon"
 author-link: "http://www.stefangordon.com/"
 #author-image: "{{ site.baseurl }}/images/TDB/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure, encryption
+tags: Azure Encryption
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Storing Data Securely in Azure Blob Storage with Azure Encryption Extensions.

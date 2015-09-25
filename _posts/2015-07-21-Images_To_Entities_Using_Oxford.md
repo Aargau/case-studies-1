@@ -5,7 +5,7 @@ author: "Michael Lanzetta"
 author-link: "http://www.mikelanzetta.com/"
 #author-image: "{{site.baseurl}}/images/MichaelLanzetta/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure image-recognition project-oxford
+tags: Azure image-recognition project-oxford Cloud
 color: "blue"
 #image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: Image recognition through project oxford.

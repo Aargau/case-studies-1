@@ -11,15 +11,21 @@
     
             <div class="collapse navbar-collapse" id="navbar-list">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">everything <span class="sr-only">(current)</span></a></li> 
-                    <!--{% for page in site.pages %} {% if page.title %}
-                    <li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a> 
-                    {% endif %} {% endfor %}-->
-                    <li><a href="#">iot</a></li>
-                    <li><a href="#">cloud</a></li>
-                    <li><a href="#">mobile</a></li>
-                    <li><a href="#">desktop</a></li>
-                    <li><a href="#">av/vr</a></li>
+                    <li {% if page.url == "/index.html"  %}class="active"{% endif %} >
+                        <a href="{{site.baseurl}}/">everything <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li {% if page.url == "/tag/IoT/index.html"  %}class="active"{% endif %}>
+                        <a href="{{site.baseurl}}/tag/IoT/index.html">iot</a>
+                    </li>
+                    <li {% if page.url == "/tag/Cloud/index.html"  %}class="active"{% endif %}>
+                        <a href="{{site.baseurl}}/tag/Cloud/index.html">cloud</a>
+                    </li>
+                    <li {% if page.url == "/tag/Mobile/index.html"  %}class="active"{% endif %}>
+                        <a href="{{site.baseurl}}/tag/Mobile/index.html">mobile</a>
+                    </li>
+                    <li {% if page.url == "/tag/Desktop/index.html"  %}class="active"{% endif %}>
+                        <a href="{{site.baseurl}}/tag/Desktop/index.html">desktop</a>
+                    </li>
                 </ul>
             </div>
         </div>

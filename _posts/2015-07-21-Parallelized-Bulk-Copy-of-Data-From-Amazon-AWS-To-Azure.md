@@ -5,7 +5,7 @@ author: "Barry Briggs"
 author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure, AWS
+tags: Azure AWS Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Parallelized Bulk Copy of Data from Amazon AWS to Microsoft Azure

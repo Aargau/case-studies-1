@@ -5,7 +5,7 @@ author: "Ivan Judson"
 author-link: "#"
 #author-image: "{{ site.baseurl }}/images/ivanjudson/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: AllJoyn
+tags: AllJoyn IoT
 color: "blue"
 #image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: This document provides an overview of Alljoyn and working with the Heatworks water heater.
