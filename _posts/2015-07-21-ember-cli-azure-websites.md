@@ -5,7 +5,7 @@ author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
 #author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure Azure-Web-Apps Ember
+tags: Azure Azure-Web-Apps Ember Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Building Ember Apps on Azure Websites

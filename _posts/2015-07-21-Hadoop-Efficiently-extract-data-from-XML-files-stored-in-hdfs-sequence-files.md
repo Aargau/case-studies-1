@@ -5,7 +5,7 @@ author: "Beat Schwegler"
 author-link: "http://blogs.msdn.com/b/beatsch/"
 #author-image: "{{site.baseurl}}/images/BeatSchwegler/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure Hadoop
+tags: Azure Hadoop Cloud
 color: "blue"
 #image: "{{site.baseurl}}/images/imagename.png" #should be ~350px tall
 excerpt: Efficiently extracting XML data from HDFS sequence files

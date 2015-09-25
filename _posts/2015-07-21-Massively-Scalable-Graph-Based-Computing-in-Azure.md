@@ -5,7 +5,7 @@ author: "Barry Briggs"
 author-link: "http://blogs.msdn.com/b/msarchitecture/"
 #author-image: "{{ site.baseurl }}/images/BarryBriggs/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure Graph-Based Computing
+tags: Azure Graph-Based Computing Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Massively Scalable Graph-Based Computing in Azure

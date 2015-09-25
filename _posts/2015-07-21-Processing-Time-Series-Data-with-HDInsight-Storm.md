@@ -5,7 +5,7 @@ author: "Tim Park"
 author-link: "https://github.com/timfpark"
 #author-image: "{{ site.baseurl }}/images/TimPark/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Azure Hadoop HDInsight Storm
+tags: Azure Hadoop HDInsight Storm Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Processing Time Series Data with HDInsight Storm

@@ -5,7 +5,7 @@ author: "Steven Edouard"
 author-link: "http://stevenedouard.com/"
 #author-image: "{{ site.baseurl }}/images/StevenEdouard/photo.jpg" //should be square dimensions
 date:   2015-07-21 23:34:28
-tags: Microservice Azure
+tags: Microservice Azure Cloud
 color: "blue"
 #image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: Microservice Orchestration with Fleet on Azure w/ Tok.tv and Docebo.com

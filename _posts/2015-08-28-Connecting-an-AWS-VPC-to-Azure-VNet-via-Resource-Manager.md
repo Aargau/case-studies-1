@@ -4,7 +4,7 @@ title:  "Connecting an AWS VPC to Azure VNet via Resource Manager"
 author: "Steven Edouard"
 author-link: "http://www.stevenedouard.com"
 date:   2015-08-30 10:00:00
-tags: Azure DevOps AWS VPC
+tags: Azure DevOps AWS VPC Cloud
 color: "blue"
 excerpt: "A quick case study on connecting Azure to AWS"
 ---
