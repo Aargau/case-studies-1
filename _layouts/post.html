@@ -106,17 +106,17 @@ layout: default
                 {% endfor %}
                 </ul>
             </div> -->
-            <!--<div class="link-section">
+            <div class="link-section">
                 <span class="section-title">Tags for this case study</span>
                 <ul class="tag-cloud">
                 {% for tag in page.tags %}  
-                    <li><a href="{{ tag | prepend: site.baseurl }}">
+                    <li><a href="{{ site.baseurl }}/tag/{{ tag }}/">
                         <span class="label">{{ tag }}</span>
                         </a>
                     </li>
                 {% endfor %}
                 </ul>
-            </div> -->
+            </div>
         </div>
     <div class="divider"></div>
 </div>
