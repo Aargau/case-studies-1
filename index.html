@@ -2,30 +2,25 @@
 layout: default
 ---
 <ul id="post-list" class="js-packery"
-  data-packery-options='{ "itemSelector": ".item", "gutter": ".gutter-sizer" }'>
-  <li class="gutter-sizer"></li>
-  {% for post in site.posts %}
-    <li class="item{% if post.size > 1 %} {{ post.size }}{% endif %}">
-      <figure class="media">
-        <div class="media-img media-img-has-label {{ post.color }}">
-          <a href="{{ post.url | prepend: site.baseurl }}">
-              {% if post.image %}
-              <img src="{{ post.image}}" alt="case study image"/>
-              {% else %}
-              <img src="images/post_default.jpg" alt="case study image"/>
-              {% endif %}
-              <span class="media-img-label">
-                  {{ post.title }}
-                  <span class="media-img-label-sub">by {{post.author}}, {{ post.date | date: "%b %-d, %Y" }}</span>
-              </span>
-          </a>
-        </div>
-        <figcaption>
-          {{ post.excerpt | strip_html }}
-        </figcaption>
-      </figure>
-    </li>
-  {% endfor %}
+    data-packery-options='{ "itemSelector": ".item", "gutter": ".gutter-sizer" }'>
+    <li class="gutter-sizer"></li>
+    {% for post in site.posts %}
+        <li class="item{% if post.size > 1 %} {{ post.size }}{% endif %}">
+            <figure class="media">
+                <div class="media-img media-img-has-label {{ post.color }}" style="background-image: url('{{ site.baseurl }}/{% if post.image %}{{ post.image }}{% else %}images/post_default.jpg{% endif %}');">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        <span class="media-img-label">
+                                {{ post.title }}
+                                <span class="media-img-label-sub">by {{post.author}}, {{ post.date | date: "%b %-d, %Y" }}</span>
+                        </span>
+                    </a>
+                </div>
+                <figcaption>
+                    {{ post.excerpt | strip_html }}
+                </figcaption>
+            </figure>
+        </li>
+    {% endfor %}
 </ul>
 <script src="//cdnjs.cloudflare.com/ajax/libs/packery/1.4.2/packery.pkgd.min.js"></script>
-    
+        
