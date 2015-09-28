@@ -13,7 +13,7 @@ encoding: utf-8
 # highlighter: pygments
 # extensions: [tables fenced_code_blocks]
 
-exclude: [vendor]
+exclude: [vendor, git-tutorial.md, post-template.md]
 kramdown:
    input: GFM
 gems:

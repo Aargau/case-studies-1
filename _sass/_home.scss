@@ -13,9 +13,6 @@
     }
     
     figure.media {
-        img {
-            //max-height:280px;
-        } 
         .media-img {
             padding-bottom: 62%;
         } 
@@ -36,6 +33,9 @@
         figcaption {
             padding-top: $spacing-unit;
             
+        }
+        div {
+            background-size: cover;
         }
     }
     

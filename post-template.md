@@ -3,10 +3,13 @@ layout: post
 title:  "Title of the Post"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
+author-image: "/images/authors/FelixRieseberg.jpg"
+image: "/images/myarticle/title.png"
 date:   2015-08-30 10:00:00
-tags: [Azure, DevOps, Flynn]
+tags: Azure DevOps Flynn Cloud
 color: "blue"
 excerpt: "A small desription"
+coderesources: "http://github.com/myname/myrepo"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus gravida turpis efficitur sem pretium iaculis. Fusce varius feugiat felis, sit amet condimentum lacus imperdiet et. Quisque mollis commodo mattis. Sed porta massa quis bibendum sagittis. Vestibulum eget sapien laoreet, scelerisque diam vel, dignissim neque. Vestibulum luctus magna eget risus mattis, ac luctus lectus pellentesque. Fusce vitae dui non tellus venenatis venenatis. Suspendisse potenti. Nunc semper ante a libero finibus, nec euismod felis condimentum. Nulla eget est ut eros vehicula dapibus non vel mi. Suspendisse condimentum cursus quam, et feugiat ex commodo et. Cras vel odio vitae felis egestas maximus id maximus diam. Phasellus ac euismod ligula. Vivamus non finibus lorem, eget vehicula mauris. Vestibulum posuere malesuada risus non sollicitudin. Vestibulum consectetur nulla ut efficitur aliquam.

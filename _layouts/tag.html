@@ -9,17 +9,12 @@ layout: default
             {% if tag == page.tag %}
                 <li class="item{% if post.size > 1 %} {{ post.size }}{% endif %}">
                     <figure class="media">
-                        <div class="media-img media-img-has-label {{ post.color }}">
+                        <div class="media-img media-img-has-label {{ post.color }}" style="background-image: url('{{ site.baseurl }}/{% if post.image %}{{ post.image }}{% else %}images/post_default.jpg{% endif %}');">
                             <a href="{{ post.url | prepend: site.baseurl }}">
-                                    {% if post.image %}
-                                    <img src="{{ post.image}}" alt="case study image"/>
-                                    {% else %}
-                                    <img src="{{site.baseurl}}/images/post_default.jpg" alt="case study image"/>
-                                    {% endif %}
-                                    <span class="media-img-label">
-                                            {{ post.title }}
-                                            <span class="media-img-label-sub">by {{post.author}}, {{ post.date | date: "%b %-d, %Y" }}</span>
-                                    </span>
+                                <span class="media-img-label">
+                                        {{ post.title }}
+                                        <span class="media-img-label-sub">by {{post.author}}, {{ post.date | date: "%b %-d, %Y" }}</span>
+                                </span>
                             </a>
                         </div>
                         <figcaption>

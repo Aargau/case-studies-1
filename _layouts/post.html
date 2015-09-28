@@ -8,7 +8,7 @@ layout: default
             <div class="row">
                 <div class="col-xs-24">
                     {% if page.author %} {% if page.author-image %}
-                    <img src="{{ page.author-image }}" class="author-image circle" />{% endif %}
+                    <img src="{{site.baseurl}}/{{ page.author-image }}" class="author-image circle" alt="{{ page.author }}" />{% endif %}
                     <span class="author-name">
                         <a href="{{ page.author-link }}" itemprop="author">{{ page.author }}</a>
                     </span>{% endif %}-
@@ -50,11 +50,13 @@ layout: default
             </div>
         </div>
         <div class="col-lg-8 sidebar-content">
+            {% if page.coderesource %}
             <div class="link-section">
                 <span class="section-title">Code resources</span>
                 <div class="code-resource">
-                  http://github.com/samplepath/reponame
+                  <a href="{{ page.coderesource }}" alt="Code Resource for this case study">{{ page.coderesource }}</a>
                 </div>
+            {% endif %}
             </div>
             <div class="link-section">
                 <span class="section-title">Share this article</span>
@@ -106,17 +108,17 @@ layout: default
                 {% endfor %}
                 </ul>
             </div> -->
-            <!--<div class="link-section">
+            <div class="link-section">
                 <span class="section-title">Tags for this case study</span>
                 <ul class="tag-cloud">
                 {% for tag in page.tags %}  
-                    <li><a href="{{ tag | prepend: site.baseurl }}">
+                    <li><a href="{{ site.baseurl }}/tag/{{ tag }}/">
                         <span class="label">{{ tag }}</span>
                         </a>
                     </li>
                 {% endfor %}
                 </ul>
-            </div> -->
+            </div>
         </div>
     <div class="divider"></div>
 </div>
