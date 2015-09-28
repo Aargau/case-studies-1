@@ -3,11 +3,12 @@ layout: post
 title:  "Deis: Running a Heroku-Style Platform on Azure"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
-#author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
+author-image: "/images/authors/FelixRieseberg.jpg"
 date:   2015-07-21 23:34:28
 tags: Azure Deis Cloud
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+image: "/images/2015-07-21-Deis-Running-a-Heroku-Style-Platform-on-Azure_images/header.jpg"
+coderesource: "https://github.com/deis/deis"
 ---
 
 [Deis](http://docs.deis.io/en/latest/) is a lightweight application platform that deploys and scales Twelve-Factor apps as Docker containers across a cluster of CoreOS machines. Practically speaking, it enables users to self-host a platform implementing the Heroku workflow without being dependent on Heroku.

@@ -8,7 +8,7 @@ layout: default
             <div class="row">
                 <div class="col-xs-24">
                     {% if page.author %} {% if page.author-image %}
-                    <img src="{{site.baseurl}}/{{ page.author-image }}" class="author-image circle" />{% endif %}
+                    <img src="{{site.baseurl}}/{{ page.author-image }}" class="author-image circle" alt="{{ page.author }}" />{% endif %}
                     <span class="author-name">
                         <a href="{{ page.author-link }}" itemprop="author">{{ page.author }}</a>
                     </span>{% endif %}-

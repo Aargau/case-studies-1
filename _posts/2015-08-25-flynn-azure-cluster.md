@@ -3,11 +3,12 @@ layout: post
 title:  "Deploying Flynn Clusters on Azure"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
-#author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
+author-image: "/images/authors/FelixRieseberg.jpg"
 date:   2015-08-30 10:00:00
 tags: Azure DevOps Flynn
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
+coderesource: "https://github.com/flynn/flynn"
+image: "images/2015-08-25-flynn-azure-cluster/header.jpg"
 excerpt: "Deploying Flynn Clusters on Azure"
 ---
 

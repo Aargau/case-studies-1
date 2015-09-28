@@ -3,12 +3,13 @@ layout: post
 title:  "A ReactJS Spreadsheet Component for the Microsoft Ventures Hackathon"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
-#author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
+author-image: "/images/authors/FelixRieseberg.jpg"
 date:   2015-07-21 23:34:28
 tags: ReactJS Spreadsheet
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
-excerpt: During the Microsoft Ventures hackathon in May 2015 it became obvious that one of the startups (CreativeWorx) [required a standalone Excel-like spreadsheet component for the web](https://github.com/felixrieseberg/React-Spreadsheet-Component). This post describes the resulting React component, how it was built, and how it can be used today.
+image: "/images/2015-07-21-Microsoft-Ventures-ReactJS-Spreadsheet_images/header.jpg"
+coderesource: "https://github.com/felixrieseberg/React-Spreadsheet-Component"
+excerpt: "During the Microsoft Ventures hackathon in May 2015 it became obvious that one of the startups required a standalone Excel-like spreadsheet component for the web. This post describes the resulting React component, how it was built, and how it can be used today."
 ---
 
 During the Microsoft Ventures hackathon in May 2015 it became obvious that one of the startups (CreativeWorx) [required a standalone Excel-like spreadsheet component for the web](https://github.com/felixrieseberg/React-Spreadsheet-Component). This post describes the resulting React component, how it was built, and how it can be used today.

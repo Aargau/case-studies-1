@@ -3,12 +3,13 @@ layout: post
 title:  "Building Ember Apps on Azure Websites"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
-#author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
+author-image: "/images/authors/FelixRieseberg.jpg"
 date:   2015-07-21 23:34:28
 tags: Azure Azure-Web-Apps Ember Cloud
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
-excerpt: Building Ember Apps on Azure Websites
+image: "/images/2015-07-21-ember-azure/header.jpg"
+excerpt: "Building Ember Apps on Azure Websites"
+coderesource: "https://github.com/felixrieseberg/ember-cli-azure-deploy"
 ---
 
 Ember.js is one of the most popular frameworks for the development of ambitious web applications – developed initially as Sproutcore by Apple, it is used today in the Windows and Xbox One store, the Apple Music desktop app, at Netflix, Twitter/Vine, LinkedIn, and many other companies working at the bleeding edge of web app development.

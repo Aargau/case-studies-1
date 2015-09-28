@@ -3,12 +3,12 @@ layout: post
 title:  "Wicked Cool Excel Function with Blockspring"
 author: "Felix Rieseberg"
 author-link: "http://www.felixrieseberg.com"
-#author-image: "{{ site.baseurl }}/images/FelixRieseberg/photo.jpg" //should be square dimensions
+author-image: "/images/authors/FelixRieseberg.jpg"
 date:   2015-07-21 23:34:28
 tags: Office OfficeJS Excel Blockspring Desktop
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
-excerpt: Wicked Cool Excel Function with Blockspring
+image: "/images/2015-08-25-blockspring_images/header.jpg"
+excerpt: "Wicked Cool Excel Function with Blockspring"
 ---
 
 A small Y Combinator startup is trying to completely remove all constraints for functions in spreadsheets: It enables users to create and share custom functions for Google Sheets and Office in Node.js, Python, R, JavaScript, PHP and Ruby, running complex calculations in the cloud and pushing the results to your spreadsheet. 
